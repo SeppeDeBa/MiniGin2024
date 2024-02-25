@@ -5,6 +5,10 @@
 #include <SDL_image.h>
 #include <SDL_ttf.h>
 #include "Minigin.h"
+
+#include <chrono>
+#include <thread>
+
 #include "InputManager.h"
 #include "SceneManager.h"
 #include "Renderer.h"
@@ -82,13 +86,42 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& renderer = Renderer::GetInstance();
 	auto& sceneManager = SceneManager::GetInstance();
 	auto& input = InputManager::GetInstance();
+	const float fixed_timestep{ 1.f/60.f };
 
 	// todo: this update loop could use some work.
 	bool doContinue = true;
+	auto prev_cycle_timestamp{ std::chrono::high_resolution_clock::now() }; //save curr cycle time
+
+	float lag{ 0.f };
+	const std::chrono::seconds seconds_per_frame{ 1 / 60 };
+
+
+	std::chrono::milliseconds ms_per_frame{std::chrono::duration_cast<std::chrono::milliseconds>(seconds_per_frame)};
 	while (doContinue)
 	{
+		//timeData and set cycle to current
+		const auto current_time{ std::chrono::high_resolution_clock::now() };
+		const float deltaTime{ std::chrono::duration<float>(current_time - prev_cycle_timestamp).count()};
+		prev_cycle_timestamp = std::chrono::high_resolution_clock::now();
+		lag += deltaTime;
+
+		//input
 		doContinue = input.ProcessInput();
-		sceneManager.Update();
+		
+		
+
+		while(lag >= fixed_timestep)
+		{
+			//physics update
+			lag -= fixed_timestep;
+		}
+
+		sceneManager.Update(deltaTime);
 		renderer.Render();
+
+
+		const auto sleeping_time{ current_time + ms_per_frame - std::chrono::high_resolution_clock::now() };
+
+		std::this_thread::sleep_for(sleeping_time);
 	}
 }
