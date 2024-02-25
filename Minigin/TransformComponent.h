@@ -1,9 +1,10 @@
 #pragma once
+#include <glm/glm.hpp>
+
 #include "Component.h"
 namespace dae
 {
-
-	class TransformComponent : public Component
+	class TransformComponent final : public Component
 	{
 	public:
 		TransformComponent(GameObject* pOwner, float x, float y);
@@ -13,7 +14,7 @@ namespace dae
 
 		void SetPosition(float x, float y);
 		void AddPosition(float x, float y);
-		glm::vec3 getPosition() const;
+		glm::vec3 GetPosition() const;
 
 	private:
 		glm::vec3 m_position{};//might aswell do vec3

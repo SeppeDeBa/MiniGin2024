@@ -1,16 +1,16 @@
 #pragma once
 #include <memory>
-#include "Transform.h"
+#include <vector>
 
+#include "Scene.h"
 //components, could put in a seperate .h for includes?
 
 
-#include "Component.h"
-#include <vector>
 
 
 namespace dae
 {
+	class Component;
 	class Texture2D;
 
 	// todo: this should become final.
@@ -82,11 +82,6 @@ namespace dae
 
 
 	private:
-		Transform m_transform{};
-		// todo: mmm, every gameobject has a texture? Is that correct?
-		std::shared_ptr<Texture2D> m_texture{};
-
-
 		std::vector<std::shared_ptr<dae::Component>> m_pVectorComponents;
 	};
 }

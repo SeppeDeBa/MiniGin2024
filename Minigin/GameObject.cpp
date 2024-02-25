@@ -2,8 +2,12 @@
 #include "GameObject.h"
 #include "ResourceManager.h"
 #include "Renderer.h"
-#include "TextureComponent.h"
 #include "TransformComponent.h"
+#include "TextureComponent.h"
+#include "Component.h"
+#include <algorithm>
+
+
 
 
 dae::GameObject::~GameObject() = default;

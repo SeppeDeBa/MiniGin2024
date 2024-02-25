@@ -30,11 +30,11 @@ dae::TextureComponent::~TextureComponent()
 }
 
 
-void dae::TextureComponent::Update(float deltaTime)
+void dae::TextureComponent::Update(float)
 {
 	if (m_pOwnerTransform == nullptr || m_newParentTransform)
 	{
-		m_pOwnerTransform = GetGameObject()->GetComponent<Transform>();
+		m_pOwnerTransform = GetGameObject()->GetComponent<TransformComponent>();
 	}
 }
 

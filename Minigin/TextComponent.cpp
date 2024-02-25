@@ -16,7 +16,7 @@ dae::TextComponent::TextComponent(GameObject* pOwner, const std::string& stringT
 
 }
 
-void dae::TextComponent::Update(float deltaTime) //used from TextObject given in base MiniGin
+void dae::TextComponent::Update(float) //used from TextObject given in base MiniGin
 {
 	if(m_needsUpdate)
 	{

@@ -9,7 +9,7 @@ namespace dae
 		explicit Component(GameObject* pOwner) : m_pOwnerGO(pOwner) {};
 		virtual ~Component() = default;
 		virtual void Render() const {};
-		virtual void Update(float deltaTime) {};
+		virtual void Update(float) {};
 
 		//ro4
 		Component(const Component& other) = delete;

@@ -13,7 +13,7 @@ namespace dae
 		TextureComponent(GameObject* pOwner, const std::string& filePath, bool drawAroundCenter);
 		TextureComponent(GameObject* pOwner, bool drawAroundCenter);
 		~TextureComponent() override;
-		void Update(float deltaTime) override;
+		void Update(float) override;
 		void Render() const override;
 
 
@@ -27,7 +27,7 @@ namespace dae
 
 	private:
 		std::shared_ptr<Texture2D> m_pTexture2D;
-		Transform* m_pOwnerTransform{};
+		TransformComponent* m_pOwnerTransform{};
 		bool m_drawAroundCenter{};
 		bool m_newParentTransform{false};
 	};

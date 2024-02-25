@@ -26,7 +26,7 @@ void dae::TransformComponent::AddPosition(float x, float y)
 
 }
 
-glm::vec3 dae::TransformComponent::getPosition() const
+glm::vec3 dae::TransformComponent::GetPosition() const
 {
 	return m_position;
 }
