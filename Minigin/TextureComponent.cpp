@@ -45,8 +45,8 @@ void dae::TextureComponent::Render() const
 		if (m_drawAroundCenter)
 		{
 			Renderer::GetInstance().RenderTexture(*m_pTexture2D
-				, m_pOwnerTransform->GetPosition().x - GetTextureSize().x / 2.f
-				, m_pOwnerTransform->GetPosition().y - GetTextureSize().y / 2.f);
+				, m_pOwnerTransform->GetPosition().x - static_cast<float>(GetTextureSize().x) / 2.f
+				, m_pOwnerTransform->GetPosition().y - static_cast<float>(GetTextureSize().y) / 2.f);
 		}
 		else
 		{

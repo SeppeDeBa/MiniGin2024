@@ -72,6 +72,9 @@
     <ClInclude Include="TextureComponent.h">
       <Filter>Game Files\Components</Filter>
     </ClInclude>
+    <ClInclude Include="TextComponent.h">
+      <Filter>Game Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -120,6 +123,9 @@
       <Filter>Game Files\Components</Filter>
     </ClCompile>
     <ClCompile Include="TextureComponent.cpp">
+      <Filter>Game Files\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="TextComponent.cpp">
       <Filter>Game Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
