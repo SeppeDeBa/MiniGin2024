@@ -22,6 +22,12 @@
     <Filter Include="Game Files\Components\Base">
       <UniqueIdentifier>{f73fb952-fb33-452f-a253-c41bcae1abf4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Files\Components\Texture">
+      <UniqueIdentifier>{44c1fe54-db33-44f6-b266-f2e2edfaa893}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\GameObject">
+      <UniqueIdentifier>{dd6b5860-c1e6-4b3c-9dc2-9d8dfc4a468c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
@@ -37,9 +43,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GameObject.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Transform.h">
@@ -69,11 +72,14 @@
     <ClInclude Include="FPSComponent.h">
       <Filter>Game Files\Components</Filter>
     </ClInclude>
-    <ClInclude Include="TextureComponent.h">
-      <Filter>Game Files\Components</Filter>
-    </ClInclude>
     <ClInclude Include="TextComponent.h">
-      <Filter>Game Files\Components</Filter>
+      <Filter>Game Files\Components\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureComponent.h">
+      <Filter>Game Files\Components\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>Game Files\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -87,9 +93,6 @@
       <Filter>Game Files</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>Game Files</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
       <Filter>Game Files</Filter>
     </ClCompile>
     <ClCompile Include="Transform.cpp">
@@ -122,11 +125,14 @@
     <ClCompile Include="FPSComponent.cpp">
       <Filter>Game Files\Components</Filter>
     </ClCompile>
-    <ClCompile Include="TextureComponent.cpp">
-      <Filter>Game Files\Components</Filter>
-    </ClCompile>
     <ClCompile Include="TextComponent.cpp">
-      <Filter>Game Files\Components</Filter>
+      <Filter>Game Files\Components\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureComponent.cpp">
+      <Filter>Game Files\Components\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>Game Files\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
