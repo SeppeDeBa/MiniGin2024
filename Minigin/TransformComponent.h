@@ -7,7 +7,7 @@ namespace dae
 	{
 	public:
 		TransformComponent(GameObject* pOwner, float x, float y);
-		~TransformComponent();
+		~TransformComponent() = default;
 		void Update(float deltaTime) override;
 
 

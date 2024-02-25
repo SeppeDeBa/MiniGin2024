@@ -7,11 +7,8 @@ dae::TransformComponent::TransformComponent(GameObject* pOwner, float x, float y
 
 }
 
-dae::TransformComponent::~TransformComponent()
-{
-}
 
-void dae::TransformComponent::Update(float deltaTime)
+void dae::TransformComponent::Update(float)
 {
 
 }
