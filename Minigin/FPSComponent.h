@@ -4,7 +4,7 @@
 #include "TextComponent.h"
 namespace dae
 {
-	class FPSComponent : public Component
+	class FPSComponent final : public Component
 	{
 	public:
 		FPSComponent(GameObject* pOwner);

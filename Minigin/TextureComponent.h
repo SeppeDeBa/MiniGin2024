@@ -7,7 +7,7 @@
 #include "TransformComponent.h"
 namespace dae
 {
-	class TextureComponent : public Component
+	class TextureComponent final : public Component
 	{
 	public:
 		TextureComponent(GameObject* pOwner, const std::string& filePath, bool drawAroundCenter);

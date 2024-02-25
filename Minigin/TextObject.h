@@ -8,11 +8,11 @@ namespace dae
 {
 	class Font;
 	class Texture2D;
-	class TextObject final : public GameObject
+	class TextObject final 
 	{
 	public:
 		void Update();
-		void Render() const override;
+		void Render() const;
 
 		void SetText(const std::string& text);
 		void SetPosition(float x, float y);
