@@ -15,5 +15,9 @@ namespace dae
 		Minigin(Minigin&& other) = delete;
 		Minigin& operator=(const Minigin& other) = delete;
 		Minigin& operator=(Minigin&& other) = delete;
+
+	private:
+		const float m_targetFPS{ 60.f };
+		const float m_fixedTimeStep{ 1.f / m_targetFPS };
 	};
 }
