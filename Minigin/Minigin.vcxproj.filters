@@ -81,6 +81,9 @@
     <ClInclude Include="GameObject.h">
       <Filter>Game Files\GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="RotatorComponent.h">
+      <Filter>Game Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ResourceManager.cpp">
@@ -133,6 +136,9 @@
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
       <Filter>Game Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="RotatorComponent.cpp">
+      <Filter>Game Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

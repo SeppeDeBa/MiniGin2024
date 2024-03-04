@@ -32,7 +32,7 @@ void dae::TextComponent::Update(float) //used from TextObject given in base Mini
 			throw std::runtime_error(std::string("Create text texture from surface failed: ") + SDL_GetError());
 		}
 		SDL_FreeSurface(surf);
-		GetGameObject()->GetComponent<dae::TextureComponent>()->SetTexture(std::make_shared<Texture2D>(texture));
+		GetGameObject()->GetComponent<dae::TextureComponent>()->SetTexture(std::make_shared<Texture2D>(texture));//todo: get rid of GetComponent here.
 		m_needsUpdate = false;
 	}
 }
@@ -41,8 +41,6 @@ void dae::TextComponent::SetText(const std::string& text)
 {
 	m_textString = text;
 	m_needsUpdate = true;
-
-
 }
 
 

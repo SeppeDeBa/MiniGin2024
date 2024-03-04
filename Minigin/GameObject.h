@@ -7,28 +7,29 @@
 
 
 
-
+//todo: Add removal for components after update method.
 namespace dae
 {
 	class Component;
 	class Texture2D;
 
-	// todo: this should become final.
 	class GameObject final
 	{
 	public:
+		GameObject();
+		virtual ~GameObject();
+		GameObject(const GameObject& other) = delete;
+		GameObject(GameObject&& other) = delete;
+		GameObject& operator=(const GameObject& other) = delete;
+		GameObject& operator=(GameObject&& other) = delete;
+
+
 		virtual void Update(float deltaTime);
 		virtual void Render() const;
 
 		void SetTexture(const std::string& filename);
 		void SetPosition(float x, float y);
 
-		GameObject() = default;
-		virtual ~GameObject();
-		GameObject(const GameObject& other) = delete;
-		GameObject(GameObject&& other) = delete;
-		GameObject& operator=(const GameObject& other) = delete;
-		GameObject& operator=(GameObject&& other) = delete;
 
 
 		//template functions
@@ -81,7 +82,40 @@ namespace dae
 		}
 
 
+		//parent/child functions
+		bool HasParent() const
+		{
+			if (m_pParentGO == nullptr)
+			{
+				return false;
+			}
+			return true;
+		}
+
+		//child
+		void AddChild(GameObject* childGO);
+		void RemoveChild(GameObject* childGO);
+		//parent
+		void SetParent(GameObject* parent, bool keepWorldPos);
+		GameObject* GetParent() const
+		{
+			return m_pParentGO;
+		};
+		//dirty flag
+		void SetPositionDirty();
+
+		//deletion
+		void MarkForDeletion() { m_markedForDeletion = true; };
+		bool IsMarkedForDeletion() const { return m_markedForDeletion; };
+
 	private:
 		std::vector<std::shared_ptr<dae::Component>> m_pVectorComponents;
+		std::vector<dae::GameObject*> m_pVectorGOChildren;
+		GameObject* m_pParentGO;
+
+		//unused
+		bool m_markedForDeletion = false;
+
+
 	};
 }

@@ -8,10 +8,9 @@
 #include "Texture2D.h"
 
 
-
 namespace dae
 {
-
+	//todo: add either requiredComponent method or just own a texture component in this.
 	class TextComponent : public Component
 	{
 	public:

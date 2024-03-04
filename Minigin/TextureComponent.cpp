@@ -45,15 +45,14 @@ void dae::TextureComponent::Render() const
 		if (m_drawAroundCenter)
 		{
 			Renderer::GetInstance().RenderTexture(*m_pTexture2D
-				, m_pOwnerTransform->GetPosition().x - static_cast<float>(GetTextureSize().x) / 2.f
-				, m_pOwnerTransform->GetPosition().y - static_cast<float>(GetTextureSize().y) / 2.f);
+				, m_pOwnerTransform->GetWorldPos().x - static_cast<float>(GetTextureSize().x) / 2.f
+				, m_pOwnerTransform->GetWorldPos().y - static_cast<float>(GetTextureSize().y) / 2.f);
 		}
 		else
 		{
-
 			Renderer::GetInstance().RenderTexture(*m_pTexture2D
-				, m_pOwnerTransform->GetPosition().x
-				, m_pOwnerTransform->GetPosition().y);
+				, m_pOwnerTransform->GetWorldPos().x
+				, m_pOwnerTransform->GetWorldPos().y);
 		}
 	}
 }
@@ -66,6 +65,7 @@ const dae::Texture2D& dae::TextureComponent::GetTexture() const
 void dae::TextureComponent::SetTexture(std::shared_ptr<Texture2D> texture)
 {
 	m_pTexture2D = texture;
+	SetDirty();
 }
 
 glm::ivec2 dae::TextureComponent::GetTextureSize() const

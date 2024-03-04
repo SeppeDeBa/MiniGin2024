@@ -87,7 +87,6 @@ void dae::Minigin::Run(const std::function<void()>& load)
 	auto& sceneManager = SceneManager::GetInstance();
 	auto& input = InputManager::GetInstance();
 
-	// todo: this update loop could use some work.
 	bool doContinue = true;
 
 	const int frameTimeMs{ static_cast<int>(1000.f / m_targetFPS) };
@@ -105,11 +104,12 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		//input
 		doContinue = input.ProcessInput();
 
-		while(lag >= m_fixedTimeStep)
-		{
+		//can be used for physics later
+		//while(lag >= m_fixedTimeStep)
+		//{
 			//physics update
-			lag -= m_fixedTimeStep;
-		}
+			//lag -= m_fixedTimeStep;
+		//}
 
 		sceneManager.Update(deltaTime);
 		renderer.Render();

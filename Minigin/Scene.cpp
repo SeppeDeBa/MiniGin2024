@@ -49,8 +49,20 @@ void Scene::Update(float deltaTime)
 	{
 		go->Update(deltaTime);
 	}
-}
 
+	auto it = m_pGameObjects.begin();
+	while (it != m_pGameObjects.end())
+	{
+		GameObject* go = *it;
+		if (go->IsMarkedForDeletion())
+		{
+			delete go;
+			it = m_pGameObjects.erase(it); //remove from vector and advance iterator
+		}
+		++it;
+	}
+}
+//todo: Should deletion be here?
 void Scene::Render() const
 {
 	for (GameObject* go : m_pGameObjects)

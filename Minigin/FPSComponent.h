@@ -4,7 +4,7 @@
 #include "TextComponent.h"
 namespace dae
 {
-	class FPSComponent final : public Component
+	class FPSComponent final : public Component //TODO: Calculate average, no time so far
 	{
 	public:
 		FPSComponent(GameObject* pOwner);

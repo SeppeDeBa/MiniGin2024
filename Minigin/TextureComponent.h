@@ -16,19 +16,23 @@ namespace dae
 		void Update(float) override;
 		void Render() const override;
 
-
 		const Texture2D& GetTexture() const;
-		void SetTexture(const std::string& filename) { m_pTexture2D = ResourceManager::GetInstance().LoadTexture(filename); };
-
+		void SetTexture(const std::string& filename) { m_pTexture2D = ResourceManager::GetInstance().LoadTexture(filename); SetDirty(); }; //move to cpp
+		
 
 		void SetTexture(std::shared_ptr<Texture2D> texture);
 		glm::ivec2 GetTextureSize() const;
-
+		bool IsDirty() const { return m_dirtyFlag; };
+		void SetDirty() { m_dirtyFlag = true; };
 
 	private:
 		std::shared_ptr<Texture2D> m_pTexture2D;
 		TransformComponent* m_pOwnerTransform{};
 		bool m_drawAroundCenter{};
 		bool m_newParentTransform{false};
+
+
+		//todo: decide if flag is needed here -> could be useful for for example fps component, no time for it yet
+		bool m_dirtyFlag;//first put here, but unused so far
 	};
 }
