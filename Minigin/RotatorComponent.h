@@ -20,7 +20,7 @@ namespace dae
 		float m_circleRadius;
 		float m_angle;
 		float m_rotationSpeedPerSec;
-		bool m_goesClockwise;
+		bool m_goesClockwise; //todo: change to float
 		TransformComponent* m_pOwnerTransform{};
 		TextureComponent* m_pOwnerTextureComponent{};
 	};

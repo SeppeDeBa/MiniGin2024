@@ -78,7 +78,7 @@ void dae::GameObject::SetParent(GameObject* parent, bool keepWorldPos)
 	}
 
 	//2. Remove this child from parent
-	if (m_pParentGO)
+	if (m_pParentGO)//todo: could be in previous else?
 	{
 		m_pParentGO->RemoveChild(this);
 	}

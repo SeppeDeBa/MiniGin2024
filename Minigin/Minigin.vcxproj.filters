@@ -28,6 +28,9 @@
     <Filter Include="Game Files\GameObject">
       <UniqueIdentifier>{dd6b5860-c1e6-4b3c-9dc2-9d8dfc4a468c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="imgui">
+      <UniqueIdentifier>{2d3a2316-332d-4c04-ba73-bd5c5595941e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">

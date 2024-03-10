@@ -92,9 +92,8 @@ namespace dae
 			return true;
 		}
 
-		//child
-		void AddChild(GameObject* childGO);
-		void RemoveChild(GameObject* childGO);
+		//child todo: move to private, think abt all of them
+
 		//parent
 		void SetParent(GameObject* parent, bool keepWorldPos);
 		GameObject* GetParent() const
@@ -109,7 +108,9 @@ namespace dae
 		bool IsMarkedForDeletion() const { return m_markedForDeletion; };
 
 	private:
-		std::vector<std::shared_ptr<dae::Component>> m_pVectorComponents;
+		void AddChild(GameObject* childGO);
+		void RemoveChild(GameObject* childGO);
+		std::vector<std::shared_ptr<dae::Component>> m_pVectorComponents;//todo: REMOVE SHARED PTR!
 		std::vector<dae::GameObject*> m_pVectorGOChildren;
 		GameObject* m_pParentGO;
 

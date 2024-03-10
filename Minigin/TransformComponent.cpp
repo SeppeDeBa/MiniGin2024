@@ -28,7 +28,7 @@ void dae::TransformComponent::SetLocalPosition(float x, float y)
 	GetGameObject()->SetPositionDirty();
 }
 
-void dae::TransformComponent::SetLocalPosition(const glm::vec3& vecInput)
+void dae::TransformComponent::SetLocalPosition(const glm::vec3& vecInput) //todo: rename to LocalPos to be in line with other functions...
 {
 	m_localPos = vecInput;
 	GetGameObject()->SetPositionDirty();
