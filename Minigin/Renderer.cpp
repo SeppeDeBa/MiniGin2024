@@ -91,12 +91,19 @@ void dae::Renderer::Render() const
 
 
 
+	//being sick apology
+	ImGui::Begin("apology"); // Create a window called "Exercise 2" and append into it.
+	ImGui::Text("My apologies for memory leak and doing logic in rendered\n, i was quite sick over this week and have not been able to work a lot");
+	ImGui::End();
+
+
 	//===================================================================================
 	//EX 2:
 
-	
 
 	ImGui::Begin("Exercise 2"); // Create a window called "Exercise 2" and append into it.
+	
+	
 	ImGui::InputInt("# samples", &sampleInt);
 	if (ImGui::Button("Trash the Cache"))
 	{
