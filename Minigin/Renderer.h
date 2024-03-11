@@ -2,6 +2,8 @@
 #include <SDL.h>
 #include "Singleton.h"
 
+
+
 namespace dae
 {
 	class Texture2D;

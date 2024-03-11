@@ -30,10 +30,10 @@ namespace dae
 		explicit Scene(const std::string& name);
 
 		std::string m_name;
-		std::vector < std::shared_ptr<GameObject>> m_objects{};
+		std::vector < std::shared_ptr<GameObject>> m_objects{};//TODO MAKE UNIQUE PTRS (although generally unused here)
 
 		//using scenes as central owners
-		std::vector<GameObject*> m_pGameObjects;
+		std::vector<GameObject*> m_pGameObjects; //todo: make root scene?
 
 
 		static unsigned int m_idCounter; 

@@ -53,7 +53,7 @@ void dae::GameObject::AddChild(GameObject* childGO)
 	m_pVectorGOChildren.push_back(childGO);
 }
 
-void dae::GameObject::RemoveChild(GameObject* childGO)
+void dae::GameObject::RemoveChild(GameObject* childGO)//todo: check ppt to update this function. focus after this week bc sick
 {
 	const auto childGODeleteIt = std::find(m_pVectorGOChildren.begin(), m_pVectorGOChildren.end(), childGO);
 	if (childGODeleteIt != m_pVectorGOChildren.end())
@@ -70,9 +70,11 @@ void dae::GameObject::SetParent(GameObject* parent, bool keepWorldPos)
 	}
 	else
 	{
-		if (keepWorldPos)
+		if (keepWorldPos)//TODO: ASK ALEX WHAT HE MEANS LOGIC MISTAKE
 		{
-			GetComponent<TransformComponent>()->SetLocalPosition(GetComponent<TransformComponent>()->GetLocalPos() - m_pParentGO->GetComponent<TransformComponent>()->GetWorldPos());
+			GetComponent<TransformComponent>()->SetLocalPosition(
+													GetComponent<TransformComponent>()->GetLocalPos() - 
+													m_pParentGO->GetComponent<TransformComponent>()->GetWorldPos()); //slide 21 does this needs to substract local pos aswell?
 		}
 		SetPositionDirty();
 	}
