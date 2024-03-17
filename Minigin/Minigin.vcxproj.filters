@@ -31,12 +31,18 @@
     <Filter Include="imgui">
       <UniqueIdentifier>{2d3a2316-332d-4c04-ba73-bd5c5595941e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Files\Input">
+      <UniqueIdentifier>{a801b21d-9268-4b63-99d8-dd111a830103}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Input\Commands">
+      <UniqueIdentifier>{b35c096a-31bc-44e2-9e45-9744dd75de26}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Managers">
+      <UniqueIdentifier>{3609b51e-fc7b-4a68-ad07-b15baa998df7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="ResourceManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Renderer.h">
@@ -45,16 +51,10 @@
     <ClInclude Include="Texture2D.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="InputManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="TextObject.h">
@@ -114,27 +114,42 @@
     <ClInclude Include="..\3rdParty\imgui-1.90.4\imgui_plot.h">
       <Filter>imgui</Filter>
     </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>Game Files\Input\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="GOCommand.h">
+      <Filter>Game Files\Input\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="MoveCommand.h">
+      <Filter>Game Files\Input\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="SeppeUtils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Controller.h">
+      <Filter>Game Files\Input</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Game Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Game Files\Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Game Files\Managers</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ResourceManager.cpp">
-      <Filter>Game Files</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer.cpp">
       <Filter>Game Files</Filter>
     </ClCompile>
     <ClCompile Include="Texture2D.cpp">
       <Filter>Game Files</Filter>
     </ClCompile>
-    <ClCompile Include="InputManager.cpp">
-      <Filter>Game Files</Filter>
-    </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>Game Files</Filter>
     </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>Game Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneManager.cpp">
       <Filter>Game Files</Filter>
     </ClCompile>
     <ClCompile Include="TextObject.cpp">
@@ -193,6 +208,30 @@
     </ClCompile>
     <ClCompile Include="..\3rdParty\imgui-1.90.4\imgui_plot.cpp">
       <Filter>imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>Game Files\Input\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="GOCommand.cpp">
+      <Filter>Game Files\Input\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="MoveCommand.cpp">
+      <Filter>Game Files\Input\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="SeppeUtils.cpp">
+      <Filter>Game Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Controller.cpp">
+      <Filter>Game Files\Input</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Game Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Game Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Game Files\Managers</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
