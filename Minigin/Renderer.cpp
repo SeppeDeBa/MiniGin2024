@@ -93,10 +93,10 @@ void dae::Renderer::Render() const
 
 	//being sick apology
 	ImGui::Begin("apology"); // Create a window called "Exercise 2" and append into it.
-	ImGui::Text("My apologies for memory leak and doing logic in rendered\n, i was quite sick over this week and have not been able to work a lot");
+	ImGui::Text("I was very sick this weekend and had to be in bed all saturday\n Fought through sunday to get this together\n Sorry that memory leaks are still there \n Click off of this screen to activate controls");
 	ImGui::End();
 
-
+	/*
 	//===================================================================================
 	//EX 2:
 
@@ -390,7 +390,7 @@ void dae::Renderer::Render() const
 
 	ImGui::End();
 
-
+	*/
 
 	//ImGui::ShowDemoWindow();
 	ImGui::Render();
