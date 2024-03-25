@@ -40,6 +40,15 @@
     <Filter Include="Game Files\Managers">
       <UniqueIdentifier>{3609b51e-fc7b-4a68-ad07-b15baa998df7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Files\Events">
+      <UniqueIdentifier>{166cd44c-f516-4933-9578-0b765a300cc2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Events\Observer">
+      <UniqueIdentifier>{4fd1ce2b-4fb5-437a-a5bf-6fb57551cf93}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Events\Subject">
+      <UniqueIdentifier>{42e61b78-5168-4430-a29a-0263421cb3fa}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
@@ -138,6 +147,12 @@
     <ClInclude Include="SceneManager.h">
       <Filter>Game Files\Managers</Filter>
     </ClInclude>
+    <ClInclude Include="IObserver.h">
+      <Filter>Game Files\Events\Observer</Filter>
+    </ClInclude>
+    <ClInclude Include="Subject.h">
+      <Filter>Game Files\Events\Subject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Renderer.cpp">
@@ -232,6 +247,12 @@
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
       <Filter>Game Files\Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="IObserver.cpp">
+      <Filter>Game Files\Events\Observer</Filter>
+    </ClCompile>
+    <ClCompile Include="Subject.cpp">
+      <Filter>Game Files\Events\Subject</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

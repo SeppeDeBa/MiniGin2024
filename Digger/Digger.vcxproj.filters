@@ -1,10 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
     <Filter Include="Header Files">
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
@@ -13,10 +9,67 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Game Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Game Files\Components">
+      <UniqueIdentifier>{71cbecd1-16fa-4531-97c2-d5cef843f9b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Components\UI">
+      <UniqueIdentifier>{f282449b-9292-4898-8936-3cb0af632811}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Components\Player">
+      <UniqueIdentifier>{4145e617-4601-4739-b587-fc5e25587a20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Components\Unused">
+      <UniqueIdentifier>{339a5ad7-8be9-409b-827d-5d2382f8ae7a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Commands">
+      <UniqueIdentifier>{4b334533-8372-4698-bcb1-7e926f692a8a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Digger.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Game Files</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Game Files\Components\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="LivesDisplayComponent.cpp">
+      <Filter>Game Files\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreDisplayComponent.cpp">
+      <Filter>Game Files\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStatsDisplay.cpp">
+      <Filter>Game Files\Components\Unused</Filter>
+    </ClCompile>
+    <ClCompile Include="DieCommand.cpp">
+      <Filter>Game Files\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreCommand.cpp">
+      <Filter>Game Files\Commands</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Player.h">
+      <Filter>Game Files\Components\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreDisplayComponent.h">
+      <Filter>Game Files\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="LivesDisplayComponent.h">
+      <Filter>Game Files\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStatsDisplay.h">
+      <Filter>Game Files\Components\Unused</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreCommand.h">
+      <Filter>Game Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="DieCommand.h">
+      <Filter>Game Files\Commands</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

@@ -143,7 +143,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="DieCommand.cpp" />
     <ClCompile Include="Digger.cpp" />
+    <ClCompile Include="GameStatsDisplay.cpp" />
+    <ClCompile Include="LivesDisplayComponent.cpp" />
+    <ClCompile Include="Player.cpp" />
+    <ClCompile Include="ScoreCommand.cpp" />
+    <ClCompile Include="ScoreDisplayComponent.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DieCommand.h" />
+    <ClInclude Include="GameStatsDisplay.h" />
+    <ClInclude Include="LivesDisplayComponent.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="ScoreCommand.h" />
+    <ClInclude Include="ScoreDisplayComponent.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
