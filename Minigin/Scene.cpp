@@ -21,6 +21,7 @@ void Scene::Add(std::shared_ptr<GameObject> object)
 
 void Scene::Add(GameObject* object)
 {
+
 	m_pGameObjects.push_back(object);
 }
 

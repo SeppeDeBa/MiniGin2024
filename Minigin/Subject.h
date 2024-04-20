@@ -22,8 +22,9 @@ public:
 
 	void RemoveObserver(IObserver<Args...>* observerToRemove)
 	{
-		m_pObserverVector.erase(std::remove(m_pObserverVector.begin(), m_pObserverVector.end(), observerToRemove),
-			m_pObserverVector.end());
+		/*m_pObserverVector.erase(std::remove(m_pObserverVector.begin(), m_pObserverVector.end(), observerToRemove),
+			m_pObserverVector.end());*/
+		std::remove(m_pObserverVector.begin(), m_pObserverVector.end(), observerToRemove);
 	}
 
 	//void NotifyAll() --> REDUNDANT SINCE IT IS NOW TEMPLATED //leaving for personal interest, was from Mikes video
