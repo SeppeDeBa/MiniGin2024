@@ -13,7 +13,7 @@ public:
 	}
 	virtual ~DieCommand() = default;
 
-	void Execute(float deltaTime) override
+	void Execute(float) override
 	{
 		if (m_pGameObject) m_pGameObject->GetComponent<Player>()->Die();
 	}

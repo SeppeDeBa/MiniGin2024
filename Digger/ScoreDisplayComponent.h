@@ -3,19 +3,23 @@
 #include "IObserver.h"
 #include "Player.h"
 #include "TextComponent.h"
+#include <vector>
 
-using namespace dae;
-class ScoreDisplayComponent : public Component, public IObserver<int> 
+namespace dae
 {
-public:
-	ScoreDisplayComponent(GameObject* pOwner, Player* pObservedPlayerComp);
-	~ScoreDisplayComponent();
-	void OnNotify(int stat) override;
-private:
 
-	void UpdateDisplay(int stat); //helper function bc frequently used
-	TextComponent* m_pTextComponent; //dont delete, not parent
-	Player* m_pPlayerComp; //dont delete, not parent
-};
+	class ScoreDisplayComponent : public dae::Component, public IObserver<int>
+	{
+	public:
+		ScoreDisplayComponent(dae::GameObject* pOwner, Player* pObservedPlayerComp);
+		~ScoreDisplayComponent();
+		void OnNotify(int) override;
+	private:
+
+		void UpdateDisplay(int stat); //helper function bc frequently used
+		dae::TextComponent* m_pTextComponent; //dont delete, not parent
+		Player* m_pPlayerComp; //dont delete, not parent
+	};
+}
 
 

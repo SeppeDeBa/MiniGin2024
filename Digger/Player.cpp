@@ -1,7 +1,7 @@
 #include "Player.h"
 #include "iostream"
-Player::Player(GameObject* pOwner, int startingLives)
-	:Component(pOwner)
+Player::Player(dae::GameObject* pOwner, int startingLives)
+	: Component(pOwner)
 	, m_Lives(startingLives)
 	, m_Score(0)
 {

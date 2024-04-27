@@ -1,7 +1,7 @@
 //INSPIRED BY MIKE SHAH, The Observer Design Pattern on his youtube and cppcon 2022, adapted to prog 4, modified with personal notes from last year
 #pragma once
-#include "IObserver.h"
 #include <vector>
+#include "IObserver.h"
 template<typename... Args>
 class Subject final
 {
@@ -24,7 +24,8 @@ public:
 	{
 		/*m_pObserverVector.erase(std::remove(m_pObserverVector.begin(), m_pObserverVector.end(), observerToRemove),
 			m_pObserverVector.end());*/
-		std::remove(m_pObserverVector.begin(), m_pObserverVector.end(), observerToRemove);
+		if(!m_pObserverVector.empty()) m_pObserverVector.erase(std::remove(m_pObserverVector.begin(), m_pObserverVector.end(), observerToRemove), m_pObserverVector.end());
+
 	}
 
 	//void NotifyAll() --> REDUNDANT SINCE IT IS NOW TEMPLATED //leaving for personal interest, was from Mikes video

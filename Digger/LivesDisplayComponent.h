@@ -3,18 +3,22 @@
 #include "IObserver.h"
 #include "Player.h"
 #include "TextComponent.h"
+#include <vector>
 
-using namespace dae;
-class LivesDisplayComponent : public Component, public IObserver<int> 
+namespace dae
 {
-public:
-	LivesDisplayComponent(GameObject* pOwner, Player* pObservedPlayerComp);
-	~LivesDisplayComponent();
-	void OnNotify(int stat) override;
-private:
 
-	void UpdateDisplay(int stat); //helper function bc frequently used
-	TextComponent* m_pTextComponent; //dont delete, not parent
-	Player* m_pPlayerComp; //dont delete, not parent
-};
+	class LivesDisplayComponent : public Component, public IObserver<int>
+	{
+	public:
+		LivesDisplayComponent(GameObject* pOwner, Player* pObservedPlayerComp);
+		~LivesDisplayComponent();
+		void OnNotify(int) override;
+	private:
+
+		void UpdateDisplay(int stat); //helper function bc frequently used
+		TextComponent* m_pTextComponent; //dont delete, not parent
+		Player* m_pPlayerComp; //dont delete, not parent
+	};
+}
 

@@ -85,7 +85,7 @@ void load()
 	GOScoreP1Text->AddComponent<dae::TransformComponent>(5.f, 100.f);
 	GOScoreP1Text->AddComponent<dae::TextureComponent>(false);
 	GOScoreP1Text->AddComponent<dae::TextComponent>("Score:", fpsFont);
-	GOScoreP1Text->AddComponent<ScoreDisplayComponent>(GOOne->GetComponent<Player>());
+	GOScoreP1Text->AddComponent<dae::ScoreDisplayComponent>(GOOne->GetComponent<Player>());
 	scene.Add(GOScoreP1Text);
 
 	//Lives P1
@@ -95,7 +95,7 @@ void load()
 	GOLivesP1Text->AddComponent<dae::TransformComponent>(5.f, 125.f);
 	GOLivesP1Text->AddComponent<dae::TextureComponent>(false);
 	GOLivesP1Text->AddComponent<dae::TextComponent>("Lives:", fpsFont);
-	GOLivesP1Text->AddComponent<LivesDisplayComponent>(GOOne->GetComponent<Player>());
+	GOLivesP1Text->AddComponent<dae::LivesDisplayComponent>(GOOne->GetComponent<Player>());
 	scene.Add(GOLivesP1Text);
 
 
@@ -117,7 +117,7 @@ void load()
 	GOScoreP2Text->AddComponent<dae::TransformComponent>(5.f, 150.f);
 	GOScoreP2Text->AddComponent<dae::TextureComponent>(false);
 	GOScoreP2Text->AddComponent<dae::TextComponent>("Score:", fpsFont);
-	GOScoreP2Text->AddComponent<ScoreDisplayComponent>(GOTwo->GetComponent<Player>());
+	GOScoreP2Text->AddComponent<dae::ScoreDisplayComponent>(GOTwo->GetComponent<Player>());
 	scene.Add(GOScoreP2Text);
 
 	//Lives P1
@@ -127,7 +127,7 @@ void load()
 	GOLivesP2Text->AddComponent<dae::TransformComponent>(5.f, 175.f);
 	GOLivesP2Text->AddComponent<dae::TextureComponent>(false);
 	GOLivesP2Text->AddComponent<dae::TextComponent>("Lives:", fpsFont);
-	GOLivesP2Text->AddComponent<LivesDisplayComponent>(GOTwo->GetComponent<Player>());
+	GOLivesP2Text->AddComponent<dae::LivesDisplayComponent>(GOTwo->GetComponent<Player>());
 	scene.Add(GOLivesP2Text);
 
 
@@ -197,11 +197,11 @@ void load()
 			glm::vec2{ 1.f, 0.f }), dae::InputType::ISHELD);
 
 	//die
-	input.AddConsoleCommand(controllerOne, Controller::ControllerButton::ButtonX,
+	input.AddConsoleCommand(controllerOne, dae::Controller::ControllerButton::ButtonX,
 		std::make_unique<DieCommand>(GOOne),
 		dae::InputType::ISUP);
 	//score
-	input.AddConsoleCommand(controllerOne, Controller::ControllerButton::ButtonY,
+	input.AddConsoleCommand(controllerOne, dae::Controller::ControllerButton::ButtonY,
 		std::make_unique<ScoreCommand>(GOOne, 100),
 		dae::InputType::ISUP);
 
@@ -244,13 +244,13 @@ void load()
 	input.AddKeyboardCommand(SDL_SCANCODE_C,
 		std::make_unique<DieCommand>(GOTwo));
 
-	input.AddConsoleCommand(controllerOne, Controller::ControllerButton::ButtonX,
+	input.AddConsoleCommand(controllerOne, dae::Controller::ControllerButton::ButtonX,
 		std::make_unique<DieCommand>(GOTwo),
 		dae::InputType::ISUP);
 	//score
 	input.AddKeyboardCommand(SDL_SCANCODE_X,
 		std::make_unique<ScoreCommand>(GOTwo));
-	input.AddConsoleCommand(controllerOne, Controller::ControllerButton::ButtonY,
+	input.AddConsoleCommand(controllerOne, dae::Controller::ControllerButton::ButtonY,
 		std::make_unique<ScoreCommand>(GOTwo, 100),
 		dae::InputType::ISUP);
 

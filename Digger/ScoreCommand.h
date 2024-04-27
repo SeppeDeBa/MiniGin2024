@@ -13,7 +13,7 @@ public:
 	virtual ~ScoreCommand() = default;
 
 
-	void Execute(float deltaTime) override
+	void Execute(float) override
 	{
 		if (m_pGameObject) m_pGameObject->GetComponent<Player>()->Score(m_ScorePerTrigger);
 	}

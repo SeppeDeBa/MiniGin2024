@@ -4,7 +4,8 @@
 //#include "Player.h"
 //#include "TextureComponent.h"
 //#include "TextComponent.h"
-//
+//using namespace dae
+
 ////todo: ask if this can be used as central comp?
 //using namespace dae;
 //class GameStatsDisplay : public Component, public IObserver<int> //todo: rename with component in name, forgot

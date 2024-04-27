@@ -1,12 +1,11 @@
 #pragma once
 #include "Component.h"
 #include "Subject.h"
-using namespace dae;
 
 	class Player final: public dae::Component //todo: might not have to be final if adding implementation for being enemies? have to give it some thought
 	{
 	public:
-		Player(GameObject* pOwner, int startingLives = 3);
+		Player(dae::GameObject* pOwner, int startingLives = 3);
 		~Player() = default;
 
 		void Die();
