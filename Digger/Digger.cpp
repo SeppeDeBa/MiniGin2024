@@ -1,6 +1,7 @@
 #include <SDL.h>
 
 #if _DEBUG
+
 // ReSharper disable once CppUnusedIncludeDirective
 #if __has_include(<vld.h>)
 #include <vld.h>
@@ -30,8 +31,20 @@
 #include "DieCommand.h"
 #include "ScoreCommand.h"
 
+//Sound
+
+#include "ISoundSystem.h"
+#include "SoundServiceLocator.h"
+#include "SoundSystem.h"
+#include "LoggingSoundSystem.h"
+
+
+
 void load()
 {
+	SoundServiceLocator::Register_Sound_System(std::make_unique<SoundSystem>());
+	auto& soundService = SoundServiceLocator::Get_Sound_System();
+
 	auto& scene = dae::SceneManager::GetInstance().CreateScene("Demo");
 
 	auto font = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);

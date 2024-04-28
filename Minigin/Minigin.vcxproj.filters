@@ -49,6 +49,18 @@
     <Filter Include="Game Files\Events\Subject">
       <UniqueIdentifier>{42e61b78-5168-4430-a29a-0263421cb3fa}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Sound">
+      <UniqueIdentifier>{2c5eca79-59f6-4c2c-9722-fbf112e43cc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound\Interface">
+      <UniqueIdentifier>{fdc0a4cf-0ffb-450e-83a0-bedcf779aa2d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound\ServiceLocator">
+      <UniqueIdentifier>{85e3ec9e-a572-4029-a181-cc73595185a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Sound\SoundSystems">
+      <UniqueIdentifier>{d655bc2a-3e23-4e26-9d3b-46a4d231744c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Singleton.h">
@@ -153,6 +165,21 @@
     <ClInclude Include="Subject.h">
       <Filter>Game Files\Events\Subject</Filter>
     </ClInclude>
+    <ClInclude Include="ISoundSystem.h">
+      <Filter>Sound\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundServiceLocator.h">
+      <Filter>Sound\ServiceLocator</Filter>
+    </ClInclude>
+    <ClInclude Include="LoggingSoundSystem.h">
+      <Filter>Sound\SoundSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="NullSoundSystem.h">
+      <Filter>Sound\SoundSystems</Filter>
+    </ClInclude>
+    <ClInclude Include="SoundSystem.h">
+      <Filter>Sound\SoundSystems</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Renderer.cpp">
@@ -253,6 +280,21 @@
     </ClCompile>
     <ClCompile Include="Subject.cpp">
       <Filter>Game Files\Events\Subject</Filter>
+    </ClCompile>
+    <ClCompile Include="ISoundSystem.cpp">
+      <Filter>Sound\Interface</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundServiceLocator.cpp">
+      <Filter>Sound\ServiceLocator</Filter>
+    </ClCompile>
+    <ClCompile Include="LoggingSoundSystem.cpp">
+      <Filter>Sound\SoundSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="NullSoundSystem.cpp">
+      <Filter>Sound\SoundSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundSystem.cpp">
+      <Filter>Sound\SoundSystems</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
