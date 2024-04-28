@@ -4,7 +4,7 @@ class ISoundSystem
 {
 public:
 	virtual ~ISoundSystem() = default;
-	virtual void Play(const sound_id soundID) const = 0;
+	virtual void Play(const sound_id soundID, const float volume) const = 0;
 	virtual void Pause() const = 0;
 	virtual void Resume() const = 0;
 	virtual void Stop() const = 0;

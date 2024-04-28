@@ -14,8 +14,8 @@ public:
 	{};
 	virtual ~LoggingSoundSystem() = default;
 
-	void Play(const sound_id soundID) const override {
-		m_pRealSoundSystem->Play(soundID);
+	void Play(const sound_id soundID, const float volume) const override {
+		m_pRealSoundSystem->Play(soundID, volume);
 		std::cout << "playing sound id: " << soundID << std::endl;
 	}
 	virtual void Pause() const override {

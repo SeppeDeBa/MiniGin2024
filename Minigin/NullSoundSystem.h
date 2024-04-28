@@ -7,7 +7,7 @@ class NullSoundSystem final : public ISoundSystem
 {
 public:
 	virtual ~NullSoundSystem() = default;
-	void Play(const sound_id) const override {
+	void Play(const sound_id, const float) const override {
 		std::cout << "trying to play a sound when sound system is null" << std::endl;
 	}
 

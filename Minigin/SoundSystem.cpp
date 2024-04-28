@@ -5,12 +5,20 @@
 //IMPORTANT: had a problem with the newest lib, so using an older SDL2_Mixer
 #include <SDL.h>
 #include <iostream>
+#include <thread>
+#include <mutex>
 
 class SoundSystem::SoundSystemImpl
 {
-private:
-	std::vector<Mix_Chunk*>m_SoundEffects;
+	struct musicLoaderFunctor
+	{
+		void operator()
+	};
 
+private:
+	std::vector<Mix_Chunk*>m_SoundEffects{};
+	std::mutex m_SoundEffectsVectorMutex{};
+	std::vector<std::jthread*> m_SoundEffectsThreads{};
 public:
 	SoundSystemImpl()
 	{
@@ -39,13 +47,14 @@ public:
 		m_SoundEffects.clear();
 	};
 
-	void Play(const sound_id soundId) const {
+	void Play(const sound_id soundId, const float volume) const {
 		if (soundId > m_SoundEffects.size() - 1)
 		{
 			std::cout << "id is higher than the amount of existing sounds" << std::endl;
 		}
 		else
 		{
+			m_SoundEffects[soundId]->volume = static_cast<Uint8>(volume); //autoconversion should be fine...
 			Mix_PlayChannel(-1, m_SoundEffects[soundId], 0);
 			std::cout << "Played sound ID: " << soundId << std::endl;
 		}
@@ -82,9 +91,9 @@ SoundSystem::~SoundSystem()
 {
 }
 
-void SoundSystem::Play(const sound_id soundID) const
+void SoundSystem::Play(const sound_id soundID, const float volume) const
 {
-	m_pImpl->Play(soundID);
+	m_pImpl->Play(soundID, volume);
 }
 
 void SoundSystem::Pause() const
