@@ -52,6 +52,11 @@ class SoundSystem::SoundSystemImpl
 			}
 			queueReadyConditional.notify_all();
 		}
+		void NotifyQuit()
+		{
+			stopCycle = true;
+			queueReadyConditional.notify_all();
+		}
 	};
 
 private:
@@ -83,14 +88,15 @@ public:
 	};
 	~SoundSystemImpl()
 	{
-		m_SoundEffectLoadingFunctorPtr->stopCycle = true;
+		m_SoundEffectLoadingFunctorPtr->NotifyQuit();
 		delete m_SoundEffectLoadingFunctorPtr;
 		for (auto& se : m_SoundEffects)
 		{
 			Mix_FreeChunk(se);
-			delete se;//don't fully know if this is needed
+			//delete se;//don't fully know if this is needed
 		}
 		m_SoundEffects.clear();
+		Mix_Quit();
 		
 	};
 
@@ -139,6 +145,7 @@ SoundSystem::SoundSystem()
 
 SoundSystem::~SoundSystem()
 {
+	
 }
 
 void SoundSystem::Play(const sound_id soundID, const float volume) const
