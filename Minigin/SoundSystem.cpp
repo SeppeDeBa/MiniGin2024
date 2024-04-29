@@ -7,21 +7,61 @@
 #include <iostream>
 #include <thread>
 #include <mutex>
-
+#include <queue>
+#include <condition_variable>
 class SoundSystem::SoundSystemImpl
 {
 	struct musicLoaderFunctor
 	{
-		void operator()
+		void operator()(std::vector<Mix_Chunk*>& soundEffectsVec)
+		{
+			while (true)
+			{
+				//1. create own lock
+				std::unique_lock<std::mutex> guard(queueMutex);
+				//2. wait for ping
+				//queueReadyConditional.wait(guard, StopQueueConditionalFunction);
+				queueReadyConditional.wait(guard, [this] {return (!filePathQueue.empty() || stopCycle); });
+				//3. check for early out
+				if (stopCycle) break; //exit
+				//4. load sound
+				Mix_Chunk* tempChunk = Mix_LoadWAV(filePathQueue.front());
+				if (tempChunk != nullptr)
+				{
+					//5. add sounds
+					soundEffectsVec.push_back(tempChunk);
+					std::cout << "SoundBank added a sound, Size in SoundSystem is: " << (soundEffectsVec.size() - 1) << ". Added path is: " << filePathQueue.front() << std::endl;
+				}
+				else
+				{
+					std::cout << "soundPath " << filePathQueue.front() << " is invalid." << std::endl;
+				}
+				filePathQueue.pop();
+			}
+		}
+		bool StopQueueConditionalFunction() const { return (!filePathQueue.empty() || stopCycle); };
+		std::condition_variable queueReadyConditional{};
+		std::mutex queueMutex{};
+		std::queue<const char*> filePathQueue{};
+		bool stopCycle{false};
+		void AddAndNotify(const char* filePath)
+		{
+			{
+				std::lock_guard<std::mutex> guard(queueMutex);
+				filePathQueue.push(filePath);
+			}
+			queueReadyConditional.notify_all();
+		}
 	};
 
 private:
-	std::vector<Mix_Chunk*>m_SoundEffects{};
-	std::mutex m_SoundEffectsVectorMutex{};
-	std::vector<std::jthread*> m_SoundEffectsThreads{};
+	std::vector<Mix_Chunk*>m_SoundEffects{}; //todo: make map with filePaths so that they can be remembered as loaded or not
+	musicLoaderFunctor* m_SoundEffectLoadingFunctorPtr{};
+	std::jthread* m_SoundEffectsThread{};
 public:
 	SoundSystemImpl()
 	{
+		m_SoundEffectLoadingFunctorPtr = new musicLoaderFunctor();
 		SDL_Init(SDL_INIT_AUDIO);
 
 		//Defaults found on the Youtube channel of Code, Tech, and Tutorials, aswell as gneeral initialisation mixed with the GL_Mixer documentation
@@ -39,12 +79,16 @@ public:
 	};
 	~SoundSystemImpl()
 	{
+		m_SoundEffectLoadingFunctorPtr->stopCycle = true;
+		delete m_SoundEffectsThread;
+		delete m_SoundEffectLoadingFunctorPtr;
 		for (auto& se : m_SoundEffects)
 		{
 			Mix_FreeChunk(se);
 			delete se;//don't fully know if this is needed
 		}
 		m_SoundEffects.clear();
+		
 	};
 
 	void Play(const sound_id soundId, const float volume) const {
@@ -72,12 +116,15 @@ public:
 	}
 
 	void Load(const char* filePath) {
-		Mix_Chunk* tempChunk = Mix_LoadWAV(filePath);
+
+		m_SoundEffectLoadingFunctorPtr->AddAndNotify(filePath);
+
+		/*Mix_Chunk* tempChunk = Mix_LoadWAV(filePath);
 		if (tempChunk != nullptr)
 		{
 			m_SoundEffects.push_back(tempChunk);
 			std::cout << "SoundBank added a sound, Size in SoundSystem is: " << (m_SoundEffects.size() - 1) << ". Added path is: " << filePath << std::endl;
-		}
+		}*/
 	}
 };
 

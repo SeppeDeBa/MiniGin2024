@@ -1,6 +1,7 @@
 #pragma once
 #include "GOCommand.h"
 #include "Player.h"
+#include "SoundServiceLocator.h"
 class ScoreCommand : public dae::GOCommand
 {
 public:
@@ -15,7 +16,12 @@ public:
 
 	void Execute(float) override
 	{
-		if (m_pGameObject) m_pGameObject->GetComponent<Player>()->Score(m_ScorePerTrigger);
+		if (m_pGameObject)
+		{
+			m_pGameObject->GetComponent<Player>()->Score(m_ScorePerTrigger);
+			auto& soundService = SoundServiceLocator::Get_Sound_System();
+			soundService.Play(1, 50);
+		}
 	}
 private:
 	int m_ScorePerTrigger;

@@ -44,6 +44,9 @@ void load()
 {
 	SoundServiceLocator::Register_Sound_System(std::make_unique<SoundSystem>());
 	auto& soundService = SoundServiceLocator::Get_Sound_System();
+	soundService.Load("Die.wav");
+	soundService.Load("Points.wav");
+
 
 	auto& scene = dae::SceneManager::GetInstance().CreateScene("Demo");
 
@@ -172,7 +175,7 @@ void load()
 	//2. build up GO
 	GOConsoleText->AddComponent<dae::TransformComponent>(5.f, 45.f);
 	GOConsoleText->AddComponent<dae::TextureComponent>(false);
-	GOConsoleText->AddComponent<dae::TextComponent>("P2 use WASD to move right object, C to get score, X to die", fpsFont);
+	GOConsoleText->AddComponent<dae::TextComponent>("P2 same input, keyboard down while testing", fpsFont);
 	//3. add to scene
 	scene.Add(GOConsoleText);
 
@@ -223,46 +226,46 @@ void load()
 
 	//==PLAYER TWO
 	//Up
-	input.AddKeyboardCommand(SDL_SCANCODE_UP,
-		std::make_unique<dae::MoveCommand>(GOTwo, moveSpeed,
-			glm::vec2{ 0.f, 1.f }));
+	//input.AddKeyboardCommand(SDL_SCANCODE_UP,
+	//	std::make_unique<dae::MoveCommand>(GOTwo, moveSpeed,
+	//		glm::vec2{ 0.f, 1.f }));
 	input.AddConsoleCommand(controllerTwo, dae::Controller::ControllerButton::DpadUp,
 		std::make_unique<dae::MoveCommand>(GOTwo, moveSpeed,
 			glm::vec2{ 0.f, 1.f }), dae::InputType::ISHELD);
 
 	//Down
-	input.AddKeyboardCommand(SDL_SCANCODE_DOWN,
+	/*input.AddKeyboardCommand(SDL_SCANCODE_DOWN,
 		std::make_unique<dae::MoveCommand>(GOTwo, moveSpeed,
-			glm::vec2{ 0.f, -1.f }));
+			glm::vec2{ 0.f, -1.f }));*/
 	input.AddConsoleCommand(controllerTwo, dae::Controller::ControllerButton::DPadDown,
 		std::make_unique<dae::MoveCommand>(GOTwo, moveSpeed,
 			glm::vec2{ 0.f, -1.f }), dae::InputType::ISHELD);
 
 	//left
-	input.AddKeyboardCommand(SDL_SCANCODE_LEFT,
+	/*input.AddKeyboardCommand(SDL_SCANCODE_LEFT,
 		std::make_unique<dae::MoveCommand>(GOTwo, moveSpeed,
-			glm::vec2{ -1.f, 0.f }));
+			glm::vec2{ -1.f, 0.f }));*/
 	input.AddConsoleCommand(controllerTwo, dae::Controller::ControllerButton::DpadLeft,
 		std::make_unique<dae::MoveCommand>(GOTwo, moveSpeed,
 			glm::vec2{ -1.f, 0.f }), dae::InputType::ISHELD);
 
 	//right
-	input.AddKeyboardCommand(SDL_SCANCODE_RIGHT,
-		std::make_unique<dae::MoveCommand>(GOTwo, moveSpeed,
-			glm::vec2{ 1.f, 0.f }));
+	//input.AddKeyboardCommand(SDL_SCANCODE_RIGHT,
+	//	std::make_unique<dae::MoveCommand>(GOTwo, moveSpeed,
+	//		glm::vec2{ 1.f, 0.f }));
 	input.AddConsoleCommand(controllerTwo, dae::Controller::ControllerButton::DPadRight,
 		std::make_unique<dae::MoveCommand>(GOTwo, moveSpeed,
 			glm::vec2{ 1.f, 0.f }), dae::InputType::ISHELD);
 	//die
-	input.AddKeyboardCommand(SDL_SCANCODE_C,
-		std::make_unique<DieCommand>(GOTwo));
+	//input.AddKeyboardCommand(SDL_SCANCODE_C,
+	//	std::make_unique<DieCommand>(GOTwo));
 
 	input.AddConsoleCommand(controllerOne, dae::Controller::ControllerButton::ButtonX,
 		std::make_unique<DieCommand>(GOTwo),
 		dae::InputType::ISUP);
 	//score
-	input.AddKeyboardCommand(SDL_SCANCODE_X,
-		std::make_unique<ScoreCommand>(GOTwo));
+	/*input.AddKeyboardCommand(SDL_SCANCODE_X,
+		std::make_unique<ScoreCommand>(GOTwo));*/
 	input.AddConsoleCommand(controllerOne, dae::Controller::ControllerButton::ButtonY,
 		std::make_unique<ScoreCommand>(GOTwo, 100),
 		dae::InputType::ISUP);
