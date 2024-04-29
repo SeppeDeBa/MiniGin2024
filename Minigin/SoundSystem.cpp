@@ -55,13 +55,17 @@ class SoundSystem::SoundSystemImpl
 	};
 
 private:
-	std::vector<Mix_Chunk*>m_SoundEffects{}; //todo: make map with filePaths so that they can be remembered as loaded or not
-	musicLoaderFunctor* m_SoundEffectLoadingFunctorPtr{};
-	std::jthread* m_SoundEffectsThread{};
+	std::vector<Mix_Chunk*>m_SoundEffects; //needs to be initialized before the thread and functor as its passed
+	//todo: make map with filePaths so that they can be remembered as loaded or not
+	musicLoaderFunctor* m_SoundEffectLoadingFunctorPtr;
+	std::jthread m_SoundEffectsThread;
 public:
 	SoundSystemImpl()
+		: m_SoundEffects{}
+		, m_SoundEffectLoadingFunctorPtr{ new musicLoaderFunctor }
+		, m_SoundEffectsThread{std::ref(*m_SoundEffectLoadingFunctorPtr), std::ref(m_SoundEffects)}
 	{
-		m_SoundEffectLoadingFunctorPtr = new musicLoaderFunctor();
+
 		SDL_Init(SDL_INIT_AUDIO);
 
 		//Defaults found on the Youtube channel of Code, Tech, and Tutorials, aswell as gneeral initialisation mixed with the GL_Mixer documentation
@@ -80,7 +84,6 @@ public:
 	~SoundSystemImpl()
 	{
 		m_SoundEffectLoadingFunctorPtr->stopCycle = true;
-		delete m_SoundEffectsThread;
 		delete m_SoundEffectLoadingFunctorPtr;
 		for (auto& se : m_SoundEffects)
 		{
