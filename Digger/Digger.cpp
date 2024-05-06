@@ -31,6 +31,9 @@
 #include "DieCommand.h"
 #include "ScoreCommand.h"
 
+//Level
+#include "Level.h"
+
 //Sound
 
 #include "ISoundSystem.h"
@@ -46,7 +49,7 @@ void load()
 	auto& soundService = SoundServiceLocator::Get_Sound_System();
 	soundService.Load("../Data/Die.wav");
 	soundService.Load("../Data/Points.wav");
-
+	
 
 	auto& scene = dae::SceneManager::GetInstance().CreateScene("Demo");
 

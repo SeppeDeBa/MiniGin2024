@@ -180,6 +180,9 @@
     <ClInclude Include="SoundSystem.h">
       <Filter>Sound\SoundSystems</Filter>
     </ClInclude>
+    <ClInclude Include="CollisionComponent.h">
+      <Filter>Game Files\Components</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Renderer.cpp">
@@ -295,6 +298,9 @@
     </ClCompile>
     <ClCompile Include="SoundSystem.cpp">
       <Filter>Sound\SoundSystems</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionComponent.cpp">
+      <Filter>Game Files\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

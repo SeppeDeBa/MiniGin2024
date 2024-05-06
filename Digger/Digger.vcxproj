@@ -158,18 +158,22 @@
     <ClCompile Include="DieCommand.cpp" />
     <ClCompile Include="Digger.cpp" />
     <ClCompile Include="GameStatsDisplay.cpp" />
+    <ClCompile Include="Level.cpp" />
     <ClCompile Include="LivesDisplayComponent.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="ScoreCommand.cpp" />
     <ClCompile Include="ScoreDisplayComponent.cpp" />
+    <ClCompile Include="Tile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="DieCommand.h" />
     <ClInclude Include="GameStatsDisplay.h" />
+    <ClInclude Include="Level.h" />
     <ClInclude Include="LivesDisplayComponent.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="ScoreCommand.h" />
     <ClInclude Include="ScoreDisplayComponent.h" />
+    <ClInclude Include="Tile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
