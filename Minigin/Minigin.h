@@ -1,7 +1,8 @@
 #pragma once
 #include <string>
 #include <functional>
-
+int g_windowWdith{ 640 };
+int g_windowHeight{ 480 };
 namespace dae
 {
 	class Minigin

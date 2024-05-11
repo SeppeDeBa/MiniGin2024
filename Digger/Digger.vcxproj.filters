@@ -31,6 +31,12 @@
     <Filter Include="Game Files\Level">
       <UniqueIdentifier>{5059cd73-fe8e-4da3-8dce-f62a823bee77}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Files\GameManagers">
+      <UniqueIdentifier>{f3b74b13-a1af-4499-aca2-f9e795daa0f9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\Components\Level">
+      <UniqueIdentifier>{2e37a99f-3bd1-4cc1-8f98-42b55f26fc40}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Digger.cpp">
@@ -58,7 +64,13 @@
       <Filter>Game Files\Level</Filter>
     </ClCompile>
     <ClCompile Include="Tile.cpp">
-      <Filter>Game Files</Filter>
+      <Filter>Game Files\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelManager.cpp">
+      <Filter>Game Files\GameManagers</Filter>
+    </ClCompile>
+    <ClCompile Include="TileComponent.cpp">
+      <Filter>Game Files\Components\Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -84,7 +96,13 @@
       <Filter>Game Files\Level</Filter>
     </ClInclude>
     <ClInclude Include="Tile.h">
-      <Filter>Header Files</Filter>
+      <Filter>Game Files\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelManager.h">
+      <Filter>Game Files\GameManagers</Filter>
+    </ClInclude>
+    <ClInclude Include="TileComponent.h">
+      <Filter>Game Files\Components\Level</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

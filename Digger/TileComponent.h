@@ -1,18 +1,23 @@
 #pragma once
+#include <Component.h>
 #include <glm/glm.hpp>
-class Tile
+class TileComponent : public dae::Component
 {
-	Tile();
-	Tile(int rowPos, int colPos, float tileRadius);
-	~Tile();
-	
+	TileComponent()
+;
+	//Tile(int rowPos, int colPos, float tileRadius);
+	~TileComponent();
+
 
 private:
 	const glm::vec2 m_gridPos;
 	const glm::vec2 m_tileTopLeftPos;
 	bool openSides[2][2]{ {false, false }, {false, false } }; //up down left right, all closed by default
-	bool fullyOpen{false};
-	Tile* connectedTiles[2][2]{};//default all empty up down left right
+	bool fullyOpen{ false };//maybe to be used later?
+
+
+
+
 
 };
 

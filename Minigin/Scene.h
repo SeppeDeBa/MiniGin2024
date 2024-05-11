@@ -32,8 +32,13 @@ namespace dae
 		std::string m_name;
 		std::vector < std::shared_ptr<GameObject>> m_objects{};//TODO MAKE UNIQUE PTRS (although generally unused here)
 
+		
 		//using scenes as central owners
 		std::vector<GameObject*> m_pGameObjects; //todo: make root scene?
+		std::unique_ptr<GameObject> m_pPlayerOne;
+		std::unique_ptr<GameObject> m_pPlayerTwo;
+		
+		//level
 
 
 		static unsigned int m_idCounter; 

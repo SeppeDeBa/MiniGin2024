@@ -10,4 +10,5 @@ Tile::Tile(int colPos, int rowPos, float tileRadius)
 
 Tile::~Tile()
 {
+
 }

@@ -14,7 +14,9 @@
 #include "Renderer.h"
 #include "ResourceManager.h"
 
+
 SDL_Window* g_window{};
+
 
 void PrintSDLVersion()
 {
@@ -57,12 +59,13 @@ dae::Minigin::Minigin(const std::string &dataPath)
 		"Programming 4 assignment",
 		SDL_WINDOWPOS_CENTERED,
 		SDL_WINDOWPOS_CENTERED,
-		640,
-		480,
+		g_windowWdith,
+		g_windowHeight,
 		SDL_WINDOW_OPENGL
 	);
 	if (g_window == nullptr) 
 	{
+		
 		throw std::runtime_error(std::string("SDL_CreateWindow Error: ") + SDL_GetError());
 	}
 
