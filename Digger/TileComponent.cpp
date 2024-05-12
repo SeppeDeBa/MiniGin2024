@@ -1,5 +1,5 @@
 #include "TileComponent.h"
-
+#include <iostream>
 TileComponent::TileComponent(dae::GameObject* pOwner, int col, int row, float width, float height)
 	: Component(pOwner)
 	, m_gridPos{col, row}
@@ -14,4 +14,22 @@ TileComponent::TileComponent(dae::GameObject* pOwner, int col, int row, float wi
 
 TileComponent::~TileComponent()
 {
+}
+
+void TileComponent::DigTile()
+{
+	if (!m_DugOut)
+	{
+		dae::TextureComponent* pOwnerTextureComponent{ GetGameObject()->GetComponent<dae::TextureComponent>() };
+		if (pOwnerTextureComponent)
+		{
+			pOwnerTextureComponent->DisableDrawing();
+			m_DugOut = true;
+
+		}
+		else
+		{
+			std::cout << "invalid texture not linked to a tile" << std::endl;
+		}
+	}
 }

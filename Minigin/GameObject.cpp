@@ -25,6 +25,14 @@ dae::GameObject::~GameObject()
 	m_pParentGO = nullptr;
 }
 
+void dae::GameObject::Clear()
+{
+	for (GameObject* go : m_pVectorGOChildren)
+	{
+		go = nullptr;
+	}
+}
+
 void dae::GameObject::Update(float deltaTime)
 {
 	//update self

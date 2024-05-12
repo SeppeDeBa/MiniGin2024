@@ -1,20 +1,29 @@
 #pragma once
 #include <Minigin.h> //todo:move global width and height to its own .h
+#include <Component.h>
 #include <memory>
 #include "TileComponent.h"
+#include <TransformComponent.h>
+#include <TextureComponent.h>
 #include <GameObject.h>
-class Level
+class Level : public dae::Component //todo: syntactically rename to component
 {
 public:
-	Level();//mainly constructs empty tiles to be ready for usage
+	Level(dae::GameObject* pOwner);//mainly constructs empty tiles to be ready for usage
 	~Level();
 
 	void Update(float deltaTime);
 	void Render() const;
 	void LoadLevelFromFile(const std::string& fileName);
+	glm::vec2 GetLevelTilePosition(float worldPosX, float worldPosY);
+	void DigTile(float worldPosX, float worldPosY);
+
 	
-	bool IsTileOpen(int x, int y) const { return tileMap[x][y]->GetComponent<TileComponent>()->IsOpen(); }
-	bool IsTileOpenFromWorldPos(float x, float y) const;
+	glm::vec2 GetTileSize()const { return glm::vec2{ m_tileWidth, m_tileHeight }; };
+
+
+	bool IsTileOpen(int x, int y) const { return m_pTileMap[x][y]->GetComponent<TileComponent>()->IsOpen(); }
+	bool IsTileOpenFromWorldPos(float worldPosX, float worldPosY) const;
 private:
 	static const int m_nrRows{ 10 };//UI row not included
 	static const int m_nrRowsUIIncluded{ m_nrRows + 1 }; //for ease of use
@@ -24,7 +33,7 @@ private:
 	const float m_tileHeight{ static_cast<float>(g_windowHeight) / static_cast<float>(m_nrRowsUIIncluded )};
 
 
-	std::unique_ptr<dae::GameObject> tileMap[m_nrCols][m_nrRows]{};
+	std::unique_ptr<dae::GameObject> m_pTileMap[m_nrCols][m_nrRows]{};
 
 };
 

@@ -25,6 +25,10 @@ void Scene::Add(GameObject* object)
 	m_pGameObjects.push_back(object);
 }
 
+void dae::Scene::AddWorldAware(GameObject*)
+{
+}
+
 void Scene::Remove(std::shared_ptr<GameObject> object)
 {
 	m_objects.erase(std::remove(m_objects.begin(), m_objects.end(), object), m_objects.end());
@@ -42,6 +46,12 @@ void Scene::RemoveAll()
 		delete go;
 		go = nullptr;
 	}
+}
+
+void dae::Scene::ClearLevel()
+{
+	m_pLevelRoot.reset();
+	m_pLevelRoot = std::make_unique<GameObject>();
 }
 
 void Scene::Update(float deltaTime)

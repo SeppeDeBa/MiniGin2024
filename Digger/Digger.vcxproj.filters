@@ -60,16 +60,13 @@
     <ClCompile Include="ScoreCommand.cpp">
       <Filter>Game Files\Commands</Filter>
     </ClCompile>
-    <ClCompile Include="Level.cpp">
-      <Filter>Game Files\Level</Filter>
-    </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>Game Files\Level</Filter>
-    </ClCompile>
     <ClCompile Include="LevelManager.cpp">
       <Filter>Game Files\GameManagers</Filter>
     </ClCompile>
     <ClCompile Include="TileComponent.cpp">
+      <Filter>Game Files\Components\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
       <Filter>Game Files\Components\Level</Filter>
     </ClCompile>
   </ItemGroup>
@@ -92,16 +89,13 @@
     <ClInclude Include="DieCommand.h">
       <Filter>Game Files\Commands</Filter>
     </ClInclude>
-    <ClInclude Include="Level.h">
-      <Filter>Game Files\Level</Filter>
-    </ClInclude>
-    <ClInclude Include="Tile.h">
-      <Filter>Game Files\Level</Filter>
-    </ClInclude>
     <ClInclude Include="LevelManager.h">
       <Filter>Game Files\GameManagers</Filter>
     </ClInclude>
     <ClInclude Include="TileComponent.h">
+      <Filter>Game Files\Components\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
       <Filter>Game Files\Components\Level</Filter>
     </ClInclude>
   </ItemGroup>

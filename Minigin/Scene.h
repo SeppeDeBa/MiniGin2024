@@ -9,12 +9,14 @@ namespace dae
 	public:
 		void Add(std::shared_ptr<GameObject> object);
 		void Add(GameObject* object);
-
+		void AddWorldAware(GameObject* object);
 
 		void Remove(std::shared_ptr<GameObject> object);
 		void Remove(GameObject* object);
 
 		void RemoveAll();
+
+		void ClearLevel();
 
 		void Update(float deltaTime);
 		void Render() const;
@@ -34,8 +36,11 @@ namespace dae
 		
 		//using scenes as central owners
 		std::vector<GameObject*> m_pGameObjects; //todo: make root scene?
-		std::unique_ptr<GameObject> m_pPlayerOne;
-		std::unique_ptr<GameObject> m_pPlayerTwo;
+		//players seperate
+		std::unique_ptr<GameObject> m_pPlayerOne{};
+		std::unique_ptr<GameObject> m_pPlayerTwo{};
+		//level seperate
+		std::unique_ptr<GameObject> m_pLevelRoot{};
 		
 		//level
 

@@ -64,7 +64,12 @@ void load()
 	//2. build up GO
 	//3. add to scene
 	//==================================
+	
 
+	//INIT LEVEL GAMEOBJECT
+	dae::GameObject* GOLevel = new dae::GameObject{};
+	GOLevel->AddComponent<dae::TransformComponent>(0.f, 0.f);
+	GOLevel->AddComponent<Level>();
 
 
 	//===== BACKGROUND =====

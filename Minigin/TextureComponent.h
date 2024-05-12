@@ -24,6 +24,7 @@ namespace dae
 		glm::ivec2 GetTextureSize() const;
 		bool IsDirty() const { return m_dirtyFlag; };
 		void SetDirty() { m_dirtyFlag = true; };
+		void DisableDrawing() { if (m_shouldDraw)m_shouldDraw = false; };
 
 	private:
 		std::shared_ptr<Texture2D> m_pTexture2D;
@@ -31,6 +32,7 @@ namespace dae
 		bool m_drawAroundCenter{};
 		bool m_newParentTransform{false};
 
+		bool m_shouldDraw{ true };
 
 		//todo: decide if flag is needed here -> could be useful for for example fps component, no time for it yet
 		bool m_dirtyFlag;//first put here, but unused so far
