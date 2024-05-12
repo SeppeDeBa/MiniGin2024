@@ -14,7 +14,7 @@ public:
 	void LoadLevelFromFile(const std::string& fileName);
 	
 	bool IsTileOpen(int x, int y) const { return tileMap[x][y]->GetComponent<TileComponent>()->IsOpen(); }
-
+	bool IsTileOpenFromWorldPos(float x, float y) const;
 private:
 	static const int m_nrRows{ 10 };//UI row not included
 	static const int m_nrRowsUIIncluded{ m_nrRows + 1 }; //for ease of use

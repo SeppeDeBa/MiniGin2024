@@ -1,6 +1,5 @@
 #pragma once
 #include "SceneManager.h"
-
 namespace dae
 {
 	class GameObject;

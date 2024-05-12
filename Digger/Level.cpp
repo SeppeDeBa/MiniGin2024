@@ -47,3 +47,9 @@ void Level::LoadLevelFromFile(const std::string&)
 {
 
 }
+
+bool Level::IsTileOpenFromWorldPos(float x, float y) const
+{
+	//minus 1 offset on the Y as UI is an extra row not included in the tileMap
+	return tileMap[static_cast<int>(x/m_tileWidth)][static_cast<int>(y/m_tileHeight-1)]->GetComponent<TileComponent>()->IsOpen();
+}
