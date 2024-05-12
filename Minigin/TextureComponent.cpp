@@ -3,6 +3,7 @@ dae::TextureComponent::TextureComponent(GameObject* pOwner, const std::string& f
 	: Component(pOwner)
 	, m_pTexture2D{ ResourceManager::GetInstance().LoadTexture(filePath) }
 	, m_drawAroundCenter{ drawAroundCenter }
+	, m_dirtyFlag{ true }
 {
 
 }
@@ -11,6 +12,7 @@ dae::TextureComponent::TextureComponent(GameObject* pOwner, bool drawAroundCente
 	: Component(pOwner)
 	, m_pTexture2D{}
 	, m_drawAroundCenter{ drawAroundCenter }
+	, m_dirtyFlag{true}
 {
 
 }

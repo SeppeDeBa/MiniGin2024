@@ -1,3 +1,6 @@
+//todo:delete this .h
+//transfered to Scene
+
 //#pragma once
 //#include "Minigin.h" //needed for window values
 //#include "Singleton.h"

@@ -1,3 +1,6 @@
+//todo: delete this .cpp
+//transfered to Scene
+
 //#include "LevelManager.h"
 //
 //LevelManager::LevelManager()

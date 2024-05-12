@@ -15,10 +15,10 @@ dae::CollisionComponent::~CollisionComponent()
 {
 }
 
-void dae::CollisionComponent::Update(float deltaTime)
+void dae::CollisionComponent::Update(float)
 {
 }
 
-void dae::CollisionComponent::HandleCollision(collisionTag other)
+void dae::CollisionComponent::HandleCollision(collisionTag)
 {
 }

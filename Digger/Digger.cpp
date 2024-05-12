@@ -26,6 +26,7 @@
 #include "RotatorComponent.h"
 #include "LivesDisplayComponent.h"
 #include "ScoreDisplayComponent.h"
+#include "TileComponent.h"
 //Commands
 #include "MoveCommand.h"
 #include "DieCommand.h"
