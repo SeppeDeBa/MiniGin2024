@@ -69,17 +69,17 @@ void load()
 	//INIT LEVEL GAMEOBJECT
 	dae::GameObject* GOLevel = new dae::GameObject{};
 	GOLevel->AddComponent<dae::TransformComponent>(0.f, 0.f);
-	GOLevel->AddComponent<Level>();
-
+	GOLevel->AddComponent<Level>("Level1");
+	scene.Add(GOLevel);
 
 	//===== BACKGROUND =====
 	//1. init ptr
-	dae::GameObject* GOBackground = new dae::GameObject{};
-	//2. build up GO
-	GOBackground->AddComponent<dae::TransformComponent>(0.f, 0.f);
-	GOBackground->AddComponent<dae::TextureComponent>("Background.tga", false);
-	//3. add to scene
-	scene.Add(GOBackground);
+	//dae::GameObject* GOBackground = new dae::GameObject{};
+	////2. build up GO
+	//GOBackground->AddComponent<dae::TransformComponent>(0.f, 0.f);
+	//GOBackground->AddComponent<dae::TextureComponent>("Background.tga", false);
+	////3. add to scene
+	//scene.Add(GOBackground);
 
 
 	//===== ROTATORS =====

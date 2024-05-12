@@ -302,5 +302,8 @@
     <ClCompile Include="CollisionComponent.cpp">
       <Filter>Game Files\Components</Filter>
     </ClCompile>
+    <ClCompile Include="commandIncludesEngine.h">
+      <Filter>Game Files\Input\Commands</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

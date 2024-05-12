@@ -25,7 +25,7 @@ namespace dae
 		bool IsDirty() const { return m_dirtyFlag; };
 		void SetDirty() { m_dirtyFlag = true; };
 		void DisableDrawing() { if (m_shouldDraw)m_shouldDraw = false; };
-
+		void EnableDrawing() { if (!m_shouldDraw) m_shouldDraw = true; };
 	private:
 		std::shared_ptr<Texture2D> m_pTexture2D;
 		TransformComponent* m_pOwnerTransform{};

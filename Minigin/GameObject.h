@@ -107,7 +107,7 @@ namespace dae
 		//deletion
 		void MarkForDeletion() { m_markedForDeletion = true; };
 		bool IsMarkedForDeletion() const { return m_markedForDeletion; };
-
+		void SetEnabled(bool isEnabled) { m_enabled = isEnabled; };
 	private:
 		void AddChild(GameObject* childGO);
 		void RemoveChild(GameObject* childGO);
@@ -115,6 +115,8 @@ namespace dae
 		std::vector<dae::GameObject*> m_pVectorGOChildren;
 		GameObject* m_pParentGO;
 
+
+		bool m_enabled{ true };
 		//unused
 		bool m_markedForDeletion = false;
 

@@ -4,6 +4,7 @@ Player::Player(dae::GameObject* pOwner, int startingLives)
 	: Component(pOwner)
 	, m_Lives(startingLives)
 	, m_Score(0)
+	, m_Active(true)
 {
 
 }
@@ -42,4 +43,16 @@ int Player::GetLives() const
 int Player::GetScore() const
 {
 	return m_Score;
+}
+
+void Player::Activate()
+{
+	m_Active = true;
+	GetGameObject()->GetComponent<dae::TextureComponent>()->EnableDrawing();
+}
+
+void Player::Deactivate()
+{
+	m_Active = false;
+	GetGameObject()->GetComponent<dae::TextureComponent>()->DisableDrawing();
 }

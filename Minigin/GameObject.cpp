@@ -36,22 +36,28 @@ void dae::GameObject::Clear()
 void dae::GameObject::Update(float deltaTime)
 {
 	//update self
-	for (std::shared_ptr<dae::Component> component : m_pVectorComponents)
+	if (m_enabled)
 	{
-		component->Update(deltaTime);
-	}
-	//update children
-	for (dae::GameObject* go : m_pVectorGOChildren)
-	{
-		go->Update(deltaTime);
+		for (std::shared_ptr<dae::Component> component : m_pVectorComponents)
+		{
+			component->Update(deltaTime);
+		}
+		//update children
+		for (dae::GameObject* go : m_pVectorGOChildren)
+		{
+			go->Update(deltaTime);
+		}
 	}
 }
 
 void dae::GameObject::Render() const
 {
-	for (std::shared_ptr<dae::Component> component : m_pVectorComponents)
+	if (m_enabled)
 	{
-		component->Render();
+		for (std::shared_ptr<dae::Component> component : m_pVectorComponents)
+		{
+			component->Render();
+		}
 	}
 }
 
