@@ -61,6 +61,8 @@ private:
 	void m_InitPlayerOne();
 	std::unique_ptr<dae::GameObject> m_pTileMap[m_nrCols][m_nrRows]{};
 	std::unique_ptr<dae::GameObject> m_pPlayerOne;
+	dae::TransformComponent* m_pP1Transform; //save to not have to get it every loop
+	
 	std::unique_ptr<dae::GameObject> m_pPlayerTwo;
 	std::vector <std::unique_ptr<dae::GameObject>> m_pGemObjects{};
 	std::vector <std::unique_ptr<dae::GameObject>> m_pBagObjects{};

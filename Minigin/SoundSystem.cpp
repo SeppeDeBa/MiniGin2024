@@ -25,8 +25,9 @@ class SoundSystem::SoundSystemImpl
 				//3. check for early out
 				if (stopCycle)
 				{
-					guard.release();
-					queueMutex.unlock();
+					//doesnt work...
+					//guard.release();
+					//queueMutex.unlock();
 					break;
 				}//exit
 				//4. load sound

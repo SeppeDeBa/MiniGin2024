@@ -135,9 +135,6 @@ void Level::LoadLevelFromFile(const std::string& fileName)
 				break;
 			}
 		}
-
-
-
 }
 
 glm::vec2 Level::GetLevelTilePosition(float worldPosX, float worldPosY)
@@ -208,6 +205,7 @@ void Level::m_InitPlayerOne()
 	//	std::make_unique<ScoreCommand>(m_pPlayerOne.get(), 100),
 	//	dae::InputType::ISUP);
 
+	//m_pP1Transform = m_pPlayerOne.get()->GetComponent<dae::TransformComponent>();
 }
 
 void Level::m_CreateGem(int gridPosX, int gridPosY)
