@@ -49,6 +49,10 @@ void Level::Update(float deltaTime)
 	}
 	//update player
 	m_pPlayerOne->Update(deltaTime);
+
+	DigTile(m_pP1Transform->GetLocalPos().x, m_pP1Transform->GetLocalPos().y);
+
+	
 }
 
 void Level::Render() const
@@ -145,7 +149,7 @@ glm::vec2 Level::GetLevelTilePosition(float worldPosX, float worldPosY)
 
 void Level::DigTile(float worldPosX, float worldPosY)
 {
-	m_pTileMap[static_cast<int>(worldPosX /m_tileWidth)][static_cast<int>(worldPosY/m_tileHeight)]->GetComponent<TileComponent>()->DigTile();
+	m_pTileMap[static_cast<int>(worldPosX /m_tileWidth)][static_cast<int>(worldPosY/m_tileHeight)-1]->GetComponent<TileComponent>()->DigTile();
 }
 
 void Level::DigTileFromGridPos(int gridX, int gridY)
@@ -180,22 +184,34 @@ void Level::m_InitPlayerOne()
 	input.AddConsoleCommand(controllerOne, dae::Controller::ControllerButton::DpadUp,
 		std::make_unique<dae::MoveCommand>(m_pPlayerOne.get(), moveSpeed,
 			glm::vec2{ 0.f, 1.f }), dae::InputType::ISHELD);
+	input.AddKeyboardCommand(SDL_SCANCODE_UP,
+		std::make_unique<dae::MoveCommand>(m_pPlayerOne.get(), moveSpeed,
+			glm::vec2{ 0.f, 1.f }));
+
 
 	//down
 	input.AddConsoleCommand(controllerOne, dae::Controller::ControllerButton::DPadDown,
 		std::make_unique<dae::MoveCommand>(m_pPlayerOne.get(), moveSpeed,
 			glm::vec2{ 0.f, -1.f }), dae::InputType::ISHELD);
-
+	input.AddKeyboardCommand(SDL_SCANCODE_DOWN,
+		std::make_unique<dae::MoveCommand>(m_pPlayerOne.get(), moveSpeed,
+			glm::vec2{ 0.f, -1.f }));
 	//left
 	input.AddConsoleCommand(controllerOne, dae::Controller::ControllerButton::DpadLeft,
 		std::make_unique<dae::MoveCommand>(m_pPlayerOne.get(), moveSpeed,
 			glm::vec2{ -1.f, 0.f }), dae::InputType::ISHELD);
-
+	input.AddKeyboardCommand(SDL_SCANCODE_LEFT,
+		std::make_unique<dae::MoveCommand>(m_pPlayerOne.get(), moveSpeed,
+			glm::vec2{ -1.f, 0.f }));
 	//right
 	input.AddConsoleCommand(controllerOne, dae::Controller::ControllerButton::DPadRight,
 		std::make_unique<dae::MoveCommand>(m_pPlayerOne.get(), moveSpeed,
 			glm::vec2{ 1.f, 0.f }), dae::InputType::ISHELD);
-
+	input.AddKeyboardCommand(SDL_SCANCODE_RIGHT,
+		std::make_unique<dae::MoveCommand>(m_pPlayerOne.get(), moveSpeed,
+			glm::vec2{ 1.f, 0.f }));
+	
+	
 	////die
 	//input.AddConsoleCommand(controllerOne, dae::Controller::ControllerButton::ButtonX,
 	//	std::make_unique<DieCommand>(m_pPlayerOne.get()),
@@ -205,7 +221,7 @@ void Level::m_InitPlayerOne()
 	//	std::make_unique<ScoreCommand>(m_pPlayerOne.get(), 100),
 	//	dae::InputType::ISUP);
 
-	//m_pP1Transform = m_pPlayerOne.get()->GetComponent<dae::TransformComponent>();
+	m_pP1Transform = m_pPlayerOne.get()->GetComponent<dae::TransformComponent>();
 }
 
 void Level::m_CreateGem(int gridPosX, int gridPosY)

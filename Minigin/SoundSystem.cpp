@@ -28,7 +28,7 @@ class SoundSystem::SoundSystemImpl
 					//doesnt work...
 					//guard.release();
 					//queueMutex.unlock();
-					break;
+					return;
 				}//exit
 				//4. load sound
 				Mix_Chunk* tempChunk = Mix_LoadWAV(filePathQueue.front());
@@ -76,7 +76,6 @@ public:
 		, m_SoundEffectLoadingFunctorPtr{ new musicLoaderFunctor }
 		, m_SoundEffectsThread{std::ref(*m_SoundEffectLoadingFunctorPtr), std::ref(m_SoundEffects)}
 	{
-
 		SDL_Init(SDL_INIT_AUDIO);
 
 		//Defaults found on the Youtube channel of Code, Tech, and Tutorials, aswell as gneeral initialisation mixed with the GL_Mixer documentation
@@ -88,6 +87,8 @@ public:
 		if (Mix_OpenAudio(audio_rate, audio_format, audio_channels, audio_buffers) != 0)
 		{
 			SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Could not init audio: %s", Mix_GetError());
+			//NOTICED IT ENTERED HERE IF NO AUIO DEVICE IS ACTIVE
+			std::cout << "COMMON MISTAKE: It could be that you have no activated audio output device, make sure to have at least 1 set of speakers, headphones or audio device enabled" << std::endl;
 			exit(-1);
 			//standard error logging and exiting application, 
 		}
