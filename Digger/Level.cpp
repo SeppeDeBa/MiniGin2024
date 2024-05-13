@@ -32,13 +32,21 @@ Level::~Level()
 void Level::Update(float deltaTime)
 {
 	//update level (not needed for now...)
-	//for (int colIt{}; colIt < m_nrCols; ++colIt) //should these "for each tile" functions be templated? or use an algo
-	//{
-	//	for (int rowIt{}; rowIt < m_nrRows; ++rowIt)
-	//	{
-	//		m_pTileMap[colIt][rowIt]->Update(deltaTime);
-	//	}
-	//}
+	for (int colIt{}; colIt < m_nrCols; ++colIt) //should these "for each tile" functions be templated? or use an algo
+	{
+		for (int rowIt{}; rowIt < m_nrRows; ++rowIt)
+		{
+			m_pTileMap[colIt][rowIt]->Update(deltaTime);
+		}
+	}
+	for (const std::unique_ptr<dae::GameObject>& GO : m_pGemObjects)
+	{
+		GO->Update(deltaTime);
+	}
+	for (const std::unique_ptr<dae::GameObject>& GO : m_pBagObjects)
+	{
+		GO->Update(deltaTime);
+	}
 	//update player
 	m_pPlayerOne->Update(deltaTime);
 }
@@ -69,9 +77,9 @@ void Level::Render() const
 
 void Level::LoadLevelFromFile(const std::string& fileName)
 {
-	char parsedGrid[m_nrCols][m_nrRows];
+	char parsedGrid[m_nrRows][m_nrCols];
 	//1. open file
-	std::ifstream levelFile(fileName);
+	std::ifstream levelFile(fileName, std::ios::in);
 	if (!levelFile.is_open())
 	{
 		std::cout << "Error opening level file" << std::endl;
@@ -87,7 +95,7 @@ void Level::LoadLevelFromFile(const std::string& fileName)
 			std::cout << "error reading lines" << std::endl;
 			return;
 		}
-		else if (inputLine.size() != m_nrCols)
+		if (inputLine.size() != m_nrCols)
 		{
 			std::cout << "error reading collumns in file, invalid size, must be: " << m_nrCols << std::endl;
 			return;
@@ -99,7 +107,7 @@ void Level::LoadLevelFromFile(const std::string& fileName)
 	}
 	//3. process gotten input
 	for (int rowIt{ 0 }; rowIt < m_nrRows; ++rowIt)
-		for (int colIt{ 0 }; colIt < m_nrCols; ++rowIt)
+		for (int colIt{ 0 }; colIt < m_nrCols; ++colIt)
 		{
 			switch (parsedGrid[rowIt][colIt])
 			{
@@ -121,6 +129,9 @@ void Level::LoadLevelFromFile(const std::string& fileName)
 				DigTileFromGridPos(colIt, rowIt);
 				m_pPlayerOne->GetComponent<dae::TransformComponent>()->SetLocalPosition(colIt * m_tileWidth + m_tileWidth / 2.f, rowIt * m_tileHeight + m_tileHeight / 2.f + m_tileHeight);// put to center ( + offset for UI)
 				m_pPlayerOne->SetEnabled(true);
+				break;
+			default:
+				std::cout << "hit character:" << parsedGrid[rowIt][colIt] << std::endl;
 				break;
 			}
 		}

@@ -42,19 +42,22 @@ void dae::TextureComponent::Update(float)
 
 void dae::TextureComponent::Render() const
 {
-	if (m_pTexture2D != nullptr && m_pOwnerTransform != nullptr)
+	if (m_shouldDraw)
 	{
-		if (m_drawAroundCenter)
+		if (m_pTexture2D != nullptr && m_pOwnerTransform != nullptr)
 		{
-			Renderer::GetInstance().RenderTexture(*m_pTexture2D
-				, m_pOwnerTransform->GetWorldPos().x - static_cast<float>(GetTextureSize().x) / 2.f
-				, m_pOwnerTransform->GetWorldPos().y - static_cast<float>(GetTextureSize().y) / 2.f);
-		}
-		else
-		{
-			Renderer::GetInstance().RenderTexture(*m_pTexture2D
-				, m_pOwnerTransform->GetWorldPos().x
-				, m_pOwnerTransform->GetWorldPos().y);
+			if (m_drawAroundCenter)
+			{
+				Renderer::GetInstance().RenderTexture(*m_pTexture2D
+					, m_pOwnerTransform->GetWorldPos().x - static_cast<float>(GetTextureSize().x) / 2.f
+					, m_pOwnerTransform->GetWorldPos().y - static_cast<float>(GetTextureSize().y) / 2.f);
+			}
+			else
+			{
+				Renderer::GetInstance().RenderTexture(*m_pTexture2D
+					, m_pOwnerTransform->GetWorldPos().x
+					, m_pOwnerTransform->GetWorldPos().y);
+			}
 		}
 	}
 }

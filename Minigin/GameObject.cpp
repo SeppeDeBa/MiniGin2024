@@ -13,6 +13,7 @@
 
 dae::GameObject::GameObject()
 	:m_pParentGO(nullptr)
+	, m_enabled{true}
 {
 	
 }

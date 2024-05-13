@@ -116,7 +116,7 @@ namespace dae
 		GameObject* m_pParentGO;
 
 
-		bool m_enabled{ true };
+		bool m_enabled;
 		//unused
 		bool m_markedForDeletion = false;
 

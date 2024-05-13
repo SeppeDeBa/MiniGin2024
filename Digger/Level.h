@@ -62,8 +62,8 @@ private:
 	std::unique_ptr<dae::GameObject> m_pTileMap[m_nrCols][m_nrRows]{};
 	std::unique_ptr<dae::GameObject> m_pPlayerOne;
 	std::unique_ptr<dae::GameObject> m_pPlayerTwo;
-	std::vector <std::unique_ptr<dae::GameObject>> m_pGemObjects;
-	std::vector <std::unique_ptr<dae::GameObject>> m_pBagObjects;
+	std::vector <std::unique_ptr<dae::GameObject>> m_pGemObjects{};
+	std::vector <std::unique_ptr<dae::GameObject>> m_pBagObjects{};
 
 	void m_CreateGem(int gridPosX, int gridPosY);
 	void m_CreateBag(int gridPosX, int gridPosY);

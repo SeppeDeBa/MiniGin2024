@@ -23,7 +23,12 @@ class SoundSystem::SoundSystemImpl
 				//queueReadyConditional.wait(guard, StopQueueConditionalFunction);
 				queueReadyConditional.wait(guard, [this] {return (!filePathQueue.empty() || stopCycle); });
 				//3. check for early out
-				if (stopCycle) break; //exit
+				if (stopCycle)
+				{
+					guard.release();
+					queueMutex.unlock();
+					break;
+				}//exit
 				//4. load sound
 				Mix_Chunk* tempChunk = Mix_LoadWAV(filePathQueue.front());
 				if (tempChunk != nullptr)
@@ -90,6 +95,7 @@ public:
 	{
 		m_SoundEffectLoadingFunctorPtr->NotifyQuit();
 		delete m_SoundEffectLoadingFunctorPtr;
+		//todo: alex question: how do i fix mutex being busy here?
 		for (auto& se : m_SoundEffects)
 		{
 			Mix_FreeChunk(se);
