@@ -158,6 +158,7 @@
     <ClCompile Include="DieCommand.cpp" />
     <ClCompile Include="Digger.cpp" />
     <ClCompile Include="GameStatsDisplay.cpp" />
+    <ClCompile Include="GridMoveCommand.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LivesDisplayComponent.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -169,6 +170,7 @@
     <ClInclude Include="commandIncludesGame.h" />
     <ClInclude Include="DieCommand.h" />
     <ClInclude Include="GameStatsDisplay.h" />
+    <ClInclude Include="GridMoveCommand.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LivesDisplayComponent.h" />
     <ClInclude Include="Player.h" />

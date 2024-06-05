@@ -1,7 +1,7 @@
 #pragma once
 #include <string>
 #include <functional>
-inline int g_windowWdith{ 640 };
+inline int g_windowWidth{ 640 };
 inline int g_windowHeight{ 480 };
 namespace dae
 {

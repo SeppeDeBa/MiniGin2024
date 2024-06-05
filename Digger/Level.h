@@ -19,8 +19,7 @@
 //#include "ScoreCommand.h"
 
 
-#include "commandIncludesGame.h"
-#include <commandIncludesEngine.h>
+
 
 
 //COULD I HAVE FEEDBACK:
@@ -41,7 +40,7 @@ public:
 	void DigTile(float worldPosX, float worldPosY);
 	void DigTileFromGridPos(int gridX, int gridY);
 	
-	glm::vec2 GetTileSize()const { return glm::vec2{ m_tileWidth, m_tileHeight }; };
+	glm::vec2 GetTileSize()const { return glm::vec2{ s_tileWidth, s_tileHeight }; };
 
 	
 
@@ -49,17 +48,20 @@ public:
 	bool IsTileOpenFromWorldPos(float worldPosX, float worldPosY) const;
 
 	//public statics for other objects
-	static const int m_nrRows{ 10 };//UI row not included
-	static const int m_nrRowsUIIncluded{ m_nrRows + 1 }; //for ease of use
-	static const int m_nrCols{ 15 };
+	static const int s_nrRows{ 10 };//UI row not included
+	static const int s_nrRowsUIIncluded{ s_nrRows + 1 }; //for ease of use
+	static const int s_nrCols{ 15 };
 
 	//make these inline to let the compiler know that the variable should always be the same, avoiding multiple definitions, useful as its being used in a static function
-	inline static const float m_tileWidth{ static_cast<float>( g_windowWdith )/ static_cast<float>(m_nrCols )};
-	inline static const float m_tileHeight{ static_cast<float>(g_windowHeight) / static_cast<float>(m_nrRowsUIIncluded )};
+	inline static const float s_tileWidth{ static_cast<float>( g_windowWidth )/ static_cast<float>(s_nrCols )};
+	inline static const float s_tileHeight{ static_cast<float>(g_windowHeight) / static_cast<float>(s_nrRowsUIIncluded )};
+
+	
+	static bool pointIsInGrid(glm::vec2 pointToCheck);
 private:
 
 	void m_InitPlayerOne();
-	std::unique_ptr<dae::GameObject> m_pTileMap[m_nrCols][m_nrRows]{};
+	std::unique_ptr<dae::GameObject> m_pTileMap[s_nrCols][s_nrRows]{};
 	std::unique_ptr<dae::GameObject> m_pPlayerOne;
 	dae::TransformComponent* m_pP1Transform; //save to not have to get it every loop
 	

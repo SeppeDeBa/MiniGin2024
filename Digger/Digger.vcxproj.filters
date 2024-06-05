@@ -37,6 +37,9 @@
     <Filter Include="Game Files\Components\Level">
       <UniqueIdentifier>{2e37a99f-3bd1-4cc1-8f98-42b55f26fc40}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Files\Components\Character">
+      <UniqueIdentifier>{4f8683e1-6b2c-4ccc-afb2-2fa66d6e5bb2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Digger.cpp">
@@ -66,6 +69,9 @@
     <ClCompile Include="Level.cpp">
       <Filter>Game Files\Components\Level</Filter>
     </ClCompile>
+    <ClCompile Include="GridMoveCommand.cpp">
+      <Filter>Game Files\Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -93,6 +99,9 @@
       <Filter>Game Files\Components\Level</Filter>
     </ClInclude>
     <ClInclude Include="commandIncludesGame.h">
+      <Filter>Game Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="GridMoveCommand.h">
       <Filter>Game Files\Commands</Filter>
     </ClInclude>
   </ItemGroup>
