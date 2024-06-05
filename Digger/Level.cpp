@@ -245,12 +245,12 @@ void Level::m_InitPlayerOne()
 
 void Level::m_InitUI()//call after playerInitialization
 {
-	auto font = dae::ResourceManager::GetInstance().LoadFont("Retro.otf", 22);
+	auto font = dae::ResourceManager::GetInstance().LoadFont("Retro.otf", 30);
 
 	//Score
 	m_pUIObjects.emplace_back(std::make_unique<dae::GameObject>());
 	dae::GameObject* ScoreObject = m_pUIObjects.back().get();
-	ScoreObject->AddComponent<dae::TransformComponent>(5.f, 5.f);
+	ScoreObject->AddComponent<dae::TransformComponent>(25.f, 2.f);
 	ScoreObject->AddComponent<dae::TextureComponent>(false);
 	ScoreObject->AddComponent<dae::TextComponent>("000000", font);
 	ScoreObject->AddComponent<dae::ScoreDisplayComponent>(m_pPlayerOne->GetComponent<Player>());
