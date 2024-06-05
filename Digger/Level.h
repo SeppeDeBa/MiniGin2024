@@ -60,18 +60,26 @@ public:
 	static bool pointIsInGrid(glm::vec2 pointToCheck);
 private:
 
-	void m_InitPlayerOne();
+
 	std::unique_ptr<dae::GameObject> m_pTileMap[s_nrCols][s_nrRows]{};
 	std::unique_ptr<dae::GameObject> m_pPlayerOne;
-	dae::TransformComponent* m_pP1Transform; //save to not have to get it every loop
-	
 	std::unique_ptr<dae::GameObject> m_pPlayerTwo;
+
+	//level objects
 	std::vector <std::unique_ptr<dae::GameObject>> m_pGemObjects{};
 	std::vector <std::unique_ptr<dae::GameObject>> m_pBagObjects{};
 
+	std::vector <std::unique_ptr<dae::GameObject>> m_pUIObjects{};
+	
+
+
+
+	dae::TransformComponent* m_pP1Transform; //save to not have to get it every loop
 	void m_CreateGem(int gridPosX, int gridPosY);
 	void m_CreateBag(int gridPosX, int gridPosY);
 
 
+	void m_InitPlayerOne();
+	void m_InitUI();//call after playerInitialization
 };
 

@@ -13,12 +13,16 @@ namespace dae
 	public:
 		ScoreDisplayComponent(dae::GameObject* pOwner, Player* pObservedPlayerComp);
 		~ScoreDisplayComponent();
-		void OnNotify(int) override;
+		void OnNotify(int scoreGained) override;
+		void AssignPlayerOne(Player* pPlayerOneComponent);
+		void AssignPlayerTwo(Player* pPlayerTwoComponent);
 	private:
 
 		void UpdateDisplay(int stat); //helper function bc frequently used
 		dae::TextComponent* m_pTextComponent; //dont delete, not parent
 		Player* m_pPlayerComp; //dont delete, not parent
+		Player* m_pPlayerTwoComp;
+		int m_Score{ 0 };
 	};
 }
 

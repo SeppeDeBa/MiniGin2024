@@ -1,4 +1,6 @@
 #include "ScoreDisplayComponent.h"
+#include <sstream>
+#include <iomanip>
 namespace dae
 {
 
@@ -19,18 +21,41 @@ namespace dae
 		}
 	}
 
-	void ScoreDisplayComponent::OnNotify(int)
+	void ScoreDisplayComponent::OnNotify(int scoreGained)
 	{
+		m_Score += scoreGained;
 		UpdateDisplay(m_pPlayerComp->GetScore());
+	}
+
+	void ScoreDisplayComponent::AssignPlayerOne(Player* pPlayerOneComponent)
+	{
+		if (m_pPlayerComp)
+		{
+			m_pPlayerComp->scoreChanged.RemoveObserver(this);
+		}
+		m_pPlayerComp = pPlayerOneComponent;
+		m_pPlayerComp->scoreChanged.AddObserver(this);
+	}
+
+	void ScoreDisplayComponent::AssignPlayerTwo(Player* pPlayerTwoComponent)
+	{
+		if (m_pPlayerTwoComp)
+		{
+			m_pPlayerTwoComp->scoreChanged.RemoveObserver(this);
+		}
+		m_pPlayerTwoComp = pPlayerTwoComponent;
+		m_pPlayerTwoComp->scoreChanged.AddObserver(this);
 	}
 
 	void ScoreDisplayComponent::UpdateDisplay(int stat)
 	{
 		if (m_pTextComponent)
 		{
-			m_pTextComponent->SetText("Score: " + std::to_string(stat));
+			std::ostringstream oss;
+			oss << std::setw(6) << std::setfill('0') << stat;
+			m_pTextComponent->SetText(oss.str());
 		}
-		else //should i put a replace textComp ptr here, or just get it whenever score updates?
+		else 
 		{
 			std::cout << "a GameStatsDisplay does not have a pTextComponent to find" << std::endl;
 		}

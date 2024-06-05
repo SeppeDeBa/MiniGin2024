@@ -1,12 +1,12 @@
-#include "GameStatsDisplay.h"
-//realised that i need to seperate this into lives and score, asking if posible to do in 1?
-
-
-//GameStatsDisplay::GameStatsDisplay(GameObject* pOwner, Player* pObservedPlayerComp, int startValue)
+//#include "GameStatsDisplay.h"
+////realised that i need to seperate this into lives and score, asking if posible to do in 1?
+//
+//
+//GameStatsDisplay::GameStatsDisplay(dae::GameObject* pOwner, Player* pObservedPlayerComp, int startValue)
 //	: Component(pOwner)
 //{
 //	pObservedPlayerComp->
-//		m_pTextComponent = pOwner->GetComponent<TextComponent>();
+//		m_pTextComponent = pOwner->GetComponent<dae::TextComponent>();
 //		UpdateDisplay(startValue);
 //}
 //
@@ -32,5 +32,5 @@
 //		std::cout << "a GameStatsDisplay does not have a pTextComponent to find" << std::endl;
 //	}
 //}
-
+//
 

@@ -54,7 +54,7 @@ void load()
 
 	auto& scene = dae::SceneManager::GetInstance().CreateScene("Demo");
 
-	auto font = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 36);
+	auto font = dae::ResourceManager::GetInstance().LoadFont("Retro.otf", 36);
 	auto fpsFont = dae::ResourceManager::GetInstance().LoadFont("Lingua.otf", 15);
 
 

@@ -21,6 +21,7 @@ Level::Level(dae::GameObject* pOwner, const std::string& startingLevelName)
 	}
 	m_InitPlayerOne();
 	LoadLevelFromFile(startingLevelName);
+	m_InitUI();
 	//init player1
 
 }
@@ -48,6 +49,10 @@ void Level::Update(float deltaTime)
 	{
 		GO->Update(deltaTime);
 	}
+	for (const std::unique_ptr<dae::GameObject>& GO : m_pUIObjects)
+	{
+		GO->Update(deltaTime);
+	}
 	//update player
 	m_pPlayerOne->Update(deltaTime);
 
@@ -72,6 +77,10 @@ void Level::Render() const
 		GO->Render();
 	}
 	for (const std::unique_ptr<dae::GameObject>& GO : m_pBagObjects)
+	{
+		GO->Render();
+	}
+	for (const std::unique_ptr<dae::GameObject>& GO : m_pUIObjects)
 	{
 		GO->Render();
 	}
@@ -232,6 +241,19 @@ void Level::m_InitPlayerOne()
 	//	dae::InputType::ISUP);
 
 	m_pP1Transform = m_pPlayerOne.get()->GetComponent<dae::TransformComponent>();
+}
+
+void Level::m_InitUI()//call after playerInitialization
+{
+	auto font = dae::ResourceManager::GetInstance().LoadFont("Retro.otf", 22);
+
+	//Score
+	m_pUIObjects.emplace_back(std::make_unique<dae::GameObject>());
+	dae::GameObject* ScoreObject = m_pUIObjects.back().get();
+	ScoreObject->AddComponent<dae::TransformComponent>(5.f, 5.f);
+	ScoreObject->AddComponent<dae::TextureComponent>(false);
+	ScoreObject->AddComponent<dae::TextComponent>("000000", font);
+	ScoreObject->AddComponent<dae::ScoreDisplayComponent>(m_pPlayerOne->GetComponent<Player>());
 }
 
 void Level::m_CreateGem(int gridPosX, int gridPosY)

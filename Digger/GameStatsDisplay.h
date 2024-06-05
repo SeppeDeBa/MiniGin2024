@@ -4,11 +4,12 @@
 //#include "Player.h"
 //#include "TextureComponent.h"
 //#include "TextComponent.h"
-//using namespace dae
-
+//
+//
 ////todo: ask if this can be used as central comp?
-//using namespace dae;
-//class GameStatsDisplay : public Component, public IObserver<int> //todo: rename with component in name, forgot
+//
+//	
+//class GameStatsDisplay : public dae::Component, public IObserver<int> //todo: rename with component in name, forgot
 //{
 //public:
 //	GameStatsDisplay();
@@ -18,7 +19,8 @@
 //private:
 //
 //	void UpdateDisplay(int stat);
-//	TextComponent* m_pTextComponent; //dont delete, not parent
+//	dae::TextComponent* m_pTextComponent; //dont delete, not parent
 //
 //};
+//
 //
