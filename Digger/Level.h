@@ -18,7 +18,11 @@
 //#include "DieCommand.h"
 //#include "ScoreCommand.h"
 
-
+enum UIElementLookupIndex
+{
+	score = 0,
+	lives = 1,
+};
 
 
 

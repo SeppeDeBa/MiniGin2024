@@ -226,6 +226,11 @@ void Level::m_InitPlayerOne()
 	input.AddConsoleCommand(controllerOne, dae::Controller::ControllerButton::DPadRight,
 		std::make_unique<GridMoveCommand>(m_pPlayerOne.get(), moveSpeed,
 			glm::vec2{ 1.f, 0.f }), dae::InputType::ISHELD);
+
+
+	//m_pUIObjects[UIElementLookupIndex::lives]->GetComponent<dae::ScoreDisplayComponent>()->AssignPlayerOne(m_pPlayerOne->GetComponent<Player>());
+
+
 	//input.AddKeyboardCommand(SDL_SCANCODE_RIGHT,
 	//	std::make_unique<dae::MoveCommand>(m_pPlayerOne.get(), moveSpeed,
 	//		glm::vec2{ 1.f, 0.f }));
@@ -254,6 +259,13 @@ void Level::m_InitUI()//call after playerInitialization
 	ScoreObject->AddComponent<dae::TextureComponent>(false);
 	ScoreObject->AddComponent<dae::TextComponent>("000000", font);
 	ScoreObject->AddComponent<dae::ScoreDisplayComponent>(m_pPlayerOne->GetComponent<Player>());
+
+
+	auto& input = dae::InputManager::GetInstance();
+	const unsigned int controllerOne{ 0 };
+	input.AddConsoleCommand(controllerOne, dae::Controller::ControllerButton::ButtonY,
+	std::make_unique<ScoreCommand>(m_pPlayerOne.get(), 100),
+	dae::InputType::ISUP);
 }
 
 void Level::m_CreateGem(int gridPosX, int gridPosY)

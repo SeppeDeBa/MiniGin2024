@@ -24,7 +24,7 @@ namespace dae
 	void ScoreDisplayComponent::OnNotify(int scoreGained)
 	{
 		m_Score += scoreGained;
-		UpdateDisplay(m_pPlayerComp->GetScore());
+		UpdateDisplay(m_Score);
 	}
 
 	void ScoreDisplayComponent::AssignPlayerOne(Player* pPlayerOneComponent)

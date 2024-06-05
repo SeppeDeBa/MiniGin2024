@@ -24,7 +24,7 @@
 		Subject<> gameOver;//unused but already putting in place for later
 	private:
 		int m_Lives;
-		int m_Score;
+		/*int m_Score;*/
 		bool m_Active;
 		int m_ScoreToWin{ 500 };
 	};
