@@ -5,6 +5,7 @@
 #include "GOCommand.h"
 #include "GameObject.h"
 #include "TransformComponent.h"
+#include "Player.h"
 #include "Level.h"
 
 class GridMoveCommand final : public dae::GOCommand
@@ -19,10 +20,15 @@ private:
 	float m_Speed;
 	glm::vec2 m_DirectionVector;
 	dae::TransformComponent* m_pOwnerTransformComponent;
+	Player* m_pOwnerPlayerComponent;
 	const float m_GridCheckingOffset{0.05f};
 
 	void ConsumeHorizontalInput(float deltaTime);
 	void ConsumeVerticalInput(float deltaTime);
+
+	void UpdatePlayerPosition(const playerDirection direction);
+	void UpdatePlayerPositionHorizontal(float direction);
+	void UpdatePlayerPositionVertical(float direction);
 
 	bool WillCrossGridBorder(float deltaTime);
 	const float m_GridMiddlePointY{ Level::s_tileHeight / 2.f };

@@ -1,4 +1,5 @@
-#include ""
+#include "CollisionComponent.h"
+#include "CollisionManager.h"
 
 CollisionComponent::CollisionComponent(dae::GameObject* pOwner, collisionTag tag, float radius, bool onlyReceivesCollision)
 	:Component(pOwner)
@@ -10,12 +11,12 @@ CollisionComponent::CollisionComponent(dae::GameObject* pOwner, collisionTag tag
 	{
 		m_pOwnersTransformComponent = GetGameObject()->GetComponent<dae::TransformComponent>();
 	}
-
+	CollisionManager::GetInstance().AddCollisionComp(this);
 }
 
 CollisionComponent::~CollisionComponent()
 {
-
+	CollisionManager::GetInstance().RemoveCollisionComp(this);
 }
 
 void CollisionComponent::Update(float)

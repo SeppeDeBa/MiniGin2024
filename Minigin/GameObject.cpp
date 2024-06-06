@@ -51,6 +51,22 @@ void dae::GameObject::Update(float deltaTime)
 	}
 }
 
+void dae::GameObject::FixedUpdate()
+{
+	if(m_enabled)
+	{
+		for (std::shared_ptr<dae::Component> component : m_pVectorComponents)
+		{
+			component->FixedUpdate();
+		}
+		//update children
+		for (dae::GameObject* go : m_pVectorGOChildren)
+		{
+			go->FixedUpdate();
+		}
+	}
+}
+
 void dae::GameObject::Render() const
 {
 	if (m_enabled)
@@ -58,6 +74,10 @@ void dae::GameObject::Render() const
 		for (std::shared_ptr<dae::Component> component : m_pVectorComponents)
 		{
 			component->Render();
+		}
+		for (dae::GameObject* go : m_pVectorGOChildren)
+		{
+			go->Render();
 		}
 	}
 }

@@ -190,8 +190,8 @@ void Level::m_InitPlayerOne()
 	//dae::GameObject* pGOPlayer1 = new dae::GameObject{};
 	//2. build up GO
 	m_pPlayerOne->AddComponent<dae::TransformComponent>(0.f, 0.f);
-	m_pPlayerOne->AddComponent<dae::TextureComponent>("Digger.png", true);
-	m_pPlayerOne->AddComponent<Player>();
+	m_pPlayerOne->AddComponent<dae::TextureComponent>("Digger0R.png", true);
+	m_pPlayerOne->AddComponent<Player>(0);
 	//GORotatorOne->AddComponent<dae::RotatorComponent>(100.f, 90.f, true, 0.f);
 	//GORotatorOne->SetParent(GOCenterPoint, false);
 

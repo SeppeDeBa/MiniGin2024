@@ -10,7 +10,7 @@ namespace dae
 		virtual ~Component() = default;
 		virtual void Render() const {};
 		virtual void Update(float) {};
-
+		virtual void FixedUpdate() {};
 		//ro4
 		Component(const Component& other) = delete;
 		Component(Component&& other) = delete;
