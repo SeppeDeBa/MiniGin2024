@@ -155,11 +155,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="BagComponent.cpp" />
+    <ClCompile Include="BagState.cpp" />
     <ClCompile Include="CollisionComponent.cpp" />
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="DieCommand.cpp" />
     <ClCompile Include="Digger.cpp" />
     <ClCompile Include="GameStatsDisplay.cpp" />
+    <ClCompile Include="GemCollisionComponent.cpp" />
     <ClCompile Include="GemComponent.cpp" />
     <ClCompile Include="GridMoveCommand.cpp" />
     <ClCompile Include="Level.cpp" />
@@ -170,11 +173,14 @@
     <ClCompile Include="TileComponent.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BagComponent.h" />
+    <ClInclude Include="BagState.h" />
     <ClInclude Include="CollisionComponent.h" />
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="commandIncludesGame.h" />
     <ClInclude Include="DieCommand.h" />
     <ClInclude Include="GameStatsDisplay.h" />
+    <ClInclude Include="GemCollisionComponent.h" />
     <ClInclude Include="GemComponent.h" />
     <ClInclude Include="GridMoveCommand.h" />
     <ClInclude Include="Level.h" />

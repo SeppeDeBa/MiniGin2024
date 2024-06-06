@@ -18,13 +18,13 @@
 //#include "DieCommand.h"
 //#include "ScoreCommand.h"
 
-enum UIElementLookupIndex
+
+
+enum UIElements
 {
-	score = 0,
-	lives = 1,
+	SCORE,
+	LIVES
 };
-
-
 
 //COULD I HAVE FEEDBACK:
 // the scenes confused me a bit as its not made by me, and despite being a limited and easy to understand class, i preffered to make my own.
@@ -73,9 +73,8 @@ private:
 	std::vector <std::unique_ptr<dae::GameObject>> m_pGemObjects{};
 	std::vector <std::unique_ptr<dae::GameObject>> m_pBagObjects{};
 
-	std::vector <std::unique_ptr<dae::GameObject>> m_pUIObjects{};
 	
-
+	std::map<UIElements, std::unique_ptr<dae::GameObject>> m_pUIElements{};
 
 
 	dae::TransformComponent* m_pP1Transform; //save to not have to get it every loop

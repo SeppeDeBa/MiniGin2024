@@ -49,9 +49,10 @@ void Level::Update(float deltaTime)
 	{
 		GO->Update(deltaTime);
 	}
-	for (const std::unique_ptr<dae::GameObject>& GO : m_pUIObjects)
+
+	for (const auto& [key, value] : m_pUIElements)
 	{
-		GO->Update(deltaTime);
+		value->Update(deltaTime);
 	}
 	//update player
 	m_pPlayerOne->Update(deltaTime);
@@ -80,9 +81,9 @@ void Level::Render() const
 	{
 		GO->Render();
 	}
-	for (const std::unique_ptr<dae::GameObject>& GO : m_pUIObjects)
+	for(const auto& [key, value] : m_pUIElements)
 	{
-		GO->Render();
+		value->Render();
 	}
 	//render player
 	m_pPlayerOne->Render();
@@ -191,7 +192,7 @@ void Level::m_InitPlayerOne()
 	//2. build up GO
 	m_pPlayerOne->AddComponent<dae::TransformComponent>(0.f, 0.f);
 	m_pPlayerOne->AddComponent<dae::TextureComponent>("Digger0R.png", true);
-	m_pPlayerOne->AddComponent<Player>(0);
+	m_pPlayerOne->AddComponent<Player>(1);
 	//GORotatorOne->AddComponent<dae::RotatorComponent>(100.f, 90.f, true, 0.f);
 	//GORotatorOne->SetParent(GOCenterPoint, false);
 
@@ -253,19 +254,21 @@ void Level::m_InitUI()//call after playerInitialization
 	auto font = dae::ResourceManager::GetInstance().LoadFont("Retro.otf", 30);
 
 	//Score
-	m_pUIObjects.emplace_back(std::make_unique<dae::GameObject>());
-	dae::GameObject* ScoreObject = m_pUIObjects.back().get();
+	std::unique_ptr<dae::GameObject> ScoreObject = std::make_unique<dae::GameObject>();
+
 	ScoreObject->AddComponent<dae::TransformComponent>(25.f, 2.f);
 	ScoreObject->AddComponent<dae::TextureComponent>(false);
 	ScoreObject->AddComponent<dae::TextComponent>("000000", font);
 	ScoreObject->AddComponent<dae::ScoreDisplayComponent>(m_pPlayerOne->GetComponent<Player>());
 
+	m_pUIElements.insert({ UIElements::SCORE, std::move(ScoreObject) });
 
 	auto& input = dae::InputManager::GetInstance();
 	const unsigned int controllerOne{ 0 };
 	input.AddConsoleCommand(controllerOne, dae::Controller::ControllerButton::ButtonY,
 	std::make_unique<ScoreCommand>(m_pPlayerOne.get(), 100),
 	dae::InputType::ISUP);
+
 }
 
 void Level::m_CreateGem(int gridPosX, int gridPosY)

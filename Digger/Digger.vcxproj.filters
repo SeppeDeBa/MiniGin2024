@@ -46,6 +46,12 @@
     <Filter Include="Game Files\Components\Objects">
       <UniqueIdentifier>{3fd9e230-485f-48e8-a23c-8591ad5933e1}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Files\States">
+      <UniqueIdentifier>{a4d18d61-468c-4239-b60f-289fc99fefcb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Files\States\Bag">
+      <UniqueIdentifier>{c634d946-c461-4fc4-a1b7-726b213118c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Digger.cpp">
@@ -87,6 +93,15 @@
     <ClCompile Include="GemComponent.cpp">
       <Filter>Game Files\Components\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="GemCollisionComponent.cpp">
+      <Filter>Game Files\Components\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="BagState.cpp">
+      <Filter>Game Files\States\Bag</Filter>
+    </ClCompile>
+    <ClCompile Include="BagComponent.cpp">
+      <Filter>Game Files\Components\Objects</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -126,6 +141,15 @@
       <Filter>Game Files\Components\Collision</Filter>
     </ClInclude>
     <ClInclude Include="GemComponent.h">
+      <Filter>Game Files\Components\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="GemCollisionComponent.h">
+      <Filter>Game Files\Components\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="BagState.h">
+      <Filter>Game Files\States\Bag</Filter>
+    </ClInclude>
+    <ClInclude Include="BagComponent.h">
       <Filter>Game Files\Components\Objects</Filter>
     </ClInclude>
   </ItemGroup>
