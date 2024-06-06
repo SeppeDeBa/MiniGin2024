@@ -40,6 +40,9 @@
     <Filter Include="Game Files\Components\Character">
       <UniqueIdentifier>{4f8683e1-6b2c-4ccc-afb2-2fa66d6e5bb2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Game Files\Components\Collision">
+      <UniqueIdentifier>{2fb1c88d-8b26-481f-b34b-0253999099df}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Digger.cpp">
@@ -72,6 +75,9 @@
     <ClCompile Include="GridMoveCommand.cpp">
       <Filter>Game Files\Commands</Filter>
     </ClCompile>
+    <ClCompile Include="..\Minigin\CollisionComponent.cpp">
+      <Filter>Game Files\Components\Collision</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -103,6 +109,9 @@
     </ClInclude>
     <ClInclude Include="GridMoveCommand.h">
       <Filter>Game Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Minigin\CollisionComponent.h">
+      <Filter>Game Files\Components\Collision</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -1,29 +1,29 @@
 #include "CollisionComponent.h"
 
-dae::CollisionComponent::CollisionComponent(GameObject* pOwner, collisionTag tag, float radius, bool onlyReceivesCollision)
+CollisionComponent::CollisionComponent(dae::GameObject* pOwner, collisionTag tag, float radius, bool onlyReceivesCollision)
 	:Component(pOwner)
 	,m_receiveOnly{onlyReceivesCollision}
 	,m_collisionTag{tag}
 	,m_collisionRadius(radius)
 {
-	if (GetGameObject()->HasComponent<TransformComponent>())
+	if (GetGameObject()->HasComponent<dae::TransformComponent>())
 	{
-		m_pOwnersTransformComponent = GetGameObject()->GetComponent<TransformComponent>();
+		m_pOwnersTransformComponent = GetGameObject()->GetComponent<dae::TransformComponent>();
 	}
 }
 
-dae::CollisionComponent::~CollisionComponent()
+CollisionComponent::~CollisionComponent()
 {
 
 }
 
-void dae::CollisionComponent::Update(float)
+void CollisionComponent::Update(float)
 {
 
 }
 
 
-void dae::CollisionComponent::CheckCollision(CollisionComponent* pOtherCollComponent)
+void CollisionComponent::CheckCollision(CollisionComponent* pOtherCollComponent)
 {
 	if (!m_receiveOnly)
 	{
