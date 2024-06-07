@@ -1,36 +1,24 @@
 #pragma once
-#include "BagComponent.h"
+
 #include "TransformComponent.h"
 
-class NeutralState;
-class ShakingState;
-class FallingState;
-class BrokenState;
 
-class BagState
+class BagComponent;
+
+class BagState //spoke to a similar implementation with Finnean of my class, he uses constructor and destructor which I'm not a super fan of.
 {
 public:
-	BagState(BagComponent* pBag) {};
-	virtual ~BagState();
+	BagState(BagComponent* pBag);
+	virtual ~BagState() = default;
 	//virtual void HandleInput()
 
-
-	virtual void Update(float deltaTime) = 0;
+	virtual void Update(float) = 0;
 	virtual void OnEnter() = 0;
 	virtual void OnExit() = 0;
-	bool CanBePushed()const { return m_CanBePushed; };
 
-
-
-	//states
-	static NeutralState neutral;
-	static ShakingState shaking;
-	static FallingState falling;
-	static BrokenState broken;
 
 protected:
 	BagComponent* m_pBag{};
-	bool m_CanBePushed{true};
 };
 
 
@@ -40,7 +28,7 @@ public:
 	NeutralState(BagComponent* pBag);
 	virtual ~NeutralState() override = default;
 
-	virtual void Update(float deltaTime) override;
+	virtual void Update(float) override;
 	virtual void OnEnter() override;
 	virtual void OnExit() override;
 };
@@ -56,7 +44,8 @@ public:
 	virtual void OnExit() override;
 
 private:
-	const float m_ShakeTimerMax{ 2.f };
+	const float m_ShakeTimerMax{ 3.f };
+	const int m_JigglesPerSec{ 8 };
 	float m_ShakeTimer{ 0.f };
 private:
 	void UpdateVisuals();
@@ -74,7 +63,8 @@ public:
 	virtual void OnExit() override;
 
 private:
-	dae::TransformComponent* pOwnerTransform;
+	dae::TransformComponent* m_pOwnerTransform;
+	const float m_FallingSpeed{5.f};
 };
 
 class BrokenState final : public BagState
@@ -83,11 +73,11 @@ public:
 	BrokenState(BagComponent* pBag);
 	virtual ~BrokenState() override = default;
 
-	virtual void Update(float deltaTime) override;
+	virtual void Update(float) override;
 	virtual void OnEnter() override;
 	virtual void OnExit() override;
 
 private:
-	dae::TransformComponent* pOwnerTransform;
+	dae::TransformComponent* m_pOwnerTransform;
 };
 

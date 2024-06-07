@@ -7,7 +7,7 @@
 #include "TileComponent.h"
 #include <TransformComponent.h>
 #include <TextureComponent.h>
-
+#include "BagComponent.h"
 //extras
 #include <GameObject.h>
 #include "Player.h"

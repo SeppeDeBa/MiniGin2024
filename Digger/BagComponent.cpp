@@ -1,10 +1,11 @@
 #include "BagComponent.h"
-
+#include "BagState.h"
 #include "ResourceManager.h"
 #include "TextureComponent.h"
 
 BagComponent::BagComponent(dae::GameObject* pOwner)
 	:dae::Component(pOwner)
+	, m_pBagState(std::make_unique<ShakingState>(this))
 {
 	InitBagTextures();
 }
@@ -12,6 +13,28 @@ BagComponent::BagComponent(dae::GameObject* pOwner)
 void BagComponent::SetTextureByRotation(const BagRotation rotation)
 {
 	GetGameObject()->GetComponent<dae::TextureComponent>()->SetTexture(m_pTexturesMap[rotation]);
+}
+
+void BagComponent::Update(float deltaT)
+{
+	m_pBagState->Update(deltaT);
+}
+
+void BagComponent::Render() const
+{
+	
+}
+
+void BagComponent::FixedUpdate()
+{
+	
+}
+
+void BagComponent::SetBagState(std::unique_ptr<BagState> pBagStateToSet)
+{
+	m_pBagState->OnExit();
+	m_pBagState = std::move(pBagStateToSet);
+	m_pBagState->OnEnter();
 }
 
 void BagComponent::InitBagTextures()
@@ -35,3 +58,6 @@ void BagComponent::InitBagTextures()
 	dae::ResourceManager::GetInstance().LoadTexture(neutralRotationFP) });
 
 }
+
+//===== FALLINGSTATE =====
+

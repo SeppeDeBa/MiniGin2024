@@ -12,11 +12,11 @@ void CollisionManager::AddCollisionComp(CollisionComponent* pCollisionToAdd)
 
 void CollisionManager::RemoveCollisionComp(CollisionComponent* pCollisionToRemove)
 {
-	auto i = std::find(m_pActiveCollisions.begin(), m_pActiveCollisions.end(), pCollisionToRemove);
-		if (i != m_pActiveCollisions.end())
-		{
-			m_pActiveCollisions.erase(i);
-		}
+    auto it = std::find(m_pActiveCollisions.begin(), m_pActiveCollisions.end(), pCollisionToRemove);
+    if (it != m_pActiveCollisions.end())
+    {
+        m_pActiveCollisions.erase(it);
+    }
 }
 
 

@@ -291,4 +291,5 @@ void Level::m_CreateBag(int gridPosX, int gridPosY)
 
 	createdBag->AddComponent<dae::TransformComponent>(xPos, yPos);
 	createdBag->AddComponent<dae::TextureComponent>("Bag.png", true);
+	createdBag->AddComponent<BagComponent>();
 }

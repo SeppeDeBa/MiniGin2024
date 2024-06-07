@@ -102,6 +102,12 @@
     <ClCompile Include="BagComponent.cpp">
       <Filter>Game Files\Components\Objects</Filter>
     </ClCompile>
+    <ClCompile Include="BaseState.cpp">
+      <Filter>Game Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MapRegistryComponent.cpp">
+      <Filter>Game Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -151,6 +157,12 @@
     </ClInclude>
     <ClInclude Include="BagComponent.h">
       <Filter>Game Files\Components\Objects</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MapRegistryComponent.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
