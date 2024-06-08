@@ -10,9 +10,6 @@ GridMoveCommand::GridMoveCommand(dae::GameObject* gameObjPtr, float speed, glm::
 	if (playerComp) m_pOwnerPlayerComponent = playerComp;
 }
 
-GridMoveCommand::~GridMoveCommand()
-{
-}
 
 void GridMoveCommand::Execute(float deltaTime)
 {

@@ -111,6 +111,9 @@
     <ClCompile Include="Grid.cpp">
       <Filter>Game Files\Components\Level</Filter>
     </ClCompile>
+    <ClCompile Include="SkipLevelCommand.cpp">
+      <Filter>Game Files\Commands</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -169,6 +172,9 @@
     </ClInclude>
     <ClInclude Include="Grid.h">
       <Filter>Game Files\Components\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="SkipLevelCommand.h">
+      <Filter>Game Files\Commands</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

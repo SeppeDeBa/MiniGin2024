@@ -69,7 +69,7 @@ void load()
 	//INIT LEVEL GAMEOBJECT
 	dae::GameObject* GOLevel = new dae::GameObject{};
 	GOLevel->AddComponent<dae::TransformComponent>(0.f, 0.f);
-	GOLevel->AddComponent<Level>("../Data/Level1.txt");
+	GOLevel->AddComponent<Level>();
 	scene.Add(GOLevel);
 
 	//===== BACKGROUND =====

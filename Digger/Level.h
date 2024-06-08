@@ -30,14 +30,14 @@ enum UIElements
 class Level : public dae::Component //todo: syntactically rename to component
 {
 public:
-	Level(dae::GameObject* pOwner, const std::string& startingLevelName);//mainly constructs empty tiles to be ready for usage
+	Level(dae::GameObject* pOwner);//mainly constructs empty tiles to be ready for usage
 	~Level() override;
 
 	void Update(float deltaTime) override;
 	void FixedUpdate() override;
 	void Render() const override;
-	void LoadLevelFromFile(const std::string& fileName);
 
+	void GoToNextLevel();
 private:
 
 
@@ -65,11 +65,17 @@ private:
 
 	void m_ResetMap();
 
-	bool m_PlayingState{};
-	bool m_TwoPlayerMode{ false };
-	bool m_VersusMode{ false };
+	bool m_playingState{};
+	bool m_twoPlayerMode{ false };
+	bool m_versusMode{ false };
 
-	int m_currLevel{ 0 };
+	unsigned int m_currLevel{ 0 };
+
+	//level data
+	std::vector<std::string> m_levelPathVec{};
+	void m_AddLevelNames();
+	void m_ShowWinScreen();
+	void LoadLevelFromFile(const std::string& fileName);
 
 	void m_InitPlayerOne();
 	void m_InitPlayerTwo();

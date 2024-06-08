@@ -4,15 +4,15 @@
 #include <string>
 #include "commandIncludesGame.h"
 #include <commandIncludesEngine.h>
-Level::Level(dae::GameObject* pOwner, const std::string& startingLevelName)
+Level::Level(dae::GameObject* pOwner)
 	: dae::Component(pOwner)
 	, m_pGrid(std::make_unique<Grid>())
 {
 	//init level map
-
+	m_AddLevelNames();
 	m_InitPlayerOne();
 	m_InitPlayerTwo();
-	LoadLevelFromFile(startingLevelName);
+	GoToNextLevel();
 	m_InitPlayerTwoControls();
 	m_InitUI();
 	//init player1
@@ -47,16 +47,12 @@ void Level::Update(float deltaTime)
 	m_pPlayerTwo->Update(deltaTime);
 
 	m_pGrid->DigTile(m_pP1Transform->GetLocalPos().x, m_pP1Transform->GetLocalPos().y);
-	if(m_TwoPlayerMode)	m_pGrid->DigTile(m_pP2Transform->GetLocalPos().x, m_pP2Transform->GetLocalPos().y);
+	if(m_twoPlayerMode)	m_pGrid->DigTile(m_pP2Transform->GetLocalPos().x, m_pP2Transform->GetLocalPos().y);
 
 
 	//deletions
 	CheckDAEVectorForDeletion(m_pGemObjects);
 	CheckDAEVectorForDeletion(m_pBagObjects);
-
-
-
-	
 }
 
 void Level::FixedUpdate()
@@ -151,7 +147,7 @@ void Level::LoadLevelFromFile(const std::string& fileName)
 				break;
 			case 'T':
 				m_pGrid->DigTileFromGridPos(colIt, rowIt);
-				if(m_TwoPlayerMode)
+				if(m_twoPlayerMode)
 				{
 				m_pPlayerTwo->GetComponent<dae::TransformComponent>()->SetLocalPosition(colIt * Grid::s_tileWidth + Grid::s_tileWidth / 2.f, rowIt * Grid::s_tileHeight + Grid::s_tileHeight / 2.f + Grid::s_tileHeight);// put to center ( + offset for UI)
 				m_pPlayerTwo->SetEnabled(true);
@@ -164,6 +160,34 @@ void Level::LoadLevelFromFile(const std::string& fileName)
 		}
 }
 
+void Level::GoToNextLevel()
+{
+	std::cout << "Loading level: " << m_currLevel << std::endl;
+	const unsigned int amtOfLevels{ static_cast<unsigned int>(m_levelPathVec.size()) };
+	if (m_currLevel>= amtOfLevels) //check if next would be not existing, thus finishing the game
+	{
+		m_ShowWinScreen();
+	}
+	else
+	{
+		LoadLevelFromFile(m_levelPathVec[m_currLevel]);
+	}
+	++m_currLevel;
+	m_currLevel %= amtOfLevels+1;
+}
+
+
+void Level::m_AddLevelNames() 
+{
+	m_levelPathVec.push_back("../Data/Level1.txt");
+	m_levelPathVec.push_back("../Data/Level2.txt");
+	m_levelPathVec.push_back("../Data/Level3.txt");
+}
+
+void Level::m_ShowWinScreen()
+{
+	std::cout << "YAY YOU WON" << std::endl;
+}
 
 void Level::m_InitPlayerOne()
 {
@@ -210,6 +234,11 @@ void Level::m_InitPlayerOne()
 		std::make_unique<GridMoveCommand>(m_pPlayerOne.get(), moveSpeed,
 			glm::vec2{ 1.f, 0.f }), dae::InputType::ISHELD);
 
+
+
+
+	input.AddConsoleCommand(controllerOne, dae::Controller::ControllerButton::Start,
+		std::make_unique<SkipLevelCommand>(this), dae::InputType::ISDOWN);
 
 	//m_pUIObjects[UIElementLookupIndex::lives]->GetComponent<dae::ScoreDisplayComponent>()->AssignPlayerOne(m_pPlayerOne->GetComponent<Player>());
 
