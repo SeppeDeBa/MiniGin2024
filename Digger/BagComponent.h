@@ -9,7 +9,8 @@ enum BagRotation
 {
 	LEFT,
 	NEUTRAL,
-	RIGHT
+	RIGHT,
+	OPEN
 };
 
 class BagComponent : public dae::Component
@@ -26,11 +27,13 @@ public:
 
 	void SetBagState(std::unique_ptr<BagState> pBagStateToSet);
 
+	int lastStableRow{};
 	//virtual void HandleInput(Input)
 private:
 	void InitBagTextures();
 	std::map<BagRotation, std::shared_ptr<dae::Texture2D>> m_pTexturesMap{};
 	BagRotation m_CurrentRotation;
 	std::unique_ptr<BagState> m_pBagState;
+	
 };
 

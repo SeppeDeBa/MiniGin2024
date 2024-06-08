@@ -48,6 +48,14 @@ void Level::Update(float deltaTime)
 	
 }
 
+void Level::FixedUpdate()
+{
+	for (const std::unique_ptr<dae::GameObject>& GO : m_pBagObjects)
+	{
+		GO->FixedUpdate();
+	}
+}
+
 void Level::Render() const
 {
 	//render level

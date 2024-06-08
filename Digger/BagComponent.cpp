@@ -5,7 +5,7 @@
 
 BagComponent::BagComponent(dae::GameObject* pOwner)
 	:dae::Component(pOwner)
-	, m_pBagState(std::make_unique<ShakingState>(this))
+	, m_pBagState(std::make_unique<NeutralState>(this))
 {
 	InitBagTextures();
 }
@@ -27,7 +27,7 @@ void BagComponent::Render() const
 
 void BagComponent::FixedUpdate()
 {
-	
+	m_pBagState->FixedUpdate();
 }
 
 void BagComponent::SetBagState(std::unique_ptr<BagState> pBagStateToSet)
@@ -45,6 +45,7 @@ void BagComponent::InitBagTextures()
 	std::string leftRotationFP{ bagString + "L.png" };
 	std::string rightRotationFP{ bagString + "R.png" };
 	std::string neutralRotationFP{ bagString + ".png" };
+	std::string openFP{ bagString + "O.png" };
 	//assigning
 
 	//left
@@ -56,7 +57,9 @@ void BagComponent::InitBagTextures()
 	//right
 	m_pTexturesMap.insert({ BagRotation::NEUTRAL,
 	dae::ResourceManager::GetInstance().LoadTexture(neutralRotationFP) });
-
+	//open
+	m_pTexturesMap.insert({ BagRotation::OPEN,
+dae::ResourceManager::GetInstance().LoadTexture(openFP) });
 }
 
 //===== FALLINGSTATE =====

@@ -39,6 +39,7 @@ public:
 	~Level() override;
 
 	void Update(float deltaTime) override;
+	void FixedUpdate() override;
 	void Render() const override;
 	void LoadLevelFromFile(const std::string& fileName);
 	//static glm::vec2 GetLevelTilePosition(float worldPosX, float worldPosY);

@@ -19,6 +19,7 @@ namespace dae
 		void ClearLevel();
 
 		void Update(float deltaTime);
+		void FixedUpdate();
 		void Render() const;
 
 		~Scene();

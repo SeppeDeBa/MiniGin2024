@@ -10,7 +10,7 @@ public:
 	~TileComponent();
 
 	void DigTile();
-	bool IsOpen() const { return m_fullyOpen;};
+	bool IsOpen() const { return m_DugOut;};
 
 private:
 	const glm::vec2 m_gridPos;

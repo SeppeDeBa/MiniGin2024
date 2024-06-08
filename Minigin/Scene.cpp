@@ -3,6 +3,7 @@
 
 #include <algorithm>
 
+
 using namespace dae;
 
 unsigned int Scene::m_idCounter = 0;
@@ -73,6 +74,15 @@ void Scene::Update(float deltaTime)
 		++it;
 	}
 }
+
+void Scene::FixedUpdate()
+{
+	for (GameObject* go : m_pGameObjects)
+	{
+		go->FixedUpdate();
+	}
+}
+
 //todo: Should deletion be here?
 void Scene::Render() const
 {

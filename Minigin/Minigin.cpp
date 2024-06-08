@@ -108,11 +108,11 @@ void dae::Minigin::Run(const std::function<void()>& load)
 		doContinue = input.ProcessInput(deltaTime);
 
 		//can be used for physics later
-		//while(lag >= m_fixedTimeStep)
-		//{
-			//physics update
-			//lag -= m_fixedTimeStep;
-		//}
+		while(lag >= m_fixedTimeStep)
+		{
+			sceneManager.FixedUpdate();
+			lag -= m_fixedTimeStep;
+		}
 
 		sceneManager.Update(deltaTime);
 		renderer.Render();

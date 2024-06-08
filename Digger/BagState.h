@@ -14,12 +14,18 @@ public:
 	//virtual void HandleInput()
 
 	virtual void Update(float) = 0;
+	virtual void FixedUpdate() = 0;
 	virtual void OnEnter() = 0;
 	virtual void OnExit() = 0;
 
-
+	
 protected:
 	BagComponent* m_pBag{};
+	dae::TransformComponent* m_pOwnerTransform;
+	MapRegistryComponent* m_pMap;
+
+	
+	bool tileUnderneathIsClosed() const;
 };
 
 
@@ -30,8 +36,12 @@ public:
 	virtual ~NeutralState() override = default;
 
 	virtual void Update(float) override;
+	virtual void FixedUpdate() override;
 	virtual void OnEnter() override;
 	virtual void OnExit() override;
+
+private:
+
 };
 
 class ShakingState final : public BagState
@@ -41,11 +51,12 @@ public:
 	virtual ~ShakingState() override = default;
 
 	virtual void Update(float deltaTime) override;
+	virtual void FixedUpdate() override;
 	virtual void OnEnter() override;
 	virtual void OnExit() override;
 
 private:
-	const float m_ShakeTimerMax{ 3.f };
+	const float m_ShakeTimerMax{ 2.f };
 	const int m_JigglesPerSec{ 8 };
 	float m_ShakeTimer{ 0.f };
 private:
@@ -60,16 +71,14 @@ public:
 	virtual ~FallingState() override = default;
 
 	virtual void Update(float deltaTime) override;
+	virtual void FixedUpdate() override;
 	virtual void OnEnter() override;
 	virtual void OnExit() override;
 
 private:
-	dae::TransformComponent* m_pOwnerTransform;
-	MapRegistryComponent* m_pMap;
-	const float m_FallingSpeed{16.f};
-	const float m_DistanceToGround{ 10.f };
-
-	void CheckTouchingBlock();
+	const float m_FallingSpeed{90.f};
+	const float m_DistanceToGroundExtra{ 10.f };
+	const int m_TilesFallenToBreak{ 2 };
 };
 
 class BrokenState final : public BagState
@@ -79,10 +88,10 @@ public:
 	virtual ~BrokenState() override = default;
 
 	virtual void Update(float) override;
+	virtual void FixedUpdate() override;
 	virtual void OnEnter() override;
 	virtual void OnExit() override;
 
 private:
-	dae::TransformComponent* m_pOwnerTransform;
 };
 
