@@ -16,7 +16,7 @@
 	{
 	public:
 		Player(dae::GameObject* pOwner, unsigned int playerNr, int startingLives = 3);
-		~Player() = default;
+		~Player() override = default;
 
 		void Die();
 

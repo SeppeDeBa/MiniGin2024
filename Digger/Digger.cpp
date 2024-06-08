@@ -50,6 +50,7 @@ void load()
 	auto& soundService = SoundServiceLocator::Get_Sound_System();
 	soundService.Load("../Data/Die.wav");
 	soundService.Load("../Data/Points.wav");
+	soundService.Load("../Data/MainLoop.wav");
 	
 
 	auto& scene = dae::SceneManager::GetInstance().CreateScene("Demo");

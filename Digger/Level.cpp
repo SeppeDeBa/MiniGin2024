@@ -37,6 +37,10 @@ void Level::Update(float deltaTime)
 	{
 		GO->Update(deltaTime);
 	}
+	for (const std::unique_ptr<dae::GameObject>& GO : m_pEnemyObjects)
+	{
+		GO->Update(deltaTime);
+	}
 
 	for (const auto& [key, value] : m_pUIElements)
 	{
@@ -53,11 +57,16 @@ void Level::Update(float deltaTime)
 	//deletions
 	CheckDAEVectorForDeletion(m_pGemObjects);
 	CheckDAEVectorForDeletion(m_pBagObjects);
+	CheckDAEVectorForDeletion(m_pEnemyObjects);
 }
 
 void Level::FixedUpdate()
 {
 	for (const std::unique_ptr<dae::GameObject>& GO : m_pBagObjects)
+	{
+		GO->FixedUpdate();
+	}
+	for (const std::unique_ptr<dae::GameObject>& GO : m_pEnemyObjects)
 	{
 		GO->FixedUpdate();
 	}
@@ -76,6 +85,10 @@ void Level::Render() const
 		GO->Render();
 	}
 	for (const std::unique_ptr<dae::GameObject>& GO : m_pBagObjects)
+	{
+		GO->Render();
+	}
+	for (const std::unique_ptr<dae::GameObject>& GO : m_pEnemyObjects)
 	{
 		GO->Render();
 	}
@@ -152,6 +165,10 @@ void Level::LoadLevelFromFile(const std::string& fileName)
 				m_pPlayerTwo->GetComponent<dae::TransformComponent>()->SetLocalPosition(colIt * Grid::s_tileWidth + Grid::s_tileWidth / 2.f, rowIt * Grid::s_tileHeight + Grid::s_tileHeight / 2.f + Grid::s_tileHeight);// put to center ( + offset for UI)
 				m_pPlayerTwo->SetEnabled(true);
 				}
+				break;
+			case 'E':
+				m_pGrid->DigTileFromGridPos(colIt, rowIt);
+				m_CreateEnemy(colIt, rowIt);
 				break;
 			default:
 				std::cout << "hit character:" << parsedGrid[rowIt][colIt] << std::endl;
@@ -362,6 +379,19 @@ void Level::m_CreateBag(int gridPosX, int gridPosY)
 	createdBag->AddComponent<MapRegistryComponent>(m_pGrid.get());
 	createdBag->AddComponent<BagComponent>();
 	createdBag->AddComponent<BagCollisionComponent>(m_pUIElements[UIElements::SCORE].get()->GetComponent<ScoreDisplayComponent>());
+}
+
+void Level::m_CreateEnemy(int gridPosX, int gridPosY)
+{
+	m_pEnemyObjects.emplace_back(std::make_unique<dae::GameObject>());
+	dae::GameObject* createdEnemy = m_pEnemyObjects.back().get();
+	float xPos{ gridPosX * Grid::s_tileWidth + Grid::s_tileWidth / 2.f };
+	float yPos{ gridPosY * Grid::s_tileHeight + Grid::s_tileHeight / 2.f + Grid::s_tileHeight }; //add offset
+	createdEnemy->AddComponent<dae::TransformComponent>(xPos, yPos);
+	createdEnemy->AddComponent<dae::TextureComponent>("Nobbin.png", true);
+	createdEnemy->AddComponent<MapRegistryComponent>(m_pGrid.get());
+	createdEnemy->AddComponent<EnemyComponent>();
+
 }
 
 void Level::m_ResetMap()

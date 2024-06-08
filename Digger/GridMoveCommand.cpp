@@ -5,9 +5,11 @@ GridMoveCommand::GridMoveCommand(dae::GameObject* gameObjPtr, float speed, glm::
 	, m_Speed(speed)
 	, m_DirectionVector(moveVector)
 	, m_pOwnerTransformComponent(gameObjPtr->GetComponent<dae::TransformComponent>())
+	, m_pOwnerPlayerComponent(nullptr)
 {
 	auto playerComp{ gameObjPtr->GetComponent<Player>() };
 	if (playerComp) m_pOwnerPlayerComponent = playerComp;
+	
 }
 
 

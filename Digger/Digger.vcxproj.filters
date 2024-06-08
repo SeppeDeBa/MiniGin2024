@@ -123,6 +123,12 @@
     <ClCompile Include="DieCommand.cpp">
       <Filter>Game Files\Components\Unused</Filter>
     </ClCompile>
+    <ClCompile Include="EnemyComponent.cpp">
+      <Filter>Game Files\Components\Character</Filter>
+    </ClCompile>
+    <ClCompile Include="MainLoopCommand.cpp">
+      <Filter>Game Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -193,6 +199,12 @@
     </ClInclude>
     <ClInclude Include="DieCommand.h">
       <Filter>Game Files\Components\Unused</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyComponent.h">
+      <Filter>Game Files\Components\Character</Filter>
+    </ClInclude>
+    <ClInclude Include="MainLoopCommand.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

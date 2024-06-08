@@ -12,6 +12,7 @@
 #include "PlayerCollisionComponent.h"
 #include "GemCollisionComponent.h"
 #include "BagCollisionComponent.h"
+#include "EnemyComponent.h"
 //extras
 #include <GameObject.h>
 #include "Player.h"
@@ -49,7 +50,7 @@ private:
 	std::unique_ptr<dae::GameObject> m_pPlayerOne;
 	std::unique_ptr<dae::GameObject> m_pPlayerTwo;
 
-	//level objects
+	//level objects -> could easily be combined but i personally like seperating them
 	std::vector <std::unique_ptr<dae::GameObject>> m_pGemObjects{};
 	std::vector <std::unique_ptr<dae::GameObject>> m_pBagObjects{};
 	std::vector <std::unique_ptr<dae::GameObject>> m_pEnemyObjects{};
@@ -64,11 +65,11 @@ private:
 	dae::TransformComponent* m_pP2Transform; //save to not have to get it every loop
 	void m_CreateGem(int gridPosX, int gridPosY);
 	void m_CreateBag(int gridPosX, int gridPosY);
-
+	void m_CreateEnemy(int gridPosX, int gridPosY);
 
 	void m_ResetMap();
 
-	bool m_playingState{};
+	bool m_playingState{false};
 	bool m_twoPlayerMode{ false };
 	bool m_versusMode{ false };
 
