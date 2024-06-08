@@ -41,7 +41,7 @@ void GridMoveCommand::SetNewTransform(dae::GameObject* gameObjPtr)
 
 void GridMoveCommand::ConsumeHorizontalInput(float deltaTime)
 {
-	float gridYPos{ m_pOwnerTransformComponent->GetWorldPos().y / Level::s_tileHeight }; 
+	float gridYPos{ m_pOwnerTransformComponent->GetWorldPos().y / Grid::s_tileHeight };
 	float gridRow{};
 	float gridRowRelativeYPos = modf(gridYPos, &gridRow);
 
@@ -67,7 +67,7 @@ void GridMoveCommand::ConsumeHorizontalInput(float deltaTime)
 
 void GridMoveCommand::ConsumeVerticalInput(float deltaTime)
 {
-	float gridXPos{ m_pOwnerTransformComponent->GetWorldPos().x / Level::s_tileWidth };
+	float gridXPos{ m_pOwnerTransformComponent->GetWorldPos().x / Grid::s_tileWidth };
 	float gridCol{};
 	float gridColRelativeXPos = modf(gridXPos, &gridCol);
 
@@ -116,7 +116,7 @@ bool GridMoveCommand::WillCrossGridBorder(float deltaTime)
 		pointToCheck.y *= -1;
 		pointToCheck.x += m_pOwnerTransformComponent->GetWorldPos().x;
 		pointToCheck.y += m_pOwnerTransformComponent->GetWorldPos().y;
-		return !Level::pointIsInGrid(pointToCheck);
+		return !Grid::pointIsInGrid(pointToCheck);
 	}
 	std::cout << "m_pOwnerTransformComponent is invalid in WilLCrossGridBroder" << std::endl;
 	return false;

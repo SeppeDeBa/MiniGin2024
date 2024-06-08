@@ -106,7 +106,10 @@
       <Filter>Game Files</Filter>
     </ClCompile>
     <ClCompile Include="MapRegistryComponent.cpp">
-      <Filter>Game Files</Filter>
+      <Filter>Game Files\Components\Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Grid.cpp">
+      <Filter>Game Files\Components\Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -162,7 +165,10 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MapRegistryComponent.h">
-      <Filter>Header Files</Filter>
+      <Filter>Game Files\Components\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Game Files\Components\Level</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

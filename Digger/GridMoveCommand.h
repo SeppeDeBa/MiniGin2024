@@ -31,8 +31,8 @@ private:
 	void UpdatePlayerPositionVertical(float direction);
 
 	bool WillCrossGridBorder(float deltaTime);
-	const float m_GridMiddlePointY{ Level::s_tileHeight / 2.f };
-	const float m_GridMiddlePointX{ Level::s_tileWidth / 2.f };
+	const float m_GridMiddlePointY{ Grid::s_tileHeight / 2.f };
+	const float m_GridMiddlePointX{ Grid::s_tileWidth / 2.f };
 };
 //class GridMoveCommand : public dae::Command
 //{
