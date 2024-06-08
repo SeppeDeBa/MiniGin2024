@@ -39,6 +39,7 @@ namespace dae
 		bool ProcessInput(float deltaTime);
 		InputManager();
 		void AddConsoleCommand(unsigned int controllerIndex, Controller::ControllerButton button, std::unique_ptr<dae::Command>&& command, InputType typeOfInput);
+		void ClearConsoleCommandsForIndex(unsigned int controllerIndex);
 		void AddKeyboardCommand(SDL_Scancode keyboardButton, std::unique_ptr<dae::Command>&& command);
 		//	void SetUpArrow(Command* command) { arrowUp = std::make_unique<Command>(command);};
 	};

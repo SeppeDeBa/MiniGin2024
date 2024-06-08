@@ -16,16 +16,20 @@ GridMoveCommand::~GridMoveCommand()
 
 void GridMoveCommand::Execute(float deltaTime)
 {
-	if(m_pOwnerTransformComponent && !WillCrossGridBorder(deltaTime))
+	if (m_pGameObject->IsEnabled())
 	{
-		if(m_DirectionVector.x != 0)
+		if (m_pOwnerTransformComponent && !WillCrossGridBorder(deltaTime)) //could be merged with last line. todo: check if visual studio does lazy checking.
 		{
-			ConsumeHorizontalInput(deltaTime);
+			if (m_DirectionVector.x != 0)
+			{
+				ConsumeHorizontalInput(deltaTime);
+			}
+			if (m_DirectionVector.y != 0)
+			{
+				ConsumeVerticalInput(deltaTime);
+			}
 		}
-		if(m_DirectionVector.y != 0)
-		{
-			ConsumeVerticalInput(deltaTime);
-		}
+
 	}
 }
 

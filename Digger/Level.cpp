@@ -11,7 +11,9 @@ Level::Level(dae::GameObject* pOwner, const std::string& startingLevelName)
 	//init level map
 
 	m_InitPlayerOne();
+	m_InitPlayerTwo();
 	LoadLevelFromFile(startingLevelName);
+	m_InitPlayerTwoControls();
 	m_InitUI();
 	//init player1
 
@@ -42,8 +44,17 @@ void Level::Update(float deltaTime)
 	}
 	//update player
 	m_pPlayerOne->Update(deltaTime);
+	m_pPlayerTwo->Update(deltaTime);
 
 	m_pGrid->DigTile(m_pP1Transform->GetLocalPos().x, m_pP1Transform->GetLocalPos().y);
+	if(m_TwoPlayerMode)	m_pGrid->DigTile(m_pP2Transform->GetLocalPos().x, m_pP2Transform->GetLocalPos().y);
+
+
+	//deletions
+	CheckDAEVectorForDeletion(m_pGemObjects);
+	CheckDAEVectorForDeletion(m_pBagObjects);
+
+
 
 	
 }
@@ -54,6 +65,9 @@ void Level::FixedUpdate()
 	{
 		GO->FixedUpdate();
 	}
+
+	m_pPlayerOne->FixedUpdate();
+	m_pPlayerTwo->FixedUpdate();
 }
 
 void Level::Render() const
@@ -75,11 +89,13 @@ void Level::Render() const
 	}
 	//render player
 	m_pPlayerOne->Render();
+	m_pPlayerTwo->Render();
 
 }
 
 void Level::LoadLevelFromFile(const std::string& fileName)
 {
+	m_ResetMap();
 	char parsedGrid[Grid::s_nrRows][Grid::s_nrCols];
 	//1. open file
 	std::ifstream levelFile(fileName, std::ios::in);
@@ -133,6 +149,14 @@ void Level::LoadLevelFromFile(const std::string& fileName)
 				m_pPlayerOne->GetComponent<dae::TransformComponent>()->SetLocalPosition(colIt * Grid::s_tileWidth + Grid::s_tileWidth / 2.f, rowIt * Grid::s_tileHeight + Grid::s_tileHeight / 2.f + Grid::s_tileHeight);// put to center ( + offset for UI)
 				m_pPlayerOne->SetEnabled(true);
 				break;
+			case 'T':
+				m_pGrid->DigTileFromGridPos(colIt, rowIt);
+				if(m_TwoPlayerMode)
+				{
+				m_pPlayerTwo->GetComponent<dae::TransformComponent>()->SetLocalPosition(colIt * Grid::s_tileWidth + Grid::s_tileWidth / 2.f, rowIt * Grid::s_tileHeight + Grid::s_tileHeight / 2.f + Grid::s_tileHeight);// put to center ( + offset for UI)
+				m_pPlayerTwo->SetEnabled(true);
+				}
+				break;
 			default:
 				std::cout << "hit character:" << parsedGrid[rowIt][colIt] << std::endl;
 				break;
@@ -140,36 +164,6 @@ void Level::LoadLevelFromFile(const std::string& fileName)
 		}
 }
 
-//glm::vec2 Level::GetLevelTilePosition(float worldPosX, float worldPosY)
-//{
-//
-//	return glm::vec2(worldPosX / s_tileWidth, worldPosY / s_tileHeight -1 );//1 offset for UI layer, player needs to constrain itself to boundaries of playfield however
-//}
-
-//void Level::DigTile(float worldPosX, float worldPosY)
-//{
-//	m_pTileMap[static_cast<int>(worldPosX /s_tileWidth)][static_cast<int>(worldPosY/s_tileHeight)-1]->GetComponent<TileComponent>()->DigTile();
-//}
-
-//void Level::DigTileFromGridPos(int gridX, int gridY)
-//{
-//	m_pTileMap[gridX][gridY]->GetComponent<TileComponent>()->DigTile();
-//}
-
-//bool Level::IsTileOpenFromWorldPos(float worldPosX, float worldPosY) const
-//{
-//	//minus 1 offset on the Y as UI is an extra row not included in the tileMap
-//	return m_pTileMap[static_cast<int>(worldPosX /s_tileWidth)][static_cast<int>(worldPosY /s_tileHeight-1)]->GetComponent<TileComponent>()->IsOpen();
-//}
-
-//bool Level::pointIsInGrid(glm::vec2 pointToCheck)
-//{
-//	bool isInGrid{ true };
-//	//up (checking tileHeight as there is 1 ui row)
-//	if (pointToCheck.y < s_tileHeight || pointToCheck.y > g_windowHeight) isInGrid = false;
-//	if (pointToCheck.x < 0.f || pointToCheck.x > g_windowWidth) isInGrid = false;
-//	return isInGrid;
-//}
 
 void Level::m_InitPlayerOne()
 {
@@ -180,7 +174,7 @@ void Level::m_InitPlayerOne()
 	//2. build up GO
 	m_pPlayerOne->AddComponent<dae::TransformComponent>(0.f, 0.f);
 	m_pPlayerOne->AddComponent<dae::TextureComponent>("Digger0R.png", true);
-	m_pPlayerOne->AddComponent<Player>(1);
+	m_pPlayerOne->AddComponent<Player>(0);
 	//GORotatorOne->AddComponent<dae::RotatorComponent>(100.f, 90.f, true, 0.f);
 	//GORotatorOne->SetParent(GOCenterPoint, false);
 
@@ -237,6 +231,50 @@ void Level::m_InitPlayerOne()
 	m_pP1Transform = m_pPlayerOne.get()->GetComponent<dae::TransformComponent>();
 }
 
+void Level::m_InitPlayerTwo()
+{
+	//1. init ptr
+	m_pPlayerTwo = std::make_unique<dae::GameObject>();
+
+	//2. build up GO
+	m_pPlayerTwo->AddComponent<dae::TransformComponent>(0.f, 0.f);
+	m_pPlayerTwo->AddComponent<dae::TextureComponent>("Digger1R.png", true);
+	m_pPlayerTwo->AddComponent<Player>(1);
+
+
+	m_pP2Transform = m_pPlayerTwo.get()->GetComponent<dae::TransformComponent>();
+	m_pPlayerTwo->SetEnabled(false);
+}
+
+void Level::m_InitPlayerTwoControls()
+{
+	//up
+	auto& input = dae::InputManager::GetInstance();
+	const unsigned int controllerTwo{ 1 };
+	//==PLAYER ONE
+	const float moveSpeed{ 100.f };
+	input.AddConsoleCommand(controllerTwo, dae::Controller::ControllerButton::DpadUp,
+		std::make_unique<GridMoveCommand>(m_pPlayerTwo.get(), moveSpeed,
+			glm::vec2{ 0.f, 1.f }), dae::InputType::ISHELD);
+
+
+
+	//down
+	input.AddConsoleCommand(controllerTwo, dae::Controller::ControllerButton::DPadDown,
+		std::make_unique<GridMoveCommand>(m_pPlayerTwo.get(), moveSpeed,
+			glm::vec2{ 0.f, -1.f }), dae::InputType::ISHELD);
+
+	//left
+	input.AddConsoleCommand(controllerTwo, dae::Controller::ControllerButton::DpadLeft,
+		std::make_unique<GridMoveCommand>(m_pPlayerTwo.get(), moveSpeed,
+			glm::vec2{ -1.f, 0.f }), dae::InputType::ISHELD);
+
+	//right
+	input.AddConsoleCommand(controllerTwo, dae::Controller::ControllerButton::DPadRight,
+		std::make_unique<GridMoveCommand>(m_pPlayerTwo.get(), moveSpeed,
+			glm::vec2{ 1.f, 0.f }), dae::InputType::ISHELD);
+}
+
 void Level::m_InitUI()//call after playerInitialization
 {
 	auto font = dae::ResourceManager::GetInstance().LoadFont("Retro.otf", 30);
@@ -257,6 +295,22 @@ void Level::m_InitUI()//call after playerInitialization
 	std::make_unique<ScoreCommand>(m_pPlayerOne.get(), 100),
 	dae::InputType::ISUP);
 
+}
+
+void Level::CheckDAEVectorForDeletion(std::vector<std::unique_ptr<dae::GameObject>>& vecToCheck)
+{
+	auto it = vecToCheck.begin();
+	while (it != vecToCheck.end())
+	{
+		if ((*it)->IsMarkedForDeletion())
+		{
+			it = vecToCheck.erase(it); // delete and remove from vector and advance iterator
+		}
+		else
+		{
+			++it;
+		}
+	}
 }
 
 void Level::m_CreateGem(int gridPosX, int gridPosY)
@@ -281,4 +335,13 @@ void Level::m_CreateBag(int gridPosX, int gridPosY)
 	createdBag->AddComponent<dae::TextureComponent>("Bag.png", true);
 	createdBag->AddComponent<MapRegistryComponent>(m_pGrid.get());
 	createdBag->AddComponent<BagComponent>();
+}
+
+void Level::m_ResetMap()
+{
+	m_pGrid->ResetGrid();
+	m_pGemObjects.clear();
+	m_pBagObjects.clear();
+	m_pPlayerOne->SetEnabled(false);
+	m_pPlayerTwo->SetEnabled(false);
 }

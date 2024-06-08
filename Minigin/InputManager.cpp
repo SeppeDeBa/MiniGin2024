@@ -133,6 +133,18 @@ void dae::InputManager::AddConsoleCommand(unsigned int controllerIndex, Controll
 	}
 }
 
+void dae::InputManager::ClearConsoleCommandsForIndex(unsigned int controllerIndex)
+{
+	for (auto it = m_controllerCommands.begin(); it != m_controllerCommands.end(); ) {
+		if (it->first.first == controllerIndex) {
+			it = m_controllerCommands.erase(it);
+		}
+		else {
+			++it;
+		}
+	}
+}
+
 void dae::InputManager::AddKeyboardCommand(SDL_Scancode keyboardButton, std::unique_ptr<dae::Command>&& command)
 {
 	m_keyboardCommands.insert(std::make_pair(keyboardButton, std::move(command)));

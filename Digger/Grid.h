@@ -22,8 +22,10 @@ public:
 
 	//digging
 	void DigTile(float worldPosX, float worldPosY);
+	
 	void DigTileFromGridPos(int gridX, int gridY);
 
+	void ResetGrid();
 
 	//statics
 	static glm::vec2 GetLevelTilePosition(float worldPosX, float worldPosY);

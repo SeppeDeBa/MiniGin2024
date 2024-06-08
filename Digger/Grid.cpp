@@ -52,7 +52,17 @@ void Grid::DigTile(float worldPosX, float worldPosY)
 void Grid::DigTileFromGridPos(int gridX, int gridY)
 {
 	m_pTileMap[gridX][gridY]->GetComponent<TileComponent>()->DigTile();
+}
 
+void Grid::ResetGrid()
+{
+	for (int colIt{}; colIt < s_nrCols; ++colIt)
+	{
+		for (int rowIt{}; rowIt < s_nrRows; ++rowIt)
+		{
+			m_pTileMap[colIt][rowIt]->GetComponent<TileComponent>()->FillTile();
+		}
+	}
 }
 
 glm::vec2 Grid::GetLevelTilePosition(float worldPosX, float worldPosY)

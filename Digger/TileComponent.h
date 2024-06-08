@@ -10,6 +10,7 @@ public:
 	~TileComponent();
 
 	void DigTile();
+	void FillTile();
 	bool IsOpen() const { return m_DugOut;};
 
 private:
@@ -17,8 +18,7 @@ private:
 	const float m_width;
 	const float m_height;
 	const glm::vec2 m_tileTopLeftPos;
-	bool m_openSides[2][2]; //up down left right, all closed by default
-	bool m_fullyOpen;//maybe to be used later?
+
 	bool m_DugOut{ false };
 
 

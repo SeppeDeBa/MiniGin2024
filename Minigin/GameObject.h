@@ -109,6 +109,7 @@ namespace dae
 		void MarkForDeletion() { m_markedForDeletion = true; };
 		bool IsMarkedForDeletion() const { return m_markedForDeletion; };
 		void SetEnabled(bool isEnabled) { m_enabled = isEnabled; };
+		bool IsEnabled() const { return m_enabled;};
 	private:
 		void AddChild(GameObject* childGO);
 		void RemoveChild(GameObject* childGO);
