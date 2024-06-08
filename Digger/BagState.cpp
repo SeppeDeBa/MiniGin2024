@@ -62,7 +62,7 @@ void NeutralState::FixedUpdate()
 
 void NeutralState::OnEnter()
 {
-
+	m_pBag->MakePushable();
 }
 
 void NeutralState::OnExit()
@@ -93,6 +93,7 @@ void ShakingState::FixedUpdate()
 void ShakingState::OnEnter()
 {
 	m_ShakeTimer = 0.f;
+	m_pBag->MakeUninteractable();
 }
 
 void ShakingState::OnExit()//reset visuals to neutral state
@@ -141,8 +142,6 @@ void FallingState::Update(float deltaTime)
 void FallingState::FixedUpdate()
 {
 	bool halfwayTile{ false };
-	
-
 
 	if (tileUnderneathIsClosed())
 	{
@@ -170,6 +169,8 @@ void FallingState::OnEnter()
 	dae::TransformComponent* ownerTransformPtr = m_pBag->GetGameObject()->GetComponent<dae::TransformComponent>();
 	if (ownerTransformPtr) m_pOwnerTransform = ownerTransformPtr;
 	else std::cout << "Bagstate transform is invalid for fallingState" << std::endl;
+
+	m_pBag->MakeKilling();
 }
 
 void FallingState::OnExit()
@@ -197,6 +198,7 @@ void BrokenState::FixedUpdate()
 void BrokenState::OnEnter()
 {
 	m_pBag->SetTextureByRotation(BagRotation::OPEN);
+	m_pBag->MakeCollectable();
 }
 
 void BrokenState::OnExit()

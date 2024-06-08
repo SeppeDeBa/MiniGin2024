@@ -69,12 +69,6 @@
     <ClCompile Include="GameStatsDisplay.cpp">
       <Filter>Game Files\Components\Unused</Filter>
     </ClCompile>
-    <ClCompile Include="DieCommand.cpp">
-      <Filter>Game Files\Commands</Filter>
-    </ClCompile>
-    <ClCompile Include="ScoreCommand.cpp">
-      <Filter>Game Files\Commands</Filter>
-    </ClCompile>
     <ClCompile Include="TileComponent.cpp">
       <Filter>Game Files\Components\Level</Filter>
     </ClCompile>
@@ -114,6 +108,21 @@
     <ClCompile Include="SkipLevelCommand.cpp">
       <Filter>Game Files\Commands</Filter>
     </ClCompile>
+    <ClCompile Include="ScoreTypeEnum.cpp">
+      <Filter>Game Files\Components\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCollisionComponent.cpp">
+      <Filter>Game Files\Components\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="BagCollisionComponent.cpp">
+      <Filter>Game Files\Components\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="ScoreCommand.cpp">
+      <Filter>Game Files\Components\Unused</Filter>
+    </ClCompile>
+    <ClCompile Include="DieCommand.cpp">
+      <Filter>Game Files\Components\Unused</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -127,12 +136,6 @@
     </ClInclude>
     <ClInclude Include="GameStatsDisplay.h">
       <Filter>Game Files\Components\Unused</Filter>
-    </ClInclude>
-    <ClInclude Include="ScoreCommand.h">
-      <Filter>Game Files\Commands</Filter>
-    </ClInclude>
-    <ClInclude Include="DieCommand.h">
-      <Filter>Game Files\Commands</Filter>
     </ClInclude>
     <ClInclude Include="TileComponent.h">
       <Filter>Game Files\Components\Level</Filter>
@@ -175,6 +178,21 @@
     </ClInclude>
     <ClInclude Include="SkipLevelCommand.h">
       <Filter>Game Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreTypeEnum.h">
+      <Filter>Game Files\Components\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCollisionComponent.h">
+      <Filter>Game Files\Components\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="BagCollisionComponent.h">
+      <Filter>Game Files\Components\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="ScoreCommand.h">
+      <Filter>Game Files\Components\Unused</Filter>
+    </ClInclude>
+    <ClInclude Include="DieCommand.h">
+      <Filter>Game Files\Components\Unused</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

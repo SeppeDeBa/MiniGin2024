@@ -6,7 +6,7 @@
 
 class BagComponent;
 
-class BagState //spoke to a similar implementation with Finnean of my class, he uses constructor and destructor which I'm not a super fan of.
+class BagState //spoke to a similar implementation with Finian of my class, he uses constructor and destructor which I'm not a super fan of.
 {
 public:
 	BagState(BagComponent* pBag);

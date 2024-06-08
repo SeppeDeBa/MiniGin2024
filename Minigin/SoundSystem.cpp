@@ -68,12 +68,12 @@ class SoundSystem::SoundSystemImpl
 private:
 	std::vector<Mix_Chunk*>m_SoundEffects; //needs to be initialized before the thread and functor as its passed
 	//todo: make map with filePaths so that they can be remembered as loaded or not
-	musicLoaderFunctor* m_SoundEffectLoadingFunctorPtr;
+	std::unique_ptr<musicLoaderFunctor> m_SoundEffectLoadingFunctorPtr;
 	std::jthread m_SoundEffectsThread;
 public:
 	SoundSystemImpl()
 		: m_SoundEffects{}
-		, m_SoundEffectLoadingFunctorPtr{ new musicLoaderFunctor }
+		, m_SoundEffectLoadingFunctorPtr{ std::make_unique<musicLoaderFunctor>()}
 		, m_SoundEffectsThread{std::ref(*m_SoundEffectLoadingFunctorPtr), std::ref(m_SoundEffects)}
 	{
 		SDL_Init(SDL_INIT_AUDIO);
@@ -93,10 +93,12 @@ public:
 			//standard error logging and exiting application, 
 		}
 	};
+
 	~SoundSystemImpl()
 	{
 		m_SoundEffectLoadingFunctorPtr->NotifyQuit();
-		delete m_SoundEffectLoadingFunctorPtr;
+		if (m_SoundEffectsThread.joinable())m_SoundEffectsThread.join();
+		//delete m_SoundEffectLoadingFunctorPtr;
 		//todo: alex question: how do i fix mutex being busy here?
 		for (auto& se : m_SoundEffects)
 		{

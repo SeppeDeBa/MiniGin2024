@@ -31,13 +31,21 @@ void CollisionComponent::Update(float)
 
 }
 
-
-
+void CollisionComponent::FixedUpdate()
+{
+	if (!m_receiveOnly)
+	{
+		for (CollisionComponent* collider : CollisionManager::GetInstance().GetCollisions())
+		{
+			CheckCollision(collider);
+		}
+	}
+}
 
 void CollisionComponent::CheckCollision(CollisionComponent* pOtherCollComponent)
 {
-	if (!m_receiveOnly && 
-		std::find(m_CollidesWithTagsVec.begin(), m_CollidesWithTagsVec.end(), pOtherCollComponent->GetCollisionTag()) != m_CollidesWithTagsVec.end())
+	//if I ever need collision with self to be avoided then add that tag in here as a special search
+	if (std::find(m_CollidesWithTagsVec.begin(), m_CollidesWithTagsVec.end(), pOtherCollComponent->GetCollisionTag()) != m_CollidesWithTagsVec.end())
 	{
 		glm::vec3 otherActorLocation = pOtherCollComponent->m_pOwnersTransformComponent->GetWorldPos();
 		const float distToOtherActorX = abs(m_pOwnersTransformComponent->GetWorldPos().x - otherActorLocation.x);
@@ -45,8 +53,8 @@ void CollisionComponent::CheckCollision(CollisionComponent* pOtherCollComponent)
 		if (distToOtherActorX <= (m_collisionRadius + pOtherCollComponent->m_collisionRadius)
 			&& distToOtherActorY <= (m_collisionRadius + pOtherCollComponent->m_collisionRadius))
 		{
-			HandleCollision(pOtherCollComponent->m_collisionTag);
-			pOtherCollComponent->HandleCollision(m_collisionTag);
+			HandleCollision(pOtherCollComponent->m_collisionTag, pOtherCollComponent->GetOwnerWorldLoc());
+			pOtherCollComponent->HandleCollision(m_collisionTag, GetOwnerWorldLoc());
 		}
 	}
 }

@@ -20,7 +20,7 @@
 
 		void Die();
 
-		void Score(int scoreGained);
+	
 
 		int GetLives() const;//needed for lives display
 		int GetScore() const;
@@ -31,8 +31,7 @@
 
 		void UpdatePlayerDirection(const playerDirection directionToSet);
 
-		Subject<int> playerDied;
-		Subject<int> scoreChanged;
+
 	private:
 		using PlayerDirection = std::pair<unsigned int, playerDirection>;
 		std::map<PlayerDirection, std::shared_ptr<dae::Texture2D>> m_pTexturesMap{};

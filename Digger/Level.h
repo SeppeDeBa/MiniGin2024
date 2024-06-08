@@ -9,6 +9,9 @@
 #include <TextureComponent.h>
 #include "BagComponent.h"
 #include "MapRegistryComponent.h"
+#include "PlayerCollisionComponent.h"
+#include "GemCollisionComponent.h"
+#include "BagCollisionComponent.h"
 //extras
 #include <GameObject.h>
 #include "Player.h"

@@ -10,11 +10,11 @@ Level::Level(dae::GameObject* pOwner)
 {
 	//init level map
 	m_AddLevelNames();
+	m_InitUI();
 	m_InitPlayerOne();
 	m_InitPlayerTwo();
 	GoToNextLevel();
 	m_InitPlayerTwoControls();
-	m_InitUI();
 	//init player1
 
 }
@@ -199,6 +199,7 @@ void Level::m_InitPlayerOne()
 	m_pPlayerOne->AddComponent<dae::TransformComponent>(0.f, 0.f);
 	m_pPlayerOne->AddComponent<dae::TextureComponent>("Digger0R.png", true);
 	m_pPlayerOne->AddComponent<Player>(0);
+	m_pPlayerOne->AddComponent<PlayerCollisionComponent>();
 	//GORotatorOne->AddComponent<dae::RotatorComponent>(100.f, 90.f, true, 0.f);
 	//GORotatorOne->SetParent(GOCenterPoint, false);
 
@@ -269,6 +270,7 @@ void Level::m_InitPlayerTwo()
 	m_pPlayerTwo->AddComponent<dae::TransformComponent>(0.f, 0.f);
 	m_pPlayerTwo->AddComponent<dae::TextureComponent>("Digger1R.png", true);
 	m_pPlayerTwo->AddComponent<Player>(1);
+	m_pPlayerOne->AddComponent<PlayerCollisionComponent>();
 
 
 	m_pP2Transform = m_pPlayerTwo.get()->GetComponent<dae::TransformComponent>();
@@ -314,15 +316,9 @@ void Level::m_InitUI()//call after playerInitialization
 	ScoreObject->AddComponent<dae::TransformComponent>(25.f, 2.f);
 	ScoreObject->AddComponent<dae::TextureComponent>(false);
 	ScoreObject->AddComponent<dae::TextComponent>("000000", font);
-	ScoreObject->AddComponent<dae::ScoreDisplayComponent>(m_pPlayerOne->GetComponent<Player>());
+	ScoreObject->AddComponent<ScoreDisplayComponent>();
 
 	m_pUIElements.insert({ UIElements::SCORE, std::move(ScoreObject) });
-
-	auto& input = dae::InputManager::GetInstance();
-	const unsigned int controllerOne{ 0 };
-	input.AddConsoleCommand(controllerOne, dae::Controller::ControllerButton::ButtonY,
-	std::make_unique<ScoreCommand>(m_pPlayerOne.get(), 100),
-	dae::InputType::ISUP);
 
 }
 
@@ -351,6 +347,7 @@ void Level::m_CreateGem(int gridPosX, int gridPosY)
 
 	createdGem->AddComponent<dae::TransformComponent>(xPos, yPos);
 	createdGem->AddComponent<dae::TextureComponent>("Gem.png", true);
+	createdGem->AddComponent<GemCollisionComponent>(m_pUIElements[UIElements::SCORE].get()->GetComponent<ScoreDisplayComponent>());
 }
 
 void Level::m_CreateBag(int gridPosX, int gridPosY)
@@ -364,6 +361,7 @@ void Level::m_CreateBag(int gridPosX, int gridPosY)
 	createdBag->AddComponent<dae::TextureComponent>("Bag.png", true);
 	createdBag->AddComponent<MapRegistryComponent>(m_pGrid.get());
 	createdBag->AddComponent<BagComponent>();
+	createdBag->AddComponent<BagCollisionComponent>(m_pUIElements[UIElements::SCORE].get()->GetComponent<ScoreDisplayComponent>());
 }
 
 void Level::m_ResetMap()

@@ -25,17 +25,7 @@ void Player::Die()
 	//}
 }
 
-void Player::Score(int scoreGained)
-{
-	/*m_Score += scoreGained;*/
-	scoreChanged.Notify(scoreGained);
-	//if (m_Score >= m_ScoreToWin)
-	//{
-	//	std::cout << "pinging steam achievement system" << std::endl;
-	//	//pass ping to steam achievement system, including the steam sdk did not work and i lost too much time on trying to fix my static library, thats my fault
-	//}
-	
-}
+
 
 int Player::GetLives() const
 {

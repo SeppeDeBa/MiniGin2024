@@ -1,51 +1,37 @@
 #include "ScoreDisplayComponent.h"
 #include <sstream>
 #include <iomanip>
-namespace dae
-{
 
-	ScoreDisplayComponent::ScoreDisplayComponent(GameObject* pOwner, Player* pObservedPlayerComp)
+#include "SoundServiceLocator.h"
+
+
+ScoreDisplayComponent::ScoreDisplayComponent(dae::GameObject* pOwner)
 		: Component(pOwner)
-		, m_pPlayerComp(pObservedPlayerComp)
-	{
-		m_pPlayerComp->scoreChanged.AddObserver(this);
-		m_pTextComponent = pOwner->GetComponent<TextComponent>();
-		UpdateDisplay(m_pPlayerComp->GetScore());
-	}
 
-	ScoreDisplayComponent::~ScoreDisplayComponent()
 	{
-		if (m_pPlayerComp)
-		{
-			m_pPlayerComp->scoreChanged.RemoveObserver(this); //automise with destructor on other side, does it have a point? todo: ask
-		}
-	}
-
-	void ScoreDisplayComponent::OnNotify(int scoreGained)
-	{
-		m_Score += scoreGained;
+		m_pTextComponent = pOwner->GetComponent<dae::TextComponent>();
 		UpdateDisplay(m_Score);
 	}
 
-	void ScoreDisplayComponent::AssignPlayerOne(Player* pPlayerOneComponent)
+
+	void ScoreDisplayComponent::OnNotify(ScoreType type)
 	{
-		if (m_pPlayerComp)
+		m_Score += static_cast<int>(type);
+		if(type == ScoreType::EMERALDS)
 		{
-			m_pPlayerComp->scoreChanged.RemoveObserver(this);
+			++m_GemCombo;
+			if(m_GemCombo >= m_GemsRequiredForCombo)
+			{
+				m_GemCombo = 0;
+				OnNotify(ScoreType::EMERALDCOMBO);
+			}
 		}
-		m_pPlayerComp = pPlayerOneComponent;
-		m_pPlayerComp->scoreChanged.AddObserver(this);
+		UpdateDisplay(m_Score);
+		auto& soundService = SoundServiceLocator::Get_Sound_System();
+		soundService.Play(1, 50);
 	}
 
-	void ScoreDisplayComponent::AssignPlayerTwo(Player* pPlayerTwoComponent)
-	{
-		if (m_pPlayerTwoComp)
-		{
-			m_pPlayerTwoComp->scoreChanged.RemoveObserver(this);
-		}
-		m_pPlayerTwoComp = pPlayerTwoComponent;
-		m_pPlayerTwoComp->scoreChanged.AddObserver(this);
-	}
+
 
 	void ScoreDisplayComponent::UpdateDisplay(int stat)
 	{
@@ -60,4 +46,3 @@ namespace dae
 			std::cout << "a GameStatsDisplay does not have a pTextComponent to find" << std::endl;
 		}
 	}
-}
