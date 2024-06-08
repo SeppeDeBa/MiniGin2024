@@ -31,7 +31,6 @@ private:
 	void InitBagTextures();
 	std::map<BagRotation, std::shared_ptr<dae::Texture2D>> m_pTexturesMap{};
 	BagRotation m_CurrentRotation;
-
 	std::unique_ptr<BagState> m_pBagState;
 };
 

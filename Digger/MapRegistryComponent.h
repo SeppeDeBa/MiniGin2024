@@ -1,20 +1,20 @@
 #pragma once
 #include "Component.h"
-#include "Grid.h"
+
+class Grid;
+
 #include <GameObject.h>
 class MapRegistryComponent : public dae::Component
 {
-	MapRegistryComponent(dae::GameObject* pOwner, dae::GameObject* grid2Dptr, int rows = Grid::s_nrRows, int cols = Grid::s_nrCols);
+public:
+	MapRegistryComponent(dae::GameObject* pOwner, Grid* pGrid);
 	~MapRegistryComponent() override = default;
 
-
+	Grid const* GetGrid() const { return m_pGrid; };
 	//bool IsTileOpen(int x, int y) const
 	//{ return m_pGrid[x][y]->GetComponent<TileComponent>()->IsOpen(); }
-	bool IsTileOpenFromWorldPos(float worldPosX, float worldPosY) const;
+	//bool IsTileOpenFromWorldPos(float worldPosX, float worldPosY) const;
 private:
-	dae::GameObject* m_pGrid;
-
-	const int m_rowCount;
-	const int m_colCount;
+	Grid* m_pGrid{nullptr};
 };
 

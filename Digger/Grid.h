@@ -1,8 +1,10 @@
 #pragma once
 #include <Minigin.h> 
 #include <glm/glm.hpp>
-#include "GameObject.h"
 #include "TileComponent.h"
+
+
+class TileComponent;
 
 class Grid
 {
@@ -23,7 +25,7 @@ public:
 	void DigTileFromGridPos(int gridX, int gridY);
 
 
-
+	//statics
 	static glm::vec2 GetLevelTilePosition(float worldPosX, float worldPosY);
 	static glm::vec2 GetTileSize() { return glm::vec2{ s_tileWidth, s_tileHeight }; };
 	static bool pointIsInGrid(glm::vec2 pointToCheck);

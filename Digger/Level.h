@@ -1,15 +1,14 @@
 #pragma once
-#include <Minigin.h> //todo:move global width and height to its own .h
 #include <Component.h>
 #include <memory>
 
 #include "Grid.h"
 
 //comps
-#include "TileComponent.h"
 #include <TransformComponent.h>
 #include <TextureComponent.h>
 #include "BagComponent.h"
+#include "MapRegistryComponent.h"
 //extras
 #include <GameObject.h>
 #include "Player.h"

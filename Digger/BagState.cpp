@@ -73,17 +73,27 @@ void ShakingState::UpdateVisuals()
 FallingState::FallingState(BagComponent* pBag)
 	:BagState(pBag)
 	, m_pOwnerTransform(nullptr)
+	, m_pMap(nullptr)
 {
-	//is fine if only done once, but might aswell as falling happens once aswell
-	dae::TransformComponent* ownerTransformPtr = m_pBag->GetGameObject()->GetComponent<dae::TransformComponent>();
-	if (ownerTransformPtr) m_pOwnerTransform = ownerTransformPtr;
+	//dae::TransformComponent* ownerTransformPtr = m_pBag->GetGameObject()->GetComponent<dae::TransformComponent>();
+	if (dae::TransformComponent* ownerTransformPtr = m_pBag->GetGameObject()->GetComponent<dae::TransformComponent>()) 
+		m_pOwnerTransform = ownerTransformPtr;
+	else std::cout << "Bagstate transform is invalid for fallingState" << std::endl;
+
+
+	//MapRegistryComponent* ownerMapPtr = m_pBag->GetGameObject()->GetComponent<MapRegistryComponent>();
+	if (MapRegistryComponent* ownerMapPtr = m_pBag->GetGameObject()->GetComponent<MapRegistryComponent>())
+		m_pMap = ownerMapPtr;
 	else std::cout << "Bagstate transform is invalid for fallingState" << std::endl;
 }
 
 void FallingState::Update(float deltaTime)
 {
 	if(m_pOwnerTransform) m_pOwnerTransform->AddToLocalPosition(0.f, m_FallingSpeed * deltaTime);
-
+	if(m_pMap)
+	{
+		
+	}
 }
 
 void FallingState::OnEnter()
@@ -97,6 +107,16 @@ void FallingState::OnEnter()
 void FallingState::OnExit()
 {
 
+}
+
+void FallingState::CheckTouchingBlock()
+{
+	if(m_pMap)
+	{
+		
+
+
+	}
 }
 
 BrokenState::BrokenState(BagComponent* pBag)

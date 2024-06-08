@@ -1,5 +1,6 @@
 #pragma once
 
+#include "MapRegistryComponent.h"
 #include "TransformComponent.h"
 
 
@@ -64,7 +65,11 @@ public:
 
 private:
 	dae::TransformComponent* m_pOwnerTransform;
-	const float m_FallingSpeed{5.f};
+	MapRegistryComponent* m_pMap;
+	const float m_FallingSpeed{16.f};
+	const float m_DistanceToGround{ 10.f };
+
+	void CheckTouchingBlock();
 };
 
 class BrokenState final : public BagState
