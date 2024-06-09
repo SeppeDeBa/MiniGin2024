@@ -179,7 +179,10 @@
     <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="DieCommand.cpp" />
     <ClCompile Include="Digger.cpp" />
+    <ClCompile Include="EnemyCollisionComponent.cpp" />
     <ClCompile Include="EnemyComponent.cpp" />
+    <ClCompile Include="GamemodeEnums.cpp" />
+    <ClCompile Include="GamemodeSelectorCommand.cpp" />
     <ClCompile Include="GameStatsDisplay.cpp" />
     <ClCompile Include="GemCollisionComponent.cpp" />
     <ClCompile Include="GemComponent.cpp" />
@@ -187,8 +190,8 @@
     <ClCompile Include="GridMoveCommand.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="LivesDisplayComponent.cpp" />
-    <ClCompile Include="MainLoopCommand.cpp" />
     <ClCompile Include="MapRegistryComponent.cpp" />
+    <ClCompile Include="ModeSelectComponent.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="PlayerCollisionComponent.cpp" />
     <ClCompile Include="ScoreCommand.cpp" />
@@ -206,7 +209,10 @@
     <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="commandIncludesGame.h" />
     <ClInclude Include="DieCommand.h" />
+    <ClInclude Include="EnemyCollisionComponent.h" />
     <ClInclude Include="EnemyComponent.h" />
+    <ClInclude Include="GamemodeEnums.h" />
+    <ClInclude Include="GamemodeSelectorCommand.h" />
     <ClInclude Include="GameStatsDisplay.h" />
     <ClInclude Include="GemCollisionComponent.h" />
     <ClInclude Include="GemComponent.h" />
@@ -214,8 +220,8 @@
     <ClInclude Include="GridMoveCommand.h" />
     <ClInclude Include="Level.h" />
     <ClInclude Include="LivesDisplayComponent.h" />
-    <ClInclude Include="MainLoopCommand.h" />
     <ClInclude Include="MapRegistryComponent.h" />
+    <ClInclude Include="ModeSelectComponent.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerCollisionComponent.h" />
     <ClInclude Include="ScoreCommand.h" />

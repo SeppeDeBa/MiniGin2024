@@ -37,7 +37,7 @@ void CollisionComponent::FixedUpdate()
 	{
 		for (CollisionComponent* collider : CollisionManager::GetInstance().GetCollisions())
 		{
-			CheckCollision(collider);
+			if(collider != this) CheckCollision(collider);
 		}
 	}
 }

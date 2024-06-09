@@ -7,7 +7,7 @@
 #include "../3rdParty/imgui-1.90.4/imgui_impl_sdl2.h"
 #include <iostream>
 #include "Command.h"
-
+#include <algorithm>
 
 //TODO: Pimpl away XInput and maybe windows in InputManager
 bool dae::InputManager::ProcessInput(float deltaTime)
@@ -17,36 +17,39 @@ bool dae::InputManager::ProcessInput(float deltaTime)
 	{
 		//update
 		controller->Update();
-
-		for (auto command = m_controllerCommands.begin(); command != m_controllerCommands.end(); ++command)
+		if (!m_controllerCommands.empty())
 		{
-			if (command->first.first != controller->GetControlledIdx()) continue; //go to next controller if it's not this one
-			switch (command->second.second)
+			for (auto command = m_controllerCommands.begin(); command != m_controllerCommands.end(); ++command)
 			{
-			case InputType::ISDOWN:
-				if (controller->IsDown(command->first.second))
+				if (command->first.first != controller->GetControlledIdx()) continue; //go to next controller if it's not this one
+				switch (command->second.second)
 				{
-					command->second.first->Execute(deltaTime);
-				}
-				break;
-			case InputType::ISHELD:
-				if (controller->IsPressed(command->first.second))
-				{
-					command->second.first->Execute(deltaTime);
-				}
-				break;
-			case InputType::ISUP:
-				if (controller->IsUp(command->first.second))
-				{
-					command->second.first->Execute(deltaTime);
-				}
-				break;
+				case InputType::ISDOWN:
+					if (controller->IsDown(command->first.second))
+					{
+						command->second.first->Execute(deltaTime);
+					}
+					break;
+				case InputType::ISHELD:
+					if (controller->IsPressed(command->first.second))
+					{
+						command->second.first->Execute(deltaTime);
+					}
+					break;
+				case InputType::ISUP:
+					if (controller->IsUp(command->first.second))
+					{
+						command->second.first->Execute(deltaTime);
+					}
+					break;
 
-			default:
-				std::cout << "Hit default in ProcessInput() in InputManager, Should not happen!" << std::endl;
-				break;
+				default:
+					std::cout << "Hit default in ProcessInput() in InputManager, Should not happen!" << std::endl;
+					break;
+				}
 			}
 		}
+
 	}
 
 
@@ -91,6 +94,15 @@ bool dae::InputManager::ProcessInput(float deltaTime)
 		ImGui_ImplSDL2_ProcessEvent(&e);
 		// etc...
 	}
+
+	//late cleanup
+	if(!m_RemoveCommandsFromIndexVec.empty()) ClearConsoleCommandsForIndex(m_RemoveCommandsFromIndexVec);
+	if (!m_controllerCommandsBackBuffer.empty()) std::swap(m_controllerCommands, m_controllerCommandsBackBuffer);
+	//if (!m_controllerCommands.empty())
+	//{
+	//	m_controllerCommands.swap(m_controllerCommandsBackBuffer);
+	//	m_controllerCommandsBackBuffer.clear();
+	//}
 	return true;
 	//return m_pImpl->ProcessInput();
 }
@@ -125,7 +137,7 @@ void dae::InputManager::AddConsoleCommand(unsigned int controllerIndex, Controll
 	if (controllerIndex <= m_VectorControllers.size() - 1)
 	{
 		ControllerKey controllerKey = std::make_pair(controllerIndex, button);
-		m_controllerCommands.insert(std::make_pair(controllerKey, (std::make_pair(std::move(command), typeOfInput))));
+		m_controllerCommandsBackBuffer.insert(std::make_pair(controllerKey, (std::make_pair(std::move(command), typeOfInput))));
 	}
 	else
 	{
@@ -135,14 +147,21 @@ void dae::InputManager::AddConsoleCommand(unsigned int controllerIndex, Controll
 
 void dae::InputManager::ClearConsoleCommandsForIndex(unsigned int controllerIndex)
 {
-	for (auto it = m_controllerCommands.begin(); it != m_controllerCommands.end(); ) {
-		if (it->first.first == controllerIndex) {
-			it = m_controllerCommands.erase(it);
-		}
-		else {
-			++it;
-		}
+	//std::erase_if(m_controllerCommands, [controllerIndex](const auto& entry) {
+	//	return entry.first.first == controllerIndex;
+	//	});
+	m_RemoveCommandsFromIndexVec.push_back(controllerIndex);
+}
+
+void dae::InputManager::ClearConsoleCommandsForIndex(std::vector<unsigned int>& indicesToRemove)
+{
+	for(unsigned int idx : indicesToRemove)
+	{
+	std::erase_if(m_controllerCommands, [idx](const auto& entry) {
+		return entry.first.first == idx;
+		});
 	}
+	indicesToRemove.clear();
 }
 
 void dae::InputManager::AddKeyboardCommand(SDL_Scancode keyboardButton, std::unique_ptr<dae::Command>&& command)

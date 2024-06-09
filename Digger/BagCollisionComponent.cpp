@@ -26,7 +26,7 @@
 		 m_scoreSubject.Notify(ScoreType::EMERALDS);
 		 GetGameObject()->MarkForDeletion();
 	 }
-	 else if(other == collisionTag::Player && m_pBag->CanPush())
+	 else if((other == collisionTag::Player || other == collisionTag::Enemy) && m_pBag->CanPush())
 	 {
 	 	bool otherActorIsLeft{ GetOwnerWorldLoc().x > otherWorldLoc.x }; //seperate initialization for visual clarity, personal choice
 	 	glm::vec2 locToPushTo{ m_pOwnersTransformComponent->GetWorldPos().x, m_pOwnersTransformComponent->GetWorldPos().y};//initializing to add offset to

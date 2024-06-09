@@ -17,26 +17,43 @@ EnemyComponent::EnemyComponent(dae::GameObject* pOwner, bool startsAsHobbin)
 
 	m_InitTextures();
 	m_InitCommands();
-	if (startsAsHobbin) m_Transform();
+	if (startsAsHobbin)
+	{
+		m_Transform();
+		m_InitP2Commands();
+		m_playerControlled = true;
+	}
+}
+
+EnemyComponent::~EnemyComponent()
+{
+	if(m_playerControlled)
+	{
+		auto& input = dae::InputManager::GetInstance();
+		const unsigned int controllerTwo{ 1 };
+		input.ClearConsoleCommandsForIndex(controllerTwo);
+	}
 }
 
 void EnemyComponent::Update(float deltaTime)
 {
-	if(!m_IsTransformed)
+	if(!m_IsTransformed && !m_playerControlled)
 	{
 		m_TransformTimerCurrent += deltaTime;
 		if (m_TransformTimerCurrent > m_TransformTimerMax) m_Transform();
 	}
 
-
-	m_moveCommandsMap[m_DirectionGoing]->Execute(deltaTime);
+	if (!m_playerControlled)
+	{
+		m_moveCommandsMap[m_DirectionGoing]->Execute(deltaTime);
+	}
 }
 
 void EnemyComponent::FixedUpdate()
 {
-	if (m_DirectionGoing == facingDirection::ENEMYUP) std::cout << "MOVING UP" << std::endl;
-	if (m_DirectionGoing == facingDirection::ENEMYRIGHT) std::cout << "MOVING RIGHT" << std::endl;
-	if (m_pOwnerTransform)
+	//if (m_DirectionGoing == facingDirection::ENEMYUP) std::cout << "MOVING UP" << std::endl;
+	//if (m_DirectionGoing == facingDirection::ENEMYRIGHT) std::cout << "MOVING RIGHT" << std::endl;
+	if (m_pOwnerTransform && !m_playerControlled)
 	{
 		glm::vec2 currentGridPos = Grid::GetLevelTilePosition(m_pOwnerTransform->GetWorldPos().x,
 										m_pOwnerTransform->GetWorldPos().y);
@@ -153,4 +170,32 @@ void EnemyComponent::m_InitCommands()
 	m_moveCommandsMap.insert(std::pair<facingDirection, std::unique_ptr<GridMoveCommand>>{ facingDirection::ENEMYRIGHT, std::move(pMoveRight) });
 	m_moveCommandsMap.insert(std::pair<facingDirection, std::unique_ptr<GridMoveCommand>>{ facingDirection::ENEMYUP, std::move(pMoveUp) });
 	m_moveCommandsMap.insert(std::pair<facingDirection, std::unique_ptr<GridMoveCommand>>{ facingDirection::ENEMYDOWN, std::move(pMoveDown) });
+}
+
+void EnemyComponent::m_InitP2Commands()
+{
+	auto& input = dae::InputManager::GetInstance();
+	const unsigned int controllerTwo{ 1 };
+	//==PLAYER ONE
+	const float moveSpeed{ m_HobbinsMoveSpeed };
+	input.AddConsoleCommand(controllerTwo, dae::Controller::ControllerButton::DpadUp,
+		std::make_unique<GridMoveCommand>(GetGameObject(), moveSpeed,
+			glm::vec2{ 0.f, 1.f }), dae::InputType::ISHELD);
+
+
+
+	//down
+	input.AddConsoleCommand(controllerTwo, dae::Controller::ControllerButton::DPadDown,
+		std::make_unique<GridMoveCommand>(GetGameObject(), moveSpeed,
+			glm::vec2{ 0.f, -1.f }), dae::InputType::ISHELD);
+
+	//left
+	input.AddConsoleCommand(controllerTwo, dae::Controller::ControllerButton::DpadLeft,
+		std::make_unique<GridMoveCommand>(GetGameObject(), moveSpeed,
+			glm::vec2{ -1.f, 0.f }), dae::InputType::ISHELD);
+
+	//right
+	input.AddConsoleCommand(controllerTwo, dae::Controller::ControllerButton::DPadRight,
+		std::make_unique<GridMoveCommand>(GetGameObject(), moveSpeed,
+			glm::vec2{ 1.f, 0.f }), dae::InputType::ISHELD);
 }

@@ -1,9 +1,8 @@
 #pragma once
 #include "Component.h"
 #include "TextureComponent.h"
-#include "Subject.h"
-#include "ScoreDisplayComponent.h"
 #include <random>
+#include <map>
 
 
 
@@ -23,12 +22,18 @@ class EnemyComponent : public dae::Component
 {
 public:
 	EnemyComponent(dae::GameObject* pOwner, bool startsAsHobbin = false);
-	~EnemyComponent() override = default;
+	~EnemyComponent() override;
 
 	void Update(float deltaTime) override;
 	void FixedUpdate() override;
 	bool GetIsTransformed()const { return m_IsTransformed; };
 
+	EnemyComponent(const EnemyComponent& other) = delete;
+	EnemyComponent(EnemyComponent&& other) = delete;
+	EnemyComponent& operator=(const EnemyComponent& other) = delete;
+	EnemyComponent& operator=(EnemyComponent&& other) = delete;
+
+	bool GetIsPlayerControlled()const { return m_playerControlled; };
 
 private:
 	MapRegistryComponent* m_pMapRegister{};
@@ -64,5 +69,9 @@ private:
 	void m_UpdateFacingDirection();
 	void m_InitTextures();
 	void m_InitCommands();
+
+	void m_InitP2Commands();
+
+	bool m_playerControlled{ false };
 };
 

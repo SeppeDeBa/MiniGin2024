@@ -1,39 +1,44 @@
-//#include "LivesDisplayComponent.h"
-//namespace dae
-//{
-//
-//	LivesDisplayComponent::LivesDisplayComponent(GameObject* pOwner, Player* pObservedPlayerComp)
-//		: Component(pOwner)
-//		, m_pPlayerComp(pObservedPlayerComp)
-//	{
-//		m_pPlayerComp->playerDied.AddObserver(this);
-//		m_pTextComponent = pOwner->GetComponent<TextComponent>();
-//		UpdateDisplay(m_pPlayerComp->GetLives());
-//	}
-//
-//	LivesDisplayComponent::~LivesDisplayComponent()
-//	{
-//		if (m_pPlayerComp)
-//		{
-//			m_pPlayerComp->playerDied.RemoveObserver(this); //automise with destructor on other side, does it have a point? todo: ask
-//		}
-//	}
-//
-//	void LivesDisplayComponent::OnNotify(int)
-//	{
-//		UpdateDisplay(m_pPlayerComp->GetLives());
-//	}
-//
-//	void LivesDisplayComponent::UpdateDisplay(int stat)
-//	{
-//		if (m_pTextComponent)
-//		{
-//			m_pTextComponent->SetText("Lives: " + std::to_string(stat));
-//		}
-//		else //should i put a replace textComp ptr here, or just get it whenever score updates?
-//		{
-//			std::cout << "a GameStatsDisplay does not have a pTextComponent to find" << std::endl;
-//		}
-//	}
-//
-//}
+#include "LivesDisplayComponent.h"
+#include "Level.h"
+#include "SoundServiceLocator.h"
+
+LivesDisplayComponent::LivesDisplayComponent(dae::GameObject* pOwner, Level* pLevel)
+	: Component(pOwner)
+{
+	m_pTextComponent = pOwner->GetComponent<dae::TextComponent>();
+	m_pLevel = pLevel;
+	m_UpdateDisplay(m_LivesRemaining);
+}
+
+void LivesDisplayComponent::OnNotify(int)
+{
+	--m_LivesRemaining;
+	if(m_LivesRemaining<0)
+	{
+		m_pLevel->EndGame();
+		//kill player
+	}
+	else
+	{
+		m_UpdateDisplay(m_LivesRemaining);
+		m_pLevel->ReloadLevel();
+		auto& soundService = SoundServiceLocator::Get_Sound_System();
+		soundService.Play(1, 50);
+	}
+}
+
+void LivesDisplayComponent::Reset()
+{
+	m_LivesRemaining = m_StartingLives;
+	m_UpdateDisplay(m_LivesRemaining);
+}
+
+void LivesDisplayComponent::m_UpdateDisplay(int stat)
+{
+	if(m_pTextComponent)
+	{
+		std::string outputString{ "Lives: "};
+		outputString += std::to_string(stat);
+		m_pTextComponent->SetText(outputString);
+	}
+}

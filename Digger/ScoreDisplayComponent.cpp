@@ -10,7 +10,7 @@ ScoreDisplayComponent::ScoreDisplayComponent(dae::GameObject* pOwner)
 
 	{
 		m_pTextComponent = pOwner->GetComponent<dae::TextComponent>();
-		UpdateDisplay(m_Score);
+		m_UpdateDisplay(m_Score);
 	}
 
 
@@ -26,14 +26,19 @@ ScoreDisplayComponent::ScoreDisplayComponent(dae::GameObject* pOwner)
 				OnNotify(ScoreType::EMERALDCOMBO);
 			}
 		}
-		UpdateDisplay(m_Score);
+		m_UpdateDisplay(m_Score);
 		auto& soundService = SoundServiceLocator::Get_Sound_System();
 		soundService.Play(1, 50);
 	}
 
+void ScoreDisplayComponent::Reset()
+{
+	m_Score = 0;
+	m_GemCombo = 0;
+}
 
 
-	void ScoreDisplayComponent::UpdateDisplay(int stat)
+void ScoreDisplayComponent::m_UpdateDisplay(int stat)
 	{
 		if (m_pTextComponent)
 		{

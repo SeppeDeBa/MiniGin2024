@@ -126,8 +126,17 @@
     <ClCompile Include="EnemyComponent.cpp">
       <Filter>Game Files\Components\Character</Filter>
     </ClCompile>
-    <ClCompile Include="MainLoopCommand.cpp">
-      <Filter>Game Files</Filter>
+    <ClCompile Include="EnemyCollisionComponent.cpp">
+      <Filter>Game Files\Components\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="GamemodeEnums.cpp">
+      <Filter>Game Files\Components\Unused</Filter>
+    </ClCompile>
+    <ClCompile Include="GamemodeSelectorCommand.cpp">
+      <Filter>Game Files\Commands</Filter>
+    </ClCompile>
+    <ClCompile Include="ModeSelectComponent.cpp">
+      <Filter>Game Files\Components\UI</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -203,8 +212,17 @@
     <ClInclude Include="EnemyComponent.h">
       <Filter>Game Files\Components\Character</Filter>
     </ClInclude>
-    <ClInclude Include="MainLoopCommand.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="EnemyCollisionComponent.h">
+      <Filter>Game Files\Components\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="GamemodeEnums.h">
+      <Filter>Game Files\Components\Unused</Filter>
+    </ClInclude>
+    <ClInclude Include="GamemodeSelectorCommand.h">
+      <Filter>Game Files\Commands</Filter>
+    </ClInclude>
+    <ClInclude Include="ModeSelectComponent.h">
+      <Filter>Game Files\Components\UI</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

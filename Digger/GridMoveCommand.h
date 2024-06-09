@@ -12,7 +12,7 @@ class GridMoveCommand final : public dae::GOCommand
 {
 public:
 	GridMoveCommand(dae::GameObject* gameObjPtr, float speed, glm::vec2 moveVector);
-	~GridMoveCommand() = default;
+	~GridMoveCommand() override = default;
 	void Execute(float deltaTime) override;
 	void SetSpeed(float speed);
 	void SetNewTransform(dae::GameObject* gameObjPtr);
